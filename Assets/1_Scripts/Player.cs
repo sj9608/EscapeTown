@@ -68,8 +68,6 @@ public class Player : Human
         {
             GetItem();
         }
-        OnDrawGizmos();
-
     }
     protected override void Attack()
     {
@@ -125,9 +123,13 @@ public class Player : Human
         float inputX = Input.GetAxis("Horizontal");
         float inputZ = Input.GetAxis("Vertical");
 
-        Vector3 velocity = new Vector3(inputX, 0, inputZ) * moveSpeed;
+        Vector3 movePosition = new Vector3(inputX, 0, inputZ) * moveSpeed * Time.deltaTime;
 
-        playerRigidbody.velocity = velocity;
+        playerRigidbody.position = movePosition + transform.position;
+
+        //Vector3 velocity = new Vector3(inputX, 0, inputZ) * moveSpeed;
+
+        //playerRigidbody.velocity = velocity;
 
         //Vector3 vector3 = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * moveSpeed * Time.deltaTime;
         //playerRigidbody.velocity = vector3;
@@ -154,10 +156,5 @@ public class Player : Human
         {
             isJump = false;
         }
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
 }

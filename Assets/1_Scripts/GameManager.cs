@@ -15,7 +15,10 @@ public class GameManager : SingletonBase<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        enemiesDic = enemies.GetComponentsInChildren<Enemy>().ToDictionary(key => key.name);
+        if (enemies != null)
+        {
+            enemiesDic = enemies.GetComponentsInChildren<Enemy>().ToDictionary(key => key.name);
+        }
         //enemiesList = new List<Enemy>(enemies.GetComponentsInChildren<Enemy>());
         //foreach (KeyValuePair<string, Enemy> pair in enemiesDic)
         //{
@@ -63,7 +66,7 @@ public class GameManager : SingletonBase<GameManager>
     }
     public void StageClear()
     {
-        if (enemiesDic.Count == 0)
+        if (enemiesDic == null || enemiesDic.Count == 0)
         {
             Debug.Log("스테이지 클리어");
             SceneManager.LoadScene(0);
