@@ -31,7 +31,7 @@ public class Enemy : Human
     void Update()
     {
         EnemyRaycast();
-        OnDrawGizmos();
+        
     }
     void EnemyRaycast()
     {
@@ -72,9 +72,9 @@ public class Enemy : Human
         Debug.Log(other.tag + "을 공격했다");
         GameManager.Instance.Attack(other, AP);
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, maxDistance);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, maxDistance);
+    //}
 }
