@@ -10,6 +10,8 @@ public class GameManager : SingletonBase<GameManager>
     [SerializeField] GameObject enemies;
     Dictionary<string, Enemy> enemiesDic;
 
+    // 게임오버 판단
+    public bool IsGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class GameManager : SingletonBase<GameManager>
         {
             enemiesDic = enemies.GetComponentsInChildren<Enemy>().ToDictionary(key => key.name);
         }
+        IsGameOver = false;
         //enemiesList = new List<Enemy>(enemies.GetComponentsInChildren<Enemy>());
         //foreach (KeyValuePair<string, Enemy> pair in enemiesDic)
         //{
