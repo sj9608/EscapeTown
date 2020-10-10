@@ -12,8 +12,6 @@ public class Player : Human
     private LayerMask enemyLayer;
     // 아이템 레이어 마스크
     private LayerMask itemLayer;
-    // Rigidbody
-    private Rigidbody playerRigidbody;
     // HP
     // 공격력
     // 이동속도
@@ -56,7 +54,6 @@ public class Player : Human
     {
         HP = 3;
         AP = 1;
-        playerRigidbody = GetComponent<Rigidbody>();
         enemyLayer = LayerMask.GetMask("Enemy");
         itemLayer = LayerMask.GetMask("Item");
         controller = GetComponent<CharacterController>();
@@ -135,32 +132,29 @@ public class Player : Human
             runTimer++;
             if (runTimer < 100)
             {
-                //moveSpeed = 1;
                 Debug.Log("runTimer : " + runTimer);
-                animator.SetFloat("Move", moveSpeed);
+                animator.SetFloat("Move", 2.5f);
                 moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
             }
             else
             {
-                //moveSpeed = 1;
                 Debug.Log("runTimer : 10 넘었다.");
-                animator.SetFloat("Move", moveSpeed);
+                animator.SetFloat("Move", 5.0f);
                 moveSpeed = (moveSpeed > 5.0f) ? 5.0f : (moveSpeed + .1f);
             }
             if (Input.GetKey(KeyCode.LeftControl))
             {
                 moveSpeed = 1.5f;
             }
-            if (inputZ == 0 && inputX == 0)
-            {
-                moveDir = Vector3.zero;
-                moveSpeed = 1.0f;
-                runTimer = 0;
-                animator.SetFloat("Move", 0f);
-            }
+            
             controller.Move(moveDir * moveSpeed * Time.deltaTime); // 해당 벡터의 방향으로 speed 수치만큼 frame간격마다 이동 (카메라가 바라보는 방향으로 움직이게 하기위해서 direction --> moveDir 교체)
         }
-
+        else
+        {
+            moveSpeed = 1.0f;
+            runTimer = 0;
+            animator.SetFloat("Move", 0f);
+        }
 
         //if (inputX != 0 || inputZ != 0)
         //{
