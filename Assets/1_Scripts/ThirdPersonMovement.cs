@@ -35,7 +35,7 @@ public class ThirdPersonMovement : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
             // 실제 회전 진행
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             // 카메라가 바라보는 방향에 대응하게 하기위한 벡터 (실제 움직임 벡터)
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
