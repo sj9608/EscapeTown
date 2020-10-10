@@ -22,10 +22,17 @@ public class Player : Human
     float turnSmoothVelocity;
     // 스테미너
     private float playerStamina;
-    // 점프중
-    private bool isJump;
-    // 점프파워
-    private float jumpPower;
+
+    public float jumpHeight = 3f; // 캐릭터의 점프력
+    public float gravity = -9.81f; // 중력
+
+    /* 그라운드 체크 */
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    private LayerMask groundMask;
+    Vector3 velocity; // 낙하속도 계산할 벡터(중력값에 대한 계산을 할 속도벡터)
+
+    bool isGrounded;
     // 달리기 시작 타이머
     float runTimer;
     // 
@@ -56,6 +63,7 @@ public class Player : Human
         AP = 1;
         enemyLayer = LayerMask.GetMask("Enemy");
         itemLayer = LayerMask.GetMask("Item");
+        groundMask = LayerMask.GetMask("Ground");
         controller = GetComponent<CharacterController>();
         moveSpeed = 1f;
         attackDistance = 2;
@@ -112,6 +120,23 @@ public class Player : Human
         float inputX = Input.GetAxis("Horizontal");
         float inputZ = Input.GetAxis("Vertical");
         
+        /* 지면 체크 및 중력(낙하속도)*/
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); // 캐릭터가 땅에 닿았는지 체크 닿았으면 true 반환
+        //Debug.Log(isGrounded);
+        //if (isGrounded && velocity.y < 0) // 땅 , 낙하속도 검사
+        //{
+        //    velocity.y = -2f; // 땅에 닿아있고 낙하속도가 0 보다 낮으면 낙하속도를 -2f 로 초기화
+        //}
+
+        ///* 캐릭터 중력에 대한 움직임 */
+        //velocity.y += gravity * Time.deltaTime; // 중력값 계산
+        //controller.Move(velocity * Time.deltaTime); // 실제 중력 적용
+
+        ///* 점프 */
+        //if (Input.GetButtonDown("Jump") && isGrounded)
+        //{
+        //    velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity); // 중력값에 비례한 점프력 계산 ( 중간 -2는 중력값이 마이너스 값이라서 위로 뛰려면 양수로 만들어줘야함)
+        //}
         // 플레이어 이동 방향에 대한 벡터
         Vector3 direction = new Vector3(inputX, 0f, inputZ).normalized;
 
@@ -133,13 +158,13 @@ public class Player : Human
             if (runTimer < 100)
             {
                 Debug.Log("runTimer : " + runTimer);
-                animator.SetFloat("Move", 2.5f);
+                animator.SetFloat("Move", moveSpeed);
                 moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
             }
             else
             {
                 Debug.Log("runTimer : 10 넘었다.");
-                animator.SetFloat("Move", 5.0f);
+                animator.SetFloat("Move", moveSpeed);
                 moveSpeed = (moveSpeed > 5.0f) ? 5.0f : (moveSpeed + .1f);
             }
             if (Input.GetKey(KeyCode.LeftControl))
@@ -155,60 +180,5 @@ public class Player : Human
             runTimer = 0;
             animator.SetFloat("Move", 0f);
         }
-
-        //if (inputX != 0 || inputZ != 0)
-        //{
-        //    runTimer++;
-        //    if (runTimer < 100)
-        //    {
-        //        //moveSpeed = 1;
-        //        Debug.Log("runTimer : " + runTimer);
-        //        animator.SetFloat("Move", moveSpeed);
-        //        moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
-        //    }
-        //    else
-        //    {
-        //        //moveSpeed = 1;
-        //        Debug.Log("runTimer : 10 넘었다.");
-        //        animator.SetFloat("Move", moveSpeed);
-        //        moveSpeed = (moveSpeed > 5.0f) ? 5.0f : (moveSpeed + .1f);
-        //    }
-            
-        //}
-        //if (inputZ == 0 && inputX == 0)
-        //{
-        //    moveSpeed = 1.0f;
-        //    runTimer = 0;
-        //    animator.SetFloat("Move", 0f);
-        //}
-        //if (Input.GetKey(KeyCode.LeftControl))
-        //{
-        //    moveSpeed = 1.5f;
-        //}
-
-        //Vector3 movePosition = new Vector3(inputX, 0, inputZ) * moveSpeed * Time.deltaTime;
-        //Debug.Log("moveSpeed : " + moveSpeed);
-        //playerRigidbody.position = movePosition + transform.position;
-        //if (direction.magnitude >= 0.1f)
-        //{
-        //float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg * camTransform.eulerAngles.y;
-        //float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        // Debug.Log("targetAngle : " + targetAngle + ", angle : " + angle);
-        //transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-        //Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-
-        //}
-
-        //Vector3 movePosition = new Vector3(inputX, 0, inputZ) * moveSpeed * Time.deltaTime;
-
-        //playerRigidbody.position = movePosition + transform.position;
-
-        //Vector3 velocity = new Vector3(inputX, 0, inputZ) * moveSpeed;
-
-        //playerRigidbody.velocity = velocity;
-
-        //Vector3 vector3 = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * moveSpeed * Time.deltaTime;
-        //playerRigidbody.velocity = vector3;
     }
 }
