@@ -25,7 +25,6 @@ public class Player : Human
 
     public float jumpHeight = 3f; // 캐릭터의 점프력
     public float gravity = -9.81f; // 중력
-
     /* 그라운드 체크 */
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -35,6 +34,14 @@ public class Player : Human
     bool isGrounded;
     // 달리기 시작 타이머
     float runTimer;
+    // 상호작용 거리
+    float interactionDistance;
+    // 사용할 총
+    public Gun gun;
+    // 인벤토리 입력키 반복으로 열고 닫고 싶을 때
+    bool isInvenOpen;
+    // 대화 수첩 입력키 반복으로 열고 닫고 싶을 때
+    bool isNoteOpen;
     // 
     Collider target = null;
     // 대기()
@@ -66,9 +73,11 @@ public class Player : Human
         groundMask = LayerMask.GetMask("Ground");
         controller = GetComponent<CharacterController>();
         moveSpeed = 1f;
-        attackDistance = 2;
+        attackDistance = 10;
+        interactionDistance = 2;
         runTimer = 0;
 
+        isInvenOpen = false;
         // 마우스 커서
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -87,24 +96,41 @@ public class Player : Human
         {
             GetItem();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (gun.Reload())
+            {
+                // 재장전 성공시에만 재장전 애니메이션 재생
+                animator.SetTrigger("Reload");
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            OpenInventory();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            OpenNote();
+        }
     }
     protected override void Attack()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackDistance, transform.forward, 0, enemyLayer);
-        Debug.Log(hits.Length + "개");
-        if (hits.Length > 0)
-        {
-            target = hits[0].collider;
-        }
-        else
-        {
-            target = null;
-        }
-        GameManager.Instance.Attack(target, AP);
+        //RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackDistance, transform.forward, 0, enemyLayer);
+        //Debug.Log(hits.Length + "개");
+        //if (hits.Length > 0)
+        //{
+        //    target = hits[0].collider;
+        //}
+        //else
+        //{
+        //    target = null;
+        //}
+        //GameManager.Instance.Attack(target, AP);
+        gun.Fire();
     }
     protected void GetItem()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackDistance, transform.forward, 0, itemLayer);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, interactionDistance, transform.forward, 0, itemLayer);
         if (hits.Length > 0)
         {
             target = hits[0].collider;
@@ -157,13 +183,11 @@ public class Player : Human
             runTimer++;
             if (runTimer < 100)
             {
-                Debug.Log("runTimer : " + runTimer);
                 animator.SetFloat("Move", moveSpeed);
                 moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
             }
             else
             {
-                Debug.Log("runTimer : 10 넘었다.");
                 animator.SetFloat("Move", moveSpeed);
                 moveSpeed = (moveSpeed > 5.0f) ? 5.0f : (moveSpeed + .1f);
             }
@@ -180,5 +204,29 @@ public class Player : Human
             runTimer = 0;
             animator.SetFloat("Move", 0f);
         }
+    }
+    void OpenInventory()
+    {
+        if (!isInvenOpen)
+        {
+            Debug.Log("인벤토리 열림");
+        }
+        else
+        {
+            Debug.Log("인벤토리 닫힘");
+        }
+        isInvenOpen = !isInvenOpen;
+    }
+    void OpenNote()
+    {
+        if (!isNoteOpen)
+        {
+            Debug.Log("대화 수첩 열림");
+        }
+        else
+        {
+            Debug.Log("대화 수첩 닫힘");
+        }
+        isNoteOpen = !isNoteOpen;
     }
 }

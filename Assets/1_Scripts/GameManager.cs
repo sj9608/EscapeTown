@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : SingletonBase<GameManager>
 {
     [SerializeField] Player player;
-    [SerializeField] GameObject enemies;
+    GameObject enemies;
     Dictionary<string, Enemy> enemiesDic;
 
     // 게임오버 판단
@@ -17,18 +17,16 @@ public class GameManager : SingletonBase<GameManager>
     // Start is called before the first frame update
     void Start()
     {
+        // 인스펙터에서 Enemies에 아무것도 넣지 않으면
+        // 해당 스테이지는 
+        enemies = GameObject.Find("Enemies");
         if (enemies != null)
         {
             enemiesDic = enemies.GetComponentsInChildren<Enemy>().ToDictionary(key => key.name);
         }
         IsGameOver = false;
-        //enemiesList = new List<Enemy>(enemies.GetComponentsInChildren<Enemy>());
-        //foreach (KeyValuePair<string, Enemy> pair in enemiesDic)
-        //{
-        //    Debug.Log("pair" + pair);
-        //}
     }
-    public void Attack(Collider hit, int damage)
+    public void Attack(Collider hit, float damage)
     {
         if (hit != null)
         {
@@ -48,6 +46,7 @@ public class GameManager : SingletonBase<GameManager>
                     if (player.HP <= 0)
                     {
                         player.Die();
+                        player.animator.SetTrigger("Die");
                         GameOver();
                     }
                     break;
