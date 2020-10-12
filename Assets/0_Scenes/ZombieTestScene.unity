@@ -128,13 +128,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 988199927, guid: d16b900e6934a4cf6945fcc4765fd99b, type: 3}
+      propertyPath: walkForce
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1055470696967520, guid: d16b900e6934a4cf6945fcc4765fd99b, type: 3}
       propertyPath: m_Name
       value: Zombie_Clown_Male_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 1055470696967520, guid: d16b900e6934a4cf6945fcc4765fd99b, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4465094797090432, guid: d16b900e6934a4cf6945fcc4765fd99b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -484,7 +484,8 @@ GameObject:
   - component: {fileID: 760821424}
   - component: {fileID: 760821423}
   - component: {fileID: 760821428}
-  m_Layer: 0
+  - component: {fileID: 760821427}
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -559,12 +560,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760821422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.22, y: 2.03, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.81, y: 0.72, z: 7.95}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &760821427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760821422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f85e3408f7346d1a39e6a914dac449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &760821428
 Rigidbody:
   m_ObjectHideFlags: 0
