@@ -20,15 +20,15 @@ public class Zombie : MonoBehaviour
     public int HP;                                          // 좀비의 체
     public int ap;                                          // 좀비의 공격력
     public float walkForce;                                 // 대기상태의 걷기 속도
-    public float runSpeed;                                  // 추적상태의 달리기 속도
+    public float runSpeed;                                  // 추적상태의 달리기 속도 (에디터상 동적할당 안됨, 코드상 편	)
     public float attackRange;                               // 좀비 공격의 범위 
     public float searchDistance;                            // 좀비가 주인공을 탐색할 거리
     public float searchAngle;                               // 좀비의 시야각 (플레이어를 감지할 시야각)
 
-    public float walkDelayMin = 2.0f;
-    public float walkDelayMax = 3.5f;
-    public float idleDelayMin = 1.5f;
-    public float idleDelayMax = 4.0f;
+    public float walkDelayMin = 2.0f;                       // 좀비의 걷기 최소시간
+    public float walkDelayMax = 3.5f;                       // 좀비의 걷기 최대시간
+    public float idleDelayMin = 1.5f;                       // 좀비 Idle 최소시간
+    public float idleDelayMax = 4.0f;                       // 좀비 Idle 최대시간 
 
     private float idleWalkDelay;                            // 좀비가 주변을 걷는 시간
     private float idleDelay;                                // 좀비가 제자리에 머무는 시간
@@ -53,7 +53,7 @@ public class Zombie : MonoBehaviour
         HP = 100;                            
         ap = 20;                                 
         walkForce = 240f;                         
-        runSpeed = 6f;                            
+        runSpeed = 1f;                            
         attackRange = 1.3f;                      
         searchDistance = 8f;                     
         searchAngle = 120f;
@@ -68,6 +68,8 @@ public class Zombie : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         nmAgent = GetComponent<NavMeshAgent>();
+
+        nmAgent.speed = runSpeed;
 
         // 코루틴 시작
         StartCoroutine(Think());
@@ -203,23 +205,20 @@ public class Zombie : MonoBehaviour
         
         nmAgent.isStopped = true;
         currentState = State.Attack;
-        Debug.Log("좀비 공격~!");
         anim.SetInteger("ZombieState", (int)currentState);
         isAttacking = true;
     }
-    void AttackPointHandler()
+    public void AttackPointHandler()
     {
         GameManager.Instance.Attack(player.GetComponent<Collider>(), ap / 2);
-        Debug.Log("공격포인트 도달");
     }
-    void AttackAnimationCompletHandler()
+    public void AttackAnimationCompletHandler()
     {
         //anim.SetBool();
 
         isAttacking = false;
         currentState = State.BattleMode;
         Battle();
-        Debug.Log("공격애니메이션 끝");
     }
 
     public void OnDamage(int attackPoint)
@@ -232,7 +231,7 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         nmAgent.isStopped = true;
         currentState = State.Dead;
@@ -269,7 +268,6 @@ public class Zombie : MonoBehaviour
         if (other.tag == "Player")
         {
             isPlayerTargeting = true;
-            Debug.Log("플레이어가 공격범위 안에 있음");
         }
     }
 
@@ -278,7 +276,6 @@ public class Zombie : MonoBehaviour
         if (other.tag == "Player")
         {
             isPlayerTargeting = false;
-            Debug.Log("플레이어가 공격범위를 벗어남");
         }
     }
 }
