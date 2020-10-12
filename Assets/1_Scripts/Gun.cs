@@ -33,7 +33,7 @@ public class Gun : MonoBehaviour
     public AudioClip reloadClip;
 
     // 공격력
-    public float damage = 1;
+    public float damage = 40;
     // 사정거리
     private float fireDistance = 50f;
 
@@ -98,14 +98,18 @@ public class Gun : MonoBehaviour
         // 총알이 맞은 곳을 저장할 변수
         Vector3 hitPosition = Vector3.zero;
 
-        // 레이캐스트(시작지점, 방향, 충돌 정보 컨테이너, 사정거리)
-
+        // 레이캐스트(시작지점, 방향, 충돌 정보 컨테이너, 사정거리, 레이어마스크)
         if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance, LayerMask.GetMask("Enemy")))
         {
+            Zombie zombie = hit.transform.GetComponent<Zombie>();
+            if (zombie)
+            {
+                zombie.OnDamage((int)damage);
+            }
             // 레이가 어떤 물체와 충돌한 경우
-            GameManager.Instance.Attack(hit.collider, damage);
+            //GameManager.Instance.Attack(hit.collider, damage);
             // 레이가 충돌한 위치 저장
-            hitPosition = hit.point;
+            //hitPosition = hit.point;
         }
         else
         {
@@ -119,7 +123,6 @@ public class Gun : MonoBehaviour
         StartCoroutine(ShotEffect(hitPosition));
 
         // 남은 탄환의 수를 -1
-        Debug.Log("총알 : " + magAmmo);
         magAmmo--;
         if (magAmmo <= 0)
         {

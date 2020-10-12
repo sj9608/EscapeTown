@@ -17,7 +17,7 @@ public class Zombie : MonoBehaviour
 
     // public 접근자는 기획자가 조정
     public bool isDead = false;
-    public int HP;                                          // 좀비의 체
+    public float HP;                                          // 좀비의 체
     public int ap;                                          // 좀비의 공격력
     public float walkForce;                                 // 대기상태의 걷기 속도
     public float runSpeed;                                  // 추적상태의 달리기 속도 (에디터상 동적할당 안됨, 코드상 편	)
@@ -46,12 +46,12 @@ public class Zombie : MonoBehaviour
 
 
     // 테스트용 객체 선언 (주인공으로 인식할 대상)
-    public PlayerExample player;
+    public Player player;
 
     void Start()
     {
         HP = 100;                            
-        ap = 20;                                 
+        ap = 30;                                 
         walkForce = 240f;                         
         runSpeed = 1f;                            
         attackRange = 1.3f;                      
@@ -75,7 +75,7 @@ public class Zombie : MonoBehaviour
         StartCoroutine(Think());
 
         // 플레이어를 대체할 테스트용 코드
-        player = FindObjectOfType<PlayerExample>();
+        player = FindObjectOfType<Player>();
     }
 
     
@@ -201,8 +201,7 @@ public class Zombie : MonoBehaviour
     }
 
     void Attack()
-    {
-        
+    { 
         nmAgent.isStopped = true;
         currentState = State.Attack;
         anim.SetInteger("ZombieState", (int)currentState);
@@ -210,7 +209,10 @@ public class Zombie : MonoBehaviour
     }
     public void AttackPointHandler()
     {
-        GameManager.Instance.Attack(player.GetComponent<Collider>(), ap / 2);
+        if (isPlayerTargeting)
+        {
+            player.OnDamage(ap / 2);
+        }
     }
     public void AttackAnimationCompletHandler()
     {
@@ -237,6 +239,7 @@ public class Zombie : MonoBehaviour
         currentState = State.Dead;
         anim.SetTrigger("isDead");
         isDead = true;
+        GameManager.Instance.ZombieDead();
 
         StopCoroutine(Think());
     }
@@ -249,7 +252,7 @@ public class Zombie : MonoBehaviour
         {
             if (hit.collider)
             {
-                PlayerExample player = hit.collider.GetComponent<PlayerExample>();                // 프로젝트 적용전 객체타입 Player로  %%
+                Player player = hit.collider.GetComponent<Player>();                // 프로젝트 적용전 객체타입 Player로  %%
 
                 // 플레이어가 존재하고, 좀비의 시야범위 안에 있으며, 탐색거리 안에 있다면 
                 if (player

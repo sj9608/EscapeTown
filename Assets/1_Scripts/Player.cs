@@ -70,8 +70,8 @@ public class Player : Human
     // Start is called before the first frame update
     void Start()
     {
-        HP = 3;
-        AP = 1;
+        HP = 100;
+        AP = 40;
         enemyLayer = LayerMask.GetMask("Enemy");
         itemLayer = LayerMask.GetMask("Item");
         groundMask = LayerMask.GetMask("Ground");
@@ -257,5 +257,23 @@ public class Player : Human
             rightHandMount.position);
         animator.SetIKRotation(AvatarIKGoal.RightHand,
             rightHandMount.rotation);
+    }
+    public void OnDamage(int attackPoint)
+    {
+       
+        HP -= attackPoint;
+        Debug.Log("플레이어 공격 받음. 남은체력"+ HP);
+        if (HP < 0)
+        {
+            HP = 0;
+            Die();
+        }
+    }
+
+    public override void Die()
+    {
+        GameManager.Instance.PlayerDead();
+        animator.SetTrigger("Die");
+        // base.Die();
     }
 }

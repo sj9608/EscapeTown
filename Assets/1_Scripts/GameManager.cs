@@ -8,7 +8,7 @@ public class GameManager : SingletonBase<GameManager>
 {
     [SerializeField] Player player;
     GameObject enemies;
-    Dictionary<string, Enemy> enemiesDic;
+    Dictionary<string, Zombie> enemiesDic;
 
     // 게임오버 판단
     public bool IsGameOver;
@@ -22,10 +22,22 @@ public class GameManager : SingletonBase<GameManager>
         enemies = GameObject.Find("Enemies");
         if (enemies != null)
         {
-            enemiesDic = enemies.GetComponentsInChildren<Enemy>().ToDictionary(key => key.name);
+            enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
         }
+        Debug.Log("enemiesDic : " + enemiesDic.Count);
         IsGameOver = false;
     }
+
+    public void ZombieDead()
+    {
+        Debug.Log("좀비가 죽음을 게임매니저가 인식");
+    }
+
+    public void PlayerDead()
+    {
+        Debug.Log("플레이어가 죽음을 게임매니저가 인식");
+    }
+
     public void Attack(Collider hit, float damage)
     {
         if (hit != null)
@@ -33,7 +45,7 @@ public class GameManager : SingletonBase<GameManager>
             switch (hit.tag)
             {
                 case "Enemy":
-                    Enemy enemy = enemiesDic[hit.name];
+                    Zombie enemy = enemiesDic[hit.name];
                     enemy.HP = enemy.HP - damage;
                     if (enemy.HP <= 0)
                     {
