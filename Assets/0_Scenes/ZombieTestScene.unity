@@ -128,10 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 988199927, guid: d16b900e6934a4cf6945fcc4765fd99b, type: 3}
-      propertyPath: walkForce
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1055470696967520, guid: d16b900e6934a4cf6945fcc4765fd99b, type: 3}
       propertyPath: m_Name
       value: Zombie_Clown_Male_01

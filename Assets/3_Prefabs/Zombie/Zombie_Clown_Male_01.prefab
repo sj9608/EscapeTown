@@ -240,10 +240,10 @@ BoxCollider:
   m_GameObject: {fileID: 1055470696967520}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 1, z: 0.25}
+  m_Size: {x: 0.5, y: 0.5, z: 0.79}
+  m_Center: {x: 0, y: 1, z: 0.4}
 --- !u!114 &988199927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   isDead: 0
   HP: 0
   ap: 0
-  walkSpeed: 0
+  walkForce: 0
   runSpeed: 0
   attackRange: 0
   searchDistance: 0
@@ -268,7 +268,7 @@ MonoBehaviour:
   walkDelayMax: 3.5
   idleDelayMin: 1
   idleDelayMax: 3
-  player: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!195 &988199929
 NavMeshAgent:
   m_ObjectHideFlags: 0

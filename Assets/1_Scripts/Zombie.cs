@@ -10,10 +10,9 @@ public class Zombie : MonoBehaviour
         Idle = 0,
         Walk = 1,
         Trace = 2,
-        Battle = 3,
-        Attack1 = 4,
-        Attack2 = 5,
-        Dead = 6
+        BattleMode = 3,
+        Attack = 4,
+        Dead = 5
     }
 
     // public 접근자는 기획자가 조정
@@ -42,10 +41,12 @@ public class Zombie : MonoBehaviour
     private Animator anim;
     private Rigidbody rb;
     private NavMeshAgent nmAgent;                           // 추적AI
+    private bool isAttacking;                               // 공격중인지 감지하기 위한 구분자
+    private bool isPlayerTargeting;                         // 공격시점에 플레이어가 공격 범위에 있는지 판단하기위한 구분자
 
 
     // 테스트용 객체 선언 (주인공으로 인식할 대상)
-    public Transform playerTransform;
+    public PlayerExample player;
 
     void Start()
     {
@@ -72,7 +73,7 @@ public class Zombie : MonoBehaviour
         StartCoroutine(Think());
 
         // 플레이어를 대체할 테스트용 코드
-        playerTransform = FindObjectOfType<PlayerExample>().transform;
+        player = FindObjectOfType<PlayerExample>();
     }
 
     
@@ -117,22 +118,21 @@ public class Zombie : MonoBehaviour
                     }
                     break;
                 case State.Trace:
-                    if (Vector3.Distance(playerTransform.position, transform.position) < attackRange)
+                    if (Vector3.Distance(player.transform.position, transform.position) < attackRange)
                     {
-                        Debug.Log("좀비 공격모드로");
                         Battle();
                     }
-                    else if (Vector3.Distance(playerTransform.position, transform.position) > searchDistance)
+                    else if (Vector3.Distance(player.transform.position, transform.position) > searchDistance)
                     {
                         Idle();
                     }
                     else
                     {
-                        nmAgent.SetDestination(playerTransform.position);
+                        nmAgent.SetDestination(player.transform.position);
                     }
                     break;
-                case State.Battle:
-                    if (Vector3.Distance(playerTransform.position, transform.position) > attackRange)
+                case State.BattleMode:
+                    if (Vector3.Distance(player.transform.position, transform.position) > attackRange)
                     {
                         TraceRun();
                     }else
@@ -140,8 +140,7 @@ public class Zombie : MonoBehaviour
                         Attack();
                     }
                     break;
-                case State.Attack1:
-                case State.Attack2:
+                case State.Attack:
 
                     break;
                 case State.Dead:
@@ -192,24 +191,35 @@ public class Zombie : MonoBehaviour
 
     void Battle()
     {
-        transform.LookAt(playerTransform);
+        isAttacking = false;
+        transform.LookAt(player.transform);
         nmAgent.isStopped = true;
-        currentState = State.Battle;
-        anim.SetInteger("ZombieState", (int)State.Idle);
+        currentState = State.BattleMode;
+        anim.SetInteger("ZombieState", (int)currentState);
     }
 
     void Attack()
     {
+        
         nmAgent.isStopped = true;
-        //currentState = State.Attack1;
-        if (Random.Range(0, 2) == 0)
-        {
-            anim.SetTrigger("Attack1");
-        }
-        else
-        {
-            anim.SetTrigger("Attack2");
-        }
+        currentState = State.Attack;
+        Debug.Log("좀비 공격~!");
+        anim.SetInteger("ZombieState", (int)currentState);
+        isAttacking = true;
+    }
+    void AttackPointHandler()
+    {
+        GameManager.Instance.Attack(player.GetComponent<Collider>(), ap / 2);
+        Debug.Log("공격포인트 도달");
+    }
+    void AttackAnimationCompletHandler()
+    {
+        //anim.SetBool();
+
+        isAttacking = false;
+        currentState = State.BattleMode;
+        Battle();
+        Debug.Log("공격애니메이션 끝");
     }
 
     public void OnDamage(int attackPoint)
@@ -228,6 +238,7 @@ public class Zombie : MonoBehaviour
         currentState = State.Dead;
         anim.SetTrigger("isDead");
         isDead = true;
+
         StopCoroutine(Think());
     }
 
@@ -249,5 +260,25 @@ public class Zombie : MonoBehaviour
             }
         }
         return false;
+    }
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            isPlayerTargeting = true;
+            Debug.Log("플레이어가 공격범위 안에 있음");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            isPlayerTargeting = false;
+            Debug.Log("플레이어가 공격범위를 벗어남");
+        }
     }
 }
