@@ -38,6 +38,10 @@ public class Player : Human
     float interactionDistance;
     // 사용할 총
     public Gun gun;
+    public Transform gunPivot; // 총 배치의 기준점
+    public Transform leftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
+    public Transform rightHandMount; // 총의 오른쪽 손잡이, 오른손이 위치할 지점
+
     // 인벤토리 입력키 반복으로 열고 닫고 싶을 때
     bool isInvenOpen;
     // 대화 수첩 입력키 반복으로 열고 닫고 싶을 때
@@ -228,5 +232,30 @@ public class Player : Human
             Debug.Log("대화 수첩 닫힘");
         }
         isNoteOpen = !isNoteOpen;
+    }
+    // 애니메이터의 IK 갱신
+    private void OnAnimatorIK(int layerIndex)
+    {
+        // 총의 기준점 gunPivot을 3D 모델의 오른쪽 팔꿈치 위치로 이동
+        gunPivot.position =
+            animator.GetIKHintPosition(AvatarIKHint.RightElbow);
+
+        // IK를 사용하여 왼손의 위치와 회전을 총의 오른쪽 손잡이에 맞춘다
+        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
+        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1.0f);
+
+        animator.SetIKPosition(AvatarIKGoal.LeftHand,
+            leftHandMount.position);
+        animator.SetIKRotation(AvatarIKGoal.LeftHand,
+            leftHandMount.rotation);
+
+        // IK를 사용하여 오른손의 위치와 회전을 총의 오른쪽 손잡이에 맞춘다
+        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f);
+        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1.0f);
+
+        animator.SetIKPosition(AvatarIKGoal.RightHand,
+            rightHandMount.position);
+        animator.SetIKRotation(AvatarIKGoal.RightHand,
+            rightHandMount.rotation);
     }
 }

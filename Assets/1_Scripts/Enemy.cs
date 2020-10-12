@@ -72,7 +72,7 @@ public class Enemy : Human
     }
     private void OnTriggerStay(Collider other)
     {
-        if (Time.time >= lastAttackTime + timeBetAttack)
+        if (other.tag == "Player" && Time.time >= lastAttackTime + timeBetAttack)
         {
             lastAttackTime = Time.time;
             Debug.Log(other.tag + "을 공격했다");

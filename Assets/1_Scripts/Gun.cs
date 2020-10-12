@@ -26,11 +26,11 @@ public class Gun : MonoBehaviour
     private LineRenderer bulletLineRenderer;
 
     // 총 소리 재생기
-    // private AudioSource gunAudioPlayer;
-    //// 발사 소리
-    //public AudioClip shotClip;
-    //// 재장전 소리
-    //public AudioClip reloadClip;
+    private AudioSource gunAudioPlayer;
+    // 발사 소리
+    public AudioClip shotClip;
+    // 재장전 소리
+    public AudioClip reloadClip;
 
     // 공격력
     public float damage = 1;
@@ -60,7 +60,7 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         // 사용할 컴포넌트들의 참조를 가져오기
-        // gunAudioPlayer = GetComponent<AudioSource>();
+        gunAudioPlayer = GetComponent<AudioSource>();
         bulletLineRenderer = GetComponent<LineRenderer>();
 
         // 사용할 점을 두개로 변경
@@ -119,6 +119,7 @@ public class Gun : MonoBehaviour
         StartCoroutine(ShotEffect(hitPosition));
 
         // 남은 탄환의 수를 -1
+        Debug.Log("총알 : " + magAmmo);
         magAmmo--;
         if (magAmmo <= 0)
         {
@@ -135,7 +136,7 @@ public class Gun : MonoBehaviour
         //shellEjectEffect.Play();
 
         // 총격 소리 재생
-        // gunAudioPlayer.PlayOneShot(shotClip);
+        gunAudioPlayer.PlayOneShot(shotClip);
 
         // 선의 시작점은 총구의 위치
         bulletLineRenderer.SetPosition(0, fireTransform.position);
@@ -170,7 +171,7 @@ public class Gun : MonoBehaviour
         // 현재 상태를 재장전 중 상태로 전환
         gunState = GunState.Reloading;
         // 재장전 소리 재생
-        //gunAudioPlayer.PlayOneShot(reloadClip);
+        gunAudioPlayer.PlayOneShot(reloadClip);
 
         // 재장전 소요 시간 만큼 처리를 쉬기
         yield return new WaitForSeconds(reloadTime);
