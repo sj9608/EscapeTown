@@ -39,7 +39,7 @@ public class Enemy : Human
     void EnemyRaycast()
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, maxDistance, transform.forward, 0);
-
+        
         foreach (var hit in hits)
         {
             if (hit.collider != null)
