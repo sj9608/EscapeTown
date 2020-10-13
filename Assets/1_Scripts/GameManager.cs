@@ -10,6 +10,7 @@ public class GameManager : SingletonBase<GameManager>
     [SerializeField] GameObject enemies;
     Dictionary<string, Enemy> enemiesDic;
 
+    public string sceneToLoad;
     // 게임오버 판단
     public bool IsGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
@@ -28,6 +29,13 @@ public class GameManager : SingletonBase<GameManager>
         //    Debug.Log("pair" + pair);
         //}
     }
+    // void Update()    
+    // {
+    //     if(Input.GetMouseButtonDown(0))
+    //     {
+    //         SceneManager.LoadScene(sceneToLoad);
+    //     }
+    // }
     public void Attack(Collider hit, int damage)
     {
         if (hit != null)
@@ -79,4 +87,16 @@ public class GameManager : SingletonBase<GameManager>
             Debug.Log("클리어 조건을 만족하지 못하였습니다.");
         }
     }
+    // public void LoadStage()
+    // {
+    //     SceneManager.LoadScene(sceneToLoad);
+    // }
+    // public void QuitGame()
+    // {
+    //     if(Input.GetMouseButtonDown(0))
+    //     {
+    //         SceneManager.UnloadScene(sceneToLoad);
+    //     }
+        
+    // }
 }
