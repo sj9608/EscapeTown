@@ -42,6 +42,9 @@ public class Player : Human
     public Transform leftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
     public Transform rightHandMount; // 총의 오른쪽 손잡이, 오른손이 위치할 지점
 
+    bool isAim;
+    bool isCrouch;
+    bool isDead;
     // 인벤토리 입력키 반복으로 열고 닫고 싶을 때
     bool isInvenOpen;
     // 대화 수첩 입력키 반복으로 열고 닫고 싶을 때
@@ -81,6 +84,10 @@ public class Player : Human
         interactionDistance = 2;
         runTimer = 0;
 
+        isDead = false;
+        isAim = true;
+        isCrouch = false;
+
         isInvenOpen = false;
         // 마우스 커서
         Cursor.lockState = CursorLockMode.Locked;
@@ -95,6 +102,11 @@ public class Player : Human
         if (Input.GetMouseButtonDown(0))
         {
             Attack();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            isAim = true;
+            // 조준 카메라 구현
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -115,6 +127,16 @@ public class Player : Human
         if (Input.GetKeyDown(KeyCode.P))
         {
             OpenNote();
+        }
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            isCrouch = true;
+            animator.SetBool("isCrouch", isCrouch);
+        }
+        else
+        {
+            isCrouch = false;
+            animator.SetBool("isCrouch", isCrouch);
         }
     }
     protected override void Attack()
@@ -184,22 +206,25 @@ public class Player : Human
 
             // 카메라가 바라보는 방향에 대응하게 하기위한 벡터 (실제 움직임 벡터)
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            runTimer++;
-            if (runTimer < 100)
+            if (isCrouch)
             {
-                animator.SetFloat("Move", moveSpeed);
-                moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
+                moveSpeed = 1.5f;
+                animator.SetFloat("Crouch", moveSpeed);
             }
             else
             {
-                animator.SetFloat("Move", moveSpeed);
-                moveSpeed = (moveSpeed > 5.0f) ? 5.0f : (moveSpeed + .1f);
+                runTimer++;
+                if (runTimer < 100)
+                {
+                    animator.SetFloat("Move", moveSpeed);
+                    moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
+                }
+                else
+                {
+                    animator.SetFloat("Move", moveSpeed);
+                    moveSpeed = (moveSpeed > 5.0f) ? 5.0f : (moveSpeed + .1f);
+                }
             }
-            if (Input.GetKey(KeyCode.LeftControl))
-            {
-                moveSpeed = 1.5f;
-            }
-            
             controller.Move(moveDir * moveSpeed * Time.deltaTime); // 해당 벡터의 방향으로 speed 수치만큼 frame간격마다 이동 (카메라가 바라보는 방향으로 움직이게 하기위해서 direction --> moveDir 교체)
         }
         else
@@ -207,6 +232,7 @@ public class Player : Human
             moveSpeed = 1.0f;
             runTimer = 0;
             animator.SetFloat("Move", 0f);
+            animator.SetFloat("Crouch", 0f);
         }
     }
     void OpenInventory()
@@ -258,14 +284,18 @@ public class Player : Human
         animator.SetIKRotation(AvatarIKGoal.RightHand,
             rightHandMount.rotation);
     }
-    public void OnDamage(int attackPoint)
+    public void OnDamage(float attackPoint)
     {
-       
+        if (isDead)
+        {
+            return;
+        }
         HP -= attackPoint;
         Debug.Log("플레이어 공격 받음. 남은체력"+ HP);
         if (HP < 0)
         {
             HP = 0;
+            isDead = true;
             Die();
         }
     }

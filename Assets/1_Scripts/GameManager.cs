@@ -28,9 +28,9 @@ public class GameManager : SingletonBase<GameManager>
         IsGameOver = false;
     }
 
-    public void ZombieDead()
+    public void ZombieDead(string zName)
     {
-        Debug.Log("좀비가 죽음을 게임매니저가 인식");
+        enemiesDic.Remove(zName);
     }
 
     public void PlayerDead()

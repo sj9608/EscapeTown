@@ -33,7 +33,7 @@ public class Gun : MonoBehaviour
     public AudioClip reloadClip;
 
     // 공격력
-    public float damage = 40;
+    public float gunDamage = 40;
     // 사정거리
     private float fireDistance = 50f;
 
@@ -104,12 +104,12 @@ public class Gun : MonoBehaviour
             Zombie zombie = hit.transform.GetComponent<Zombie>();
             if (zombie)
             {
-                zombie.OnDamage((int)damage);
+                zombie.OnDamage(gunDamage);
             }
+            // 레이가 충돌한 위치 저장
+            hitPosition = hit.point;
             // 레이가 어떤 물체와 충돌한 경우
             //GameManager.Instance.Attack(hit.collider, damage);
-            // 레이가 충돌한 위치 저장
-            //hitPosition = hit.point;
         }
         else
         {

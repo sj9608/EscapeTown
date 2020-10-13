@@ -18,7 +18,7 @@ public class Zombie : MonoBehaviour
     // public 접근자는 기획자가 조정
     public bool isDead = false;
     public float HP;                                          // 좀비의 체
-    public int ap;                                          // 좀비의 공격력
+    public float ap;                                          // 좀비의 공격력
     public float walkForce;                                 // 대기상태의 걷기 속도
     public float runSpeed;                                  // 추적상태의 달리기 속도 (에디터상 동적할당 안됨, 코드상 편	)
     public float attackRange;                               // 좀비 공격의 범위 
@@ -52,7 +52,7 @@ public class Zombie : MonoBehaviour
     {
         HP = 100;                            
         ap = 30;                                 
-        walkForce = 240f;                         
+        walkForce = 500f;                         
         runSpeed = 1f;                            
         attackRange = 1.3f;                      
         searchDistance = 8f;                     
@@ -86,7 +86,6 @@ public class Zombie : MonoBehaviour
         // 물리력 이동 
         if (currentState == State.Walk)
             rb.AddForce(transform.forward * walkForce * Time.deltaTime);
-        
     }
 
     IEnumerator Think()
@@ -223,7 +222,7 @@ public class Zombie : MonoBehaviour
         Battle();
     }
 
-    public void OnDamage(int attackPoint)
+    public void OnDamage(float attackPoint)
     {
         HP -= attackPoint;
         if (HP < 0)
@@ -239,7 +238,7 @@ public class Zombie : MonoBehaviour
         currentState = State.Dead;
         anim.SetTrigger("isDead");
         isDead = true;
-        GameManager.Instance.ZombieDead();
+        GameManager.Instance.ZombieDead(name);
 
         StopCoroutine(Think());
     }
@@ -252,13 +251,27 @@ public class Zombie : MonoBehaviour
         {
             if (hit.collider)
             {
-                Player player = hit.collider.GetComponent<Player>();                // 프로젝트 적용전 객체타입 Player로  %%
+                Player hitPlayer = hit.collider.GetComponent<Player>();                // 프로젝트 적용전 객체타입 Player로  %%
 
-                // 플레이어가 존재하고, 좀비의 시야범위 안에 있으며, 탐색거리 안에 있다면 
-                if (player
-                    && Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(player.transform.position)) < searchAngle / 2.0f
-                    && Vector3.Distance(player.transform.position, transform.position) < searchDistance)
-                    return true;
+                // 플레이어가 존재하고, 좀비의 시야각 안에 있으며, 탐색거리 안에 있다면 
+                if (hitPlayer
+                    && Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(hitPlayer.transform.position)) < searchAngle / 2.0f
+                    && Vector3.Distance(hitPlayer.transform.position, transform.position) < searchDistance)
+                    //return true;
+                {
+                    RaycastHit rHit;
+                    // 좀비에서 플레이어방향으로 레이캐스트 실행
+                    if (Physics.Linecast(transform.position, hitPlayer.transform.position, out rHit, LayerMask.GetMask("Player"))) // 레이어마스크 옵션 -1은 모든레이어검출(??)
+                    {
+                        // 직선방향에 검출된 대상이 플레이어라면 (둘 사이에 존재하는 다른 콜라이더가 없음을 의미)
+                        // 플레이어의 위치로만 검출하므로 정교한 방법은 아님 %% 주의 (임시방편)
+                        if (rHit.transform.CompareTag("Player"))
+                        {
+                            return true;
+                        }
+                    }
+
+                }
             }
         }
         return false;
