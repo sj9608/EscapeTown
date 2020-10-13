@@ -44,7 +44,7 @@ public class Player : Human
 
     bool isAim;
     bool isCrouch;
-    bool isDead;
+    public bool isDead;
     // 인벤토리 입력키 반복으로 열고 닫고 싶을 때
     bool isInvenOpen;
     // 대화 수첩 입력키 반복으로 열고 닫고 싶을 때
@@ -86,6 +86,7 @@ public class Player : Human
 
         isDead = false;
         isAim = true;
+
         isCrouch = false;
 
         isInvenOpen = false;
@@ -107,6 +108,7 @@ public class Player : Human
         {
             isAim = true;
             // 조준 카메라 구현
+            animator.SetBool("isAim", isAim);
         }
         if (Input.GetKeyDown(KeyCode.F))
         {

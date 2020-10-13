@@ -52,8 +52,8 @@ public class Zombie : MonoBehaviour
     {
         HP = 100;                            
         ap = 30;                                 
-        walkForce = 500f;                         
-        runSpeed = 1f;                            
+        walkForce = 100f;                         
+        runSpeed = 3f;                            
         attackRange = 1.3f;                      
         searchDistance = 8f;                     
         searchAngle = 120f;
@@ -85,7 +85,7 @@ public class Zombie : MonoBehaviour
 
         // 물리력 이동 
         if (currentState == State.Walk)
-            rb.AddForce(transform.forward * walkForce * Time.deltaTime);
+            rb.velocity = transform.forward * walkForce * Time.deltaTime;
     }
 
     IEnumerator Think()
@@ -119,6 +119,12 @@ public class Zombie : MonoBehaviour
                     }
                     break;
                 case State.Trace:
+                    if (player.isDead)
+                    {
+                        Idle();
+                        break;
+                    }
+
                     if (Vector3.Distance(player.transform.position, transform.position) < attackRange)
                     {
                         Battle();
@@ -133,6 +139,12 @@ public class Zombie : MonoBehaviour
                     }
                     break;
                 case State.BattleMode:
+                    if (player.isDead)
+                    {
+                        Idle();
+                        break;
+                    }
+
                     if (Vector3.Distance(player.transform.position, transform.position) > attackRange)
                     {
                         TraceRun();
@@ -208,6 +220,8 @@ public class Zombie : MonoBehaviour
     }
     public void AttackPointHandler()
     {
+        if (player.isDead) return;
+
         if (isPlayerTargeting)
         {
             player.OnDamage(ap / 2);
@@ -234,6 +248,8 @@ public class Zombie : MonoBehaviour
 
     public void Die()
     {
+        if (isDead) return;
+
         nmAgent.isStopped = true;
         currentState = State.Dead;
         anim.SetTrigger("isDead");
@@ -260,8 +276,9 @@ public class Zombie : MonoBehaviour
                     //return true;
                 {
                     RaycastHit rHit;
+                    Vector3 midPoint = new Vector3(0, 0.8f, 0);      // 몸의 중간 포인트로 조준
                     // 좀비에서 플레이어방향으로 레이캐스트 실행
-                    if (Physics.Linecast(transform.position, hitPlayer.transform.position, out rHit, LayerMask.GetMask("Player"))) // 레이어마스크 옵션 -1은 모든레이어검출(??)
+                    if (Physics.Linecast(transform.position + midPoint, hitPlayer.transform.position + midPoint, out rHit, LayerMask.GetMask("Player"))) // 레이어마스크 옵션 -1은 모든레이어검출(??)
                     {
                         // 직선방향에 검출된 대상이 플레이어라면 (둘 사이에 존재하는 다른 콜라이더가 없음을 의미)
                         // 플레이어의 위치로만 검출하므로 정교한 방법은 아님 %% 주의 (임시방편)
