@@ -5,6 +5,9 @@ using UnityEngine;
 public class Enemy : Human
 {
     private LayerMask playerLayerMask;
+    public float timeBetAttack = 0.5f; // 공격 간격
+    private float lastAttackTime; // 마지막 공격 시점
+    public ParticleSystem hitEffect; // 피격시 재생할 파티클 효과
     // HP
     // 공격력
     // 이동속도
@@ -36,7 +39,7 @@ public class Enemy : Human
     void EnemyRaycast()
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, maxDistance, transform.forward, 0);
-
+        
         foreach (var hit in hits)
         {
             if (hit.collider != null)
@@ -67,14 +70,13 @@ public class Enemy : Human
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.tag + "을 공격했다");
-        GameManager.Instance.Attack(other, AP);
+        if (other.tag == "Player" && Time.time >= lastAttackTime + timeBetAttack)
+        {
+            lastAttackTime = Time.time;
+            Debug.Log(other.tag + "을 공격했다");
+            GameManager.Instance.Attack(other, AP);
+        }
     }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, maxDistance);
-    //}
 }

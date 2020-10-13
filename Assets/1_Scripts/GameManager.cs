@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : SingletonBase<GameManager>
 {
     [SerializeField] Player player;
-    [SerializeField] GameObject enemies;
-    Dictionary<string, Enemy> enemiesDic;
+    GameObject enemies;
+    Dictionary<string, Zombie> enemiesDic;
 
     public string sceneToLoad;
     // 게임오버 판단
@@ -18,16 +18,15 @@ public class GameManager : SingletonBase<GameManager>
     // Start is called before the first frame update
     void Start()
     {
+        // 인스펙터에서 Enemies에 아무것도 넣지 않으면
+        // 해당 스테이지는 
+        enemies = GameObject.Find("Enemies");
         if (enemies != null)
         {
-            enemiesDic = enemies.GetComponentsInChildren<Enemy>().ToDictionary(key => key.name);
+            enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
         }
+        Debug.Log("enemiesDic : " + enemiesDic.Count);
         IsGameOver = false;
-        //enemiesList = new List<Enemy>(enemies.GetComponentsInChildren<Enemy>());
-        //foreach (KeyValuePair<string, Enemy> pair in enemiesDic)
-        //{
-        //    Debug.Log("pair" + pair);
-        //}
     }
     // void Update()    
     // {
@@ -36,14 +35,25 @@ public class GameManager : SingletonBase<GameManager>
     //         SceneManager.LoadScene(sceneToLoad);
     //     }
     // }
-    public void Attack(Collider hit, int damage)
+
+    public void ZombieDead(string zName)
+    {
+        enemiesDic.Remove(zName);
+    }
+
+    public void PlayerDead()
+    {
+        Debug.Log("플레이어가 죽음을 게임매니저가 인식");
+    }
+
+    public void Attack(Collider hit, float damage)
     {
         if (hit != null)
         {
             switch (hit.tag)
             {
                 case "Enemy":
-                    Enemy enemy = enemiesDic[hit.name];
+                    Zombie enemy = enemiesDic[hit.name];
                     enemy.HP = enemy.HP - damage;
                     if (enemy.HP <= 0)
                     {
@@ -56,6 +66,7 @@ public class GameManager : SingletonBase<GameManager>
                     if (player.HP <= 0)
                     {
                         player.Die();
+                        player.animator.SetTrigger("Die");
                         GameOver();
                     }
                     break;

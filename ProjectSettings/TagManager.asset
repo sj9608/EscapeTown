@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Enemy
+  - Zombie
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,8 @@ TagManager:
   - Player
   - Enemy
   - Item
-  - 
+  - Ground
+  - Zombie
   - 
   - 
   - 

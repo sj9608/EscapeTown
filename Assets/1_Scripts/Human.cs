@@ -17,16 +17,16 @@ public abstract class Human : MonoBehaviour
     public GameObject obj;
     public Animator animator;
     // HP
-    protected int hp;
+    protected float hp;
     // 공격력
-    protected int ap;
+    protected float ap;
     // 공격 범위
     protected float attackDistance;
     // 이동속도
     protected float moveSpeed;
     // 공격중
     protected bool isAttack;
-    public int HP
+    public float HP
     {
         get
         {
@@ -37,7 +37,7 @@ public abstract class Human : MonoBehaviour
             hp = value;
         }
     }
-    public int AP
+    public float AP
     {
         get
         {
