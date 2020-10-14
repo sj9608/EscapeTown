@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
-    [SerializeField] Player player;
+    public Player player;
     GameObject enemies;
     Dictionary<string, Zombie> enemiesDic;
 
@@ -79,6 +79,29 @@ public class GameManager : SingletonBase<GameManager>
         {
             Debug.Log(player.name + "이(가) " + getItem.name + "을 습득했다.");
             getItem.gameObject.SetActive(false);
+        }
+    }
+    public void UsePotion()
+    {
+        // 포션 사용 메서드
+        // QuickSlot 에서 포션 개수가 남아 있는지 확인
+        if(QuickSlot.Instance.numOfPotion > 0)
+        {
+            // 남아 있으면 포션 개수 -1, HP + 30
+            QuickSlot.Instance.UsePotion();
+            player.HP += 30;
+        }
+    }
+
+    public void UseMagazine()
+    {
+        // 탄창 사용 메서드
+        // QuickSlot 에서 탄창 개수가 남아 있는지 확인
+        if(QuickSlot.Instance.numOfMagazine > 0)
+        {
+            // 남아 있으면 탄창 개수 -1
+            QuickSlot.Instance.UseMagazine();
+            // 총알 + 20
         }
     }
     public void GameOver()

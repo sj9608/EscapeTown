@@ -134,6 +134,16 @@ public class Player : Human
         {
             ChangeWeapon();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            // 1키 : 포션 사용
+            GameManager.Instance.UsePotion();
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            // 2키 : 탄창 사용
+            GameManager.Instance.UseMagazine();
+        }
         if (Input.GetKey(KeyCode.LeftControl))
         {
             isCrouch = true;
@@ -294,9 +304,10 @@ public class Player : Human
         animator.SetIKRotation(AvatarIKGoal.RightHand,
             rightHandMount.rotation);
     }
+
     public void OnDamage(float attackPoint)
     {
-        if (isDead)
+        if (isDead == true)
         {
             return;
         }
@@ -305,15 +316,19 @@ public class Player : Human
         if (HP < 0)
         {
             HP = 0;
-            isDead = true;
             Die();
         }
     }
 
     public override void Die()
     {
-        GameManager.Instance.PlayerDead();
-        animator.SetTrigger("Die");
-        // base.Die();
+        if(isDead == false)
+        {
+            GameManager.Instance.PlayerDead();
+            animator.SetTrigger("Die");
+            isDead = true;
+            // base.Die();
+        }
+        
     }
 }
