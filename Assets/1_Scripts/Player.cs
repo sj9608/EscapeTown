@@ -72,9 +72,11 @@ public class Player : SingletonBase<Player>
     // 사용할 총
     public Gun gun;
     public Knife knife;
-    public Transform gunPivot; // 총 배치의 기준점
-    Transform leftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
-    Transform rightHandMount;
+    Transform weaponPivot; // IK용 배치의 기준점
+    Transform gunPivot; // 총 배치의 기준점
+    Transform knifePivot; // 칼 배치의 기준점
+    Transform leftHandMount; // IK의 왼손이 위치할 지점
+    Transform rightHandMount; // IK의 오른손이 위치할 지점
     public Transform gunLeftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
     public Transform gunRightHandMount; // 총의 오른쪽 손잡이, 오른손이 위치할 지점
     public Transform knifeLeftHandMount; // 칼의 왼쪽 손잡이, 왼손이 위치할 지점
@@ -122,6 +124,9 @@ public class Player : SingletonBase<Player>
         attackDistance = 10;
         interactionDistance = 2;
         runTimer = 0;
+        gunPivot = gun.transform.parent;
+        knifePivot = knife.transform.parent;
+
 
         isDead = false;
         isAim = false;
@@ -311,14 +316,16 @@ public class Player : SingletonBase<Player>
         animator.SetBool("isAim", isAim);
         animator.SetBool("isKnife", isKnife);
         gun.transform.parent.gameObject.SetActive(isAim);
-        //knife.transform.parent.gameObject.SetActive(isKnife);
+        knife.transform.parent.gameObject.SetActive(isKnife);
         if (isAim)
         {
+            weaponPivot = gunPivot;
             leftHandMount = gunLeftHandMount;
             rightHandMount = gunRightHandMount;
         }
-        else if (isKnife)
+        else
         {
+            weaponPivot = knifePivot;
             leftHandMount = knifeLeftHandMount;
             rightHandMount = knifeLeftHandMount;
         }
@@ -328,7 +335,7 @@ public class Player : SingletonBase<Player>
     private void OnAnimatorIK(int layerIndex)
     {
         // 총의 기준점 gunPivot을 3D 모델의 오른쪽 팔꿈치 위치로 이동
-        gunPivot.position =
+        weaponPivot.position =
             animator.GetIKHintPosition(AvatarIKHint.RightElbow);
 
         // IK를 사용하여 왼손의 위치와 회전을 총의 오른쪽 손잡이에 맞춘다
