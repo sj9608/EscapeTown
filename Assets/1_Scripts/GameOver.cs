@@ -15,7 +15,7 @@ public class GameOver : MonoBehaviour
     {
         gameover.SetActive(false);
 
-        if(GameManager.Instance.player.isDead == true)
+        if(Player.Instance.isDead == true)
         {
             gameover.SetActive(true);
             //Cursor.lockState = CursorLockMode.Confined;
