@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<chat>
+		<code>1</code>
+		<situation>독백</situation>
+		<speaker>당신</speaker>
+		<sentence>저기 사람들이 모여있다. 가서 정보를 얻자.</sentence>
+	</chat>
+	<chat>
+		<code>2</code>
+		<situation>주민들끼리 대화</situation>
+		<speaker>주민</speaker>
+		<sentence>사라진 사람이요? 그러고 보니 요즘 안보이는 사람들이 몇 명 있는 것 같기도..</sentence>
+	</chat>
+	<chat>
+		<code>3</code>
+		<speaker>주민</speaker>
+		<sentence>박사가 데려간 것 아냐? 무슨 실험한다는 소문이 있던데.</sentence>
+	</chat>
+	<chat>
+		<code>4</code>
+		<speaker>당신</speaker>
+		<sentence>박사는 누구죠?</sentence>
+	</chat>
+	<chat>
+		<code>5</code>
+		<speaker>주민</speaker>
+		<sentence>예전에 주민들하고 싸우고 산에 틀어 박힌 사람 있어.</sentence>
+	</chat>
+	<chat>
+		<code>6</code>
+		<speaker>주민</speaker>
+		<sentence>박사가 준 약을 먹어서 그런가. 요즘 밤만 되면 잠이 너무 와.</sentence>
+	</chat>
+	<chat>
+		<code>7</code>
+		<speaker>주민</speaker>
+		<sentence>나도 그래. 밤에 뭘 했는지 기억이 안 나.</sentence>
+	</chat>
+	<chat>
+		<code>8</code>
+		<situation>독백</situation>
+		<speaker>당신</speaker>
+		<sentence>좀비와 사라진 사람.. 이 마을은 뭐지?</sentence>
+	</chat>
+</root>

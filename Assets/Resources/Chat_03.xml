@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<chat>
+		<code>1</code>
+		<situation>해가 뜸</situation>
+		<speaker>당신</speaker>
+		<sentence>어느새 해가 뜨기 시작했다. 다행히 여긴 사람이 사는 곳인 것 같다.</sentence>
+	</chat>
+	<chat>
+		<code>2</code>
+		<situation>사람 발견</situation>
+		<speaker>당신</speaker>
+		<sentence>모든 주민들과 대화해 어제 있었던 일에 대해 알아보자.</sentence>
+	</chat>
+	<chat>
+		<code>3</code>
+		<speaker>당신</speaker>
+		<sentence>혹시 어젰밤에 이상한 사람 못 보셨어요? 마치 좀비 같은?</sentence>
+	</chat>
+	<chat>
+		<code>4</code>
+		<speaker>주민</speaker>
+		<sentence>이상한 사람이라, 지금 제 눈 앞에 있네요. 세상에 좀비가 어디에 있나요?</sentence>
+	</chat>
+	<chat>
+		<code>5</code>
+		<speaker>당신</speaker>
+		<sentence>나를 이상한 눈으로 보는 듯 하다. 다른 주제로 말을 걸자.</sentence>
+	</chat>
+	<chat>
+		<code>6</code>
+		<situation>다른 주민과 대화</situation>
+		<speaker>당신</speaker>
+		<sentence>여긴 어디죠?</sentence>
+	</chat>
+	<chat>
+		<code>7</code>
+		<speaker>주민</speaker>
+		<sentence>다른 곳에서 온 사람인가? 여긴 토박이들만 사는 곳인데 어디서 온 거지?</sentence>
+	</chat>
+	<chat>
+		<code>8</code>
+		<speaker>당신</speaker>
+		<sentence>여긴 어디죠?</sentence>
+	</chat>
+	<chat>
+		<code>9</code>
+		<speaker>주민</speaker>
+		<sentence>타지에서 오셨나요? 마을회관에 가보세요. 윗쪽으로 가면 마을회관이 있어요.</sentence>
+	</chat>
+	<chat>
+		<code>10</code>
+		<situation>독백</situation>
+		<speaker>당신</speaker>
+		<sentence>마을 회관을 가보자.</sentence>
+	</chat>
+	<chat>
+		<code>11</code>
+		<situation>주민 혼잣말</situation>
+		<speaker>주민</speaker>
+		<sentence>요즘 A가 잘 안 보이던데.. 그러고 보니 B도 본지가 오래 됐네.</sentence>
+	</chat>
+</root>

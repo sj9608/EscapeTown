@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<chat>
+		<code>1</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>밤만 되면 좀비가 나타나는군.</sentence>
+	</chat>
+</root>
