@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
-    public Player player;
+    Player player;
     GameObject enemies;
     Dictionary<string, Zombie> enemiesDic;
 
@@ -15,9 +15,13 @@ public class GameManager : SingletonBase<GameManager>
     public bool IsGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
+
+    // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
+    int addAmmo;
     // Start is called before the first frame update
     void Start()
     {
+        player = Player.Instance;
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 
         enemies = GameObject.Find("Enemies");
@@ -27,6 +31,7 @@ public class GameManager : SingletonBase<GameManager>
         }
         Debug.Log("enemiesDic : " + enemiesDic.Count);
         IsGameOver = false;
+        addAmmo = 60;
     }
     // void Update()    
     // {
@@ -101,8 +106,9 @@ public class GameManager : SingletonBase<GameManager>
         {
             // 남아 있으면 탄창 개수 -1
             QuickSlot.Instance.UseMagazine();
-            // 총알 + 20
+            // 총알 + 60
             // Gun 단에서 총알 충전 처리
+            player.gun.AddAmmo(addAmmo);
         }
     }
     public void GameOver()

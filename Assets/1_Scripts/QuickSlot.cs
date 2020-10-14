@@ -14,7 +14,7 @@ public class QuickSlot : SingletonBase<QuickSlot>
     void Start()
     {
       numOfPotion = 0;
-      numOfMagazine = 0;   
+      numOfMagazine = 2;   
     }
 
     public void UsePotion()
