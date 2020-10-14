@@ -71,11 +71,17 @@ public class Player : SingletonBase<Player>
     float interactionDistance;
     // 사용할 총
     public Gun gun;
+    public Knife knife;
     public Transform gunPivot; // 총 배치의 기준점
-    public Transform leftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
-    public Transform rightHandMount; // 총의 오른쪽 손잡이, 오른손이 위치할 지점
+    Transform leftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
+    Transform rightHandMount;
+    public Transform gunLeftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
+    public Transform gunRightHandMount; // 총의 오른쪽 손잡이, 오른손이 위치할 지점
+    public Transform knifeLeftHandMount; // 칼의 왼쪽 손잡이, 왼손이 위치할 지점
+    public Transform knifeRightHandMount; // 칼의 오른쪽 손잡이, 오른손이 위치할 지점
 
     bool isAim;
+    bool isKnife;
     bool isCrouch;
     public bool isDead;
     // 인벤토리 입력키 반복으로 열고 닫고 싶을 때
@@ -119,8 +125,15 @@ public class Player : SingletonBase<Player>
 
         isDead = false;
         isAim = false;
+        isKnife = true;
+
+        animator.SetBool("isAim", isAim);
+        animator.SetBool("isKnife", isKnife);
+        gun.transform.parent.gameObject.SetActive(isAim);
+        //knife.transform.parent.gameObject.SetActive(isKnife);
 
         isCrouch = false;
+        animator.SetBool("isCrouch", isCrouch);
 
         isInvenOpen = false;
     }
@@ -192,6 +205,10 @@ public class Player : SingletonBase<Player>
         if (isAim)
         {
             gun.Fire();
+        }
+        else if (isKnife)
+        {
+
         }
     }
     protected void GetItem()
@@ -290,15 +307,21 @@ public class Player : SingletonBase<Player>
     void ChangeWeapon()
     {
         isAim = !isAim;
-        //if (isAim)
-        //{
-            animator.SetBool("isAim", isAim);
-            gun.transform.parent.gameObject.SetActive(isAim);
-        //}
-        //else
-        //{
-
-        //}
+        isKnife = !isKnife;
+        animator.SetBool("isAim", isAim);
+        animator.SetBool("isKnife", isKnife);
+        gun.transform.parent.gameObject.SetActive(isAim);
+        //knife.transform.parent.gameObject.SetActive(isKnife);
+        if (isAim)
+        {
+            leftHandMount = gunLeftHandMount;
+            rightHandMount = gunRightHandMount;
+        }
+        else if (isKnife)
+        {
+            leftHandMount = knifeLeftHandMount;
+            rightHandMount = knifeLeftHandMount;
+        }
         Debug.Log("무기 바뀜");
     }
     // 애니메이터의 IK 갱신
