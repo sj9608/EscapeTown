@@ -91,7 +91,7 @@ public class Player : Human
 
         isInvenOpen = false;
         // 마우스 커서
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
     private void FixedUpdate()
     {
@@ -104,7 +104,7 @@ public class Player : Human
     // Update is called once per frame
     void Update()
     {
-        if(isDead == true)
+        if(isDead == true || MainUI.Instance.isPopUp == true)
             {
                 Debug.Log(isDead);
                 return;
