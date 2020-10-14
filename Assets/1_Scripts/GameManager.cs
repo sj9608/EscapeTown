@@ -102,6 +102,7 @@ public class GameManager : SingletonBase<GameManager>
             // 남아 있으면 탄창 개수 -1
             QuickSlot.Instance.UseMagazine();
             // 총알 + 20
+            // Gun 단에서 총알 충전 처리
         }
     }
     public void GameOver()
@@ -109,6 +110,7 @@ public class GameManager : SingletonBase<GameManager>
         Debug.Log("게임 오버");
         SceneManager.LoadScene(0);
     }
+    
     public void StageClear()
     {
         if (enemiesDic == null || enemiesDic.Count == 0)

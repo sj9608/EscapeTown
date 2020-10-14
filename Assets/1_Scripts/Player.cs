@@ -100,12 +100,17 @@ public class Player : Human
     // Update is called once per frame
     void Update()
     {
+        if(isDead == true)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
+            // 좌클릭
             Attack();
         }
         if (Input.GetMouseButtonDown(1))
         {
+            // 우클릭
             isAim = true;
             // 조준 카메라 구현
             animator.SetBool("isAim", isAim);
@@ -122,16 +127,18 @@ public class Player : Human
                 animator.SetTrigger("Reload");
             }
         }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            OpenInventory();
-        }
+        // if (Input.GetKeyDown(KeyCode.I))
+        // {
+        //     OpenInventory();
+        // }
         if (Input.GetKeyDown(KeyCode.P))
         {
             OpenNote();
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            isAim = !isAim;
+
             ChangeWeapon();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
