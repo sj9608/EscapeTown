@@ -314,6 +314,6 @@ public class Player : Human
     {
         GameManager.Instance.PlayerDead();
         animator.SetTrigger("Die");
-        // base.Die();
+        //base.Die();
     }
 }
