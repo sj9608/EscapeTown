@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
-    [SerializeField] Player player;
+    public Player player;
     GameObject enemies;
     Dictionary<string, Zombie> enemiesDic;
 
