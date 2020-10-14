@@ -50,7 +50,7 @@ public class MainUI : SingletonBase<MainUI>
 
     private void HandleHP() // HP바 
     {
-        curHP = GameManager.Instance.player.HP;
+        curHP = Player.Instance.HP;
         //hpbar.value = curHP / maxHP;
         hpbar.value = Mathf.Lerp(hpbar.value, curHP / maxHP, Time.deltaTime);
     }
@@ -59,7 +59,7 @@ public class MainUI : SingletonBase<MainUI>
     {
         
         // curBullet : 현재 총알수, max_Bullet : 최대 총알 수(10발)
-        cur_Bullet = GameManager.Instance.player.gun.magAmmo;
+        cur_Bullet = Player.Instance.gun.magAmmo;
         bullet_Count.text = cur_Bullet.ToString(); 
         
         // if(cur_Bullet < 7 && cur_Bullet >= 4)
@@ -103,7 +103,7 @@ public class MainUI : SingletonBase<MainUI>
     {
         gameover.SetActive(false);
 
-        if(GameManager.Instance.player.isDead == true)
+        if(Player.Instance.isDead == true)
         {
             gameover.SetActive(true);
             isPopUp = true;

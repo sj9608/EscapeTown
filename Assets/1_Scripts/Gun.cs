@@ -38,21 +38,20 @@ public class Gun : MonoBehaviour
     private float fireDistance = 50f;
 
     // 남은 전체 탄약
-    public int ammoRemain = 100;
+    public int ammoRemain;
     // 탄창 용량
-    public int magCapacity = 10;
+    public int magCapacity;
     // 현재 탄창에 남아있는 탄약
     public int magAmmo;
 
     // 총알 발사 간격
-    public float timeBetFire = 0.12f;
+    private float timeBetFire = 0.12f;
     // 재장전 소요 시간
-    public float reloadTime = 1.8f;
+    private float reloadTime = 1.8f;
     // 총을 마지막으로 발사한 시점
     private float lastFireTime;
 
     // 남은 탄약을 추가하는 메서드
-    //[PunRPC]
     public void AddAmmo(int ammo)
     {
         ammoRemain += ammo;
@@ -68,8 +67,10 @@ public class Gun : MonoBehaviour
         // 라인 렌더러를 비활성화
         bulletLineRenderer.enabled = false;
     }
-    private void OnEnable()
+    private void Start()
     {
+        ammoRemain = 0;
+        magCapacity = 30;
         // 현재 탄창을 가득채우기
         magAmmo = magCapacity;
         // 총의 현재 상태를 총을 쏠 준비가 된 상태로 변경

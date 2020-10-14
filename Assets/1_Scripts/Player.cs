@@ -2,8 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Human
+public class Player : SingletonBase<Player>
 {
+    public Animator animator;
+    // HP
+    protected float hp;
+    // 공격력
+    protected float ap;
+    // 공격 범위
+    protected float attackDistance;
+    // 이동속도
+    protected float moveSpeed;
+    // 공격중
+    protected bool isAttack;
+    public float HP
+    {
+        get
+        {
+            return hp;
+        }
+        set
+        {
+            hp = value;
+        }
+    }
+    public float AP
+    {
+        get
+        {
+            return ap;
+        }
+        set
+        {
+            ap = value;
+        }
+    }
     // 캐릭터 컨트롤러(특징 중력없음)
     CharacterController controller;
     // 캐릭터를 카메라가 보는 방향에 대응하게 만들기 위한 카메라의 트랜스폼을 받아올 오브젝트 // 메인카메라를 사용해야함.
@@ -38,11 +71,19 @@ public class Player : Human
     float interactionDistance;
     // 사용할 총
     public Gun gun;
-    public Transform gunPivot; // 총 배치의 기준점
-    public Transform leftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
-    public Transform rightHandMount; // 총의 오른쪽 손잡이, 오른손이 위치할 지점
+    public Knife knife;
+    Transform weaponPivot; // IK용 배치의 기준점
+    Transform gunPivot; // 총 배치의 기준점
+    Transform knifePivot; // 칼 배치의 기준점
+    Transform leftHandMount; // IK의 왼손이 위치할 지점
+    Transform rightHandMount; // IK의 오른손이 위치할 지점
+    public Transform gunLeftHandMount; // 총의 왼쪽 손잡이, 왼손이 위치할 지점
+    public Transform gunRightHandMount; // 총의 오른쪽 손잡이, 오른손이 위치할 지점
+    public Transform knifeLeftHandMount; // 칼의 왼쪽 손잡이, 왼손이 위치할 지점
+    public Transform knifeRightHandMount; // 칼의 오른쪽 손잡이, 오른손이 위치할 지점
 
     bool isAim;
+    bool isKnife;
     bool isCrouch;
     public bool isDead;
     // 인벤토리 입력키 반복으로 열고 닫고 싶을 때
@@ -83,11 +124,21 @@ public class Player : Human
         attackDistance = 10;
         interactionDistance = 2;
         runTimer = 0;
+        gunPivot = gun.transform.parent;
+        knifePivot = knife.transform.parent;
+
 
         isDead = false;
-        isAim = true;
+        isAim = false;
+        isKnife = true;
+
+        animator.SetBool("isAim", isAim);
+        animator.SetBool("isKnife", isKnife);
+        gun.transform.parent.gameObject.SetActive(isAim);
+        //knife.transform.parent.gameObject.SetActive(isKnife);
 
         isCrouch = false;
+        animator.SetBool("isCrouch", isCrouch);
 
         isInvenOpen = false;
         // 마우스 커서
@@ -116,10 +167,7 @@ public class Player : Human
         }
         if (Input.GetMouseButtonDown(1))
         {
-            // 우클릭
-            isAim = true;
             // 조준 카메라 구현
-            animator.SetBool("isAim", isAim);
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -133,18 +181,12 @@ public class Player : Human
                 animator.SetTrigger("Reload");
             }
         }
-        // if (Input.GetKeyDown(KeyCode.I))
-        // {
-        //     OpenInventory();
-        // }
         if (Input.GetKeyDown(KeyCode.P))
         {
             OpenNote();
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            isAim = !isAim;
-
             ChangeWeapon();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -168,20 +210,16 @@ public class Player : Human
             animator.SetBool("isCrouch", isCrouch);
         }
     }
-    protected override void Attack()
+    protected void Attack()
     {
-        //RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackDistance, transform.forward, 0, enemyLayer);
-        //Debug.Log(hits.Length + "개");
-        //if (hits.Length > 0)
-        //{
-        //    target = hits[0].collider;
-        //}
-        //else
-        //{
-        //    target = null;
-        //}
-        //GameManager.Instance.Attack(target, AP);
-        gun.Fire();
+        if (isAim)
+        {
+            gun.Fire();
+        }
+        else if (isKnife)
+        {
+
+        }
     }
     protected void GetItem()
     {
@@ -264,18 +302,6 @@ public class Player : Human
             animator.SetFloat("Crouch", 0f);
         }
     }
-    void OpenInventory()
-    {
-        if (!isInvenOpen)
-        {
-            Debug.Log("인벤토리 열림");
-        }
-        else
-        {
-            Debug.Log("인벤토리 닫힘");
-        }
-        isInvenOpen = !isInvenOpen;
-    }
     void OpenNote()
     {
         if (!isNoteOpen)
@@ -290,13 +316,31 @@ public class Player : Human
     }
     void ChangeWeapon()
     {
+        isAim = !isAim;
+        isKnife = !isKnife;
+        animator.SetBool("isAim", isAim);
+        animator.SetBool("isKnife", isKnife);
+        gun.transform.parent.gameObject.SetActive(isAim);
+        knife.transform.parent.gameObject.SetActive(isKnife);
+        if (isAim)
+        {
+            weaponPivot = gunPivot;
+            leftHandMount = gunLeftHandMount;
+            rightHandMount = gunRightHandMount;
+        }
+        else
+        {
+            weaponPivot = knifePivot;
+            leftHandMount = knifeLeftHandMount;
+            rightHandMount = knifeLeftHandMount;
+        }
         Debug.Log("무기 바뀜");
     }
     // 애니메이터의 IK 갱신
     private void OnAnimatorIK(int layerIndex)
     {
         // 총의 기준점 gunPivot을 3D 모델의 오른쪽 팔꿈치 위치로 이동
-        gunPivot.position =
+        weaponPivot.position =
             animator.GetIKHintPosition(AvatarIKHint.RightElbow);
 
         // IK를 사용하여 왼손의 위치와 회전을 총의 오른쪽 손잡이에 맞춘다
@@ -320,10 +364,8 @@ public class Player : Human
 
     public void OnDamage(float attackPoint)
     {
-        if (isDead == true)
-        {
-            return;
-        }
+        if (isDead) return;
+
         HP -= attackPoint;
         Debug.Log("플레이어 공격 받음. 남은체력"+ HP);
         if (HP < 0)
@@ -333,15 +375,10 @@ public class Player : Human
         }
     }
 
-    public override void Die()
+    public void Die()
     {
-        if(isDead == false)
-        {
-            GameManager.Instance.PlayerDead();
-            animator.SetTrigger("Die");
-            isDead = true;
-            // base.Die();
-        }
-        
+        GameManager.Instance.PlayerDead();
+        animator.SetTrigger("Die");
+        isDead = true;
     }
 }
