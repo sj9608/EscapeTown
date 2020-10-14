@@ -16,6 +16,7 @@ public class SceneLoader : MonoBehaviour
     void Start()
     {
         StartCoroutine(LoadScene());
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public static void LoadSceneHandle(string _name, int _loadType)
@@ -25,6 +26,7 @@ public class SceneLoader : MonoBehaviour
         string loadScene = _name;
         int loadType = _loadType;
         SceneManager.LoadScene("LoadingScene");
+        
     }
 
     // Update is called once per frame
@@ -41,8 +43,8 @@ public class SceneLoader : MonoBehaviour
         while (!operation.isDone)
         {
             yield return null;
-            if (loadType == 0) Debug.Log("New Game");
-            else if (loadType == 1) Debug.Log("Load Game");
+            if (loadType == 0) Debug.Log("New Game"); // 새게임 로드
+            else if (loadType == 1) Debug.Log("Load Game"); // 진행했던 게임 로드
 
             if (progressbar.value < 0.9f)
             {

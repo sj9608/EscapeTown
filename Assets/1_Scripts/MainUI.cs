@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum BTNType
 {
@@ -9,7 +10,7 @@ public enum BTNType
     Exit
 }
 
-public class MainUI : MonoBehaviour
+public class MainUI : SingletonBase<MainUI>
 {
     public GameObject menuSet; // 인 게임 메뉴창
     public Text bullet_Count; // 총알 수
@@ -18,15 +19,20 @@ public class MainUI : MonoBehaviour
     [SerializeField] private Slider hpbar; // HP바
     public float maxHP = 100; // 플레이어 최대 hp
     public float curHP;
+    public GameObject gameover;
+    public Button retry;
+    public Button homebutton;
+    public bool isPopUp;
     //public Human hp;
     private bool ispause = false; //menuSet 호출시 true
     int cur_Bullet; // 플레이어의 공격횟수를 받아 올 것 (현재는 임의 값 10을 준 상태)
 
-    
-    
+    //GameOver over = new GameOver();
+
     void Start()
     {
         hpbar.value = curHP;
+        isPopUp = false;
     }
 
     public void Update()
@@ -37,6 +43,8 @@ public class MainUI : MonoBehaviour
         Show_Bullet_Count();
 
         popUp_Menu();
+
+        Show_GameOver_Pannel();
 
     }
 
@@ -67,27 +75,51 @@ public class MainUI : MonoBehaviour
         // }
     }
 
+
+
     void popUp_Menu()  //인 게임내 팝업 메뉴창
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            //Cursor.lockState = CursorLockMode.Confined;
             if (menuSet.activeSelf)
             {
                 menuSet.SetActive(false);
-                Set_Outpause();
+                isPopUp = false;
+                Set_Outpause(); // 일시정지 해제
             }
             
             else
             {
+                //Cursor.lockState = CursorLockMode.Locked;
                 menuSet.SetActive(true);
-                Set_pause();
+                isPopUp = true;
+                Set_pause(); // 게임 일시정지
             }
         }
     } 
 
+    public void Show_GameOver_Pannel()
+    {
+        gameover.SetActive(false);
+
+        if(GameManager.Instance.player.isDead == true)
+        {
+            gameover.SetActive(true);
+            isPopUp = true;
+            //Cursor.lockState = CursorLockMode.Confined;
+            Set_pause();
+        }
+        else
+        {    
+            gameover.SetActive(false);
+            isPopUp = false;
+        }
+    }
+
     public void BTN_Continue()  // 팝업 메뉴 <계속하기>버튼
     {
-        popUp_Menu();
+        menuSet.SetActive(false);
         Set_Outpause();
     }
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
@@ -96,15 +128,35 @@ public class MainUI : MonoBehaviour
         Debug.Log("게임을 종료합니다.");
     }
 
+    public void Click_ReTry()
+    {
+        gameover.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // 현재 씬 다시 부르기
+            
+    }
+    
+    public void Click_MainButton()
+    {
+       
+        SceneManager.LoadScene("Main",0);
+       
+        /*
+        자동저장 기능 삽입 예정
+        */
+
+    }
+
     public void Set_pause() // 일시정지
     {
         Time.timeScale = 0f;
+        //Cursor.lockState = CursorLockMode.Confined;
         Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
 
     }
     public void Set_Outpause() // 일시정지 해제
     {   
         Time.timeScale = 1f;
+        //Cursor.lockState = CursorLockMode.Locked;
         Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
     }
 
