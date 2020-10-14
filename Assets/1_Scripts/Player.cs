@@ -95,14 +95,20 @@ public class Player : Human
     }
     private void FixedUpdate()
     {
+        if(isDead == true)
+        {
+            return;
+        }
         PlayerMove();
     }
     // Update is called once per frame
     void Update()
     {
         if(isDead == true)
-            return;
-
+            {
+                Debug.Log(isDead);
+                return;
+            }
         if (Input.GetMouseButtonDown(0))
         {
             // 좌클릭
