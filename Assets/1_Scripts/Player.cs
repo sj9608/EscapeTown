@@ -63,10 +63,13 @@ public class Player : SingletonBase<Player>
     public float groundDistance = 0.4f;
     private LayerMask groundMask;
     Vector3 velocity; // 낙하속도 계산할 벡터(중력값에 대한 계산을 할 속도벡터)
-
     bool isGrounded;
-    // 달리기 시작 타이머
-    float runTimer;
+
+    /* 달리기 키 관련 */
+    [SerializeField]
+    private KeyCode sprintKey = KeyCode.LeftShift; // leftShift key 달리기키 설정
+    bool isSprint; // 달리는 상태 체크
+
     // 상호작용 거리
     float interactionDistance;
     // 사용할 총
@@ -123,7 +126,7 @@ public class Player : SingletonBase<Player>
         moveSpeed = 1f;
         attackDistance = 10;
         interactionDistance = 2;
-        runTimer = 0;
+        isSprint = false;
         gunPivot = gun.transform.parent;
         knifePivot = knife.transform.parent;
 
@@ -140,7 +143,12 @@ public class Player : SingletonBase<Player>
         isCrouch = false;
         animator.SetBool("isCrouch", isCrouch);
 
+        /* 달리기 상태, 애니메이터 초기화 */
+        isSprint = false;
+        animator.SetBool("isSprint",isSprint);
+
         isInvenOpen = false;
+
         // 마우스 커서
         //Cursor.lockState = CursorLockMode.Locked;
     }
@@ -209,6 +217,16 @@ public class Player : SingletonBase<Player>
             isCrouch = false;
             animator.SetBool("isCrouch", isCrouch);
         }
+        /* 달리기 키 관련 */
+        if(Input.GetKey(sprintKey)) // 스프린트 키 누른 상태
+        {
+            isSprint = true;
+        }
+        else
+        {
+            isSprint = false;
+        }
+
     }
     protected void Attack()
     {
@@ -280,8 +298,7 @@ public class Player : SingletonBase<Player>
             }
             else
             {
-                runTimer++;
-                if (runTimer < 100)
+                if (!isSprint) // 달리는 상태가 아닌 걷는상태
                 {
                     animator.SetFloat("Move", moveSpeed);
                     moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
@@ -297,7 +314,6 @@ public class Player : SingletonBase<Player>
         else
         {
             moveSpeed = 1.0f;
-            runTimer = 0;
             animator.SetFloat("Move", 0f);
             animator.SetFloat("Crouch", 0f);
         }
@@ -339,6 +355,8 @@ public class Player : SingletonBase<Player>
     // 애니메이터의 IK 갱신
     private void OnAnimatorIK(int layerIndex)
     {
+        if(weaponPivot == null)
+            return;
         // 총의 기준점 gunPivot을 3D 모델의 오른쪽 팔꿈치 위치로 이동
         weaponPivot.position =
             animator.GetIKHintPosition(AvatarIKHint.RightElbow);
