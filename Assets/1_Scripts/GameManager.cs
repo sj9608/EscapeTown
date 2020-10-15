@@ -10,14 +10,14 @@ public class GameManager : SingletonBase<GameManager>
     GameObject enemies;
     Dictionary<string, Zombie> enemiesDic;
 
-    public string sceneToLoad;
     // 게임오버 판단
     public bool IsGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
 
     // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
-    int addAmmo;
+    int addAmmo = 60;
+    public int curSceneNum = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +29,8 @@ public class GameManager : SingletonBase<GameManager>
         {
             enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
         }
-        Debug.Log("enemiesDic : " + enemiesDic.Count);
+        Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
         IsGameOver = false;
-        addAmmo = 60;
     }
     // void Update()    
     // {
@@ -129,16 +128,4 @@ public class GameManager : SingletonBase<GameManager>
             Debug.Log("클리어 조건을 만족하지 못하였습니다.");
         }
     }
-    // public void LoadStage()
-    // {
-    //     SceneManager.LoadScene(sceneToLoad);
-    // }
-    // public void QuitGame()
-    // {
-    //     if(Input.GetMouseButtonDown(0))
-    //     {
-    //         SceneManager.UnloadScene(sceneToLoad);
-    //     }
-        
-    // }
 }

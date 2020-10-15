@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
@@ -8,7 +9,15 @@ public class Goal : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameManager.Instance.StageClear();
+            // SceneLoader.LoadSceneHandle("Loading", 0);
+            Debug.Log("GameManager.Instance.curSceneNum : " + GameManager.Instance.curSceneNum);
+            GameManager.Instance.curSceneNum = GameManager.Instance.curSceneNum + 1;
+            Debug.Log("GameManager.Instance.curSceneNum : " + GameManager.Instance.curSceneNum);
+            if (GameManager.Instance.curSceneNum > 3)
+            {
+                GameManager.Instance.curSceneNum = 0;
+            }
+            SceneManager.LoadScene(GameManager.Instance.curSceneNum);
         }
     }
     // Start is called before the first frame update
