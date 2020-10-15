@@ -10,7 +10,7 @@ public enum BTNType
     Exit
 }
 
-public class MainUI : SingletonBase<MainUI>
+public class MainUI : MonoBehaviour
 {
     public GameObject menuSet; // 인 게임 메뉴창
     public Text bullet_Count; // 총알 수
@@ -81,7 +81,7 @@ public class MainUI : SingletonBase<MainUI>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Confined;
             if (menuSet.activeSelf)
             {
                 menuSet.SetActive(false);
@@ -120,6 +120,7 @@ public class MainUI : SingletonBase<MainUI>
     public void BTN_Continue()  // 팝업 메뉴 <계속하기>버튼
     {
         menuSet.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         Set_Outpause();
     }
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
@@ -131,6 +132,7 @@ public class MainUI : SingletonBase<MainUI>
     public void Click_ReTry()
     {
         gameover.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // 현재 씬 다시 부르기
             
     }

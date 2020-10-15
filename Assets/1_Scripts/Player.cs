@@ -49,6 +49,7 @@ public class Player : SingletonBase<Player>
     // 공격력
     // 이동속도
 
+    public MainUI mainUI;
     // 캐릭터의 회전을 부드럽게 만들어줄 변수
     float turnSmoothTime = 0.1f;
     // 캐릭터의 부드러운 방향전환을 위한 velocity
@@ -163,7 +164,7 @@ public class Player : SingletonBase<Player>
     // Update is called once per frame
     void Update()
     {
-        if(isDead == true || MainUI.Instance.isPopUp == true)
+        if(isDead == true || mainUI.isPopUp == true)
             {
                 Debug.Log(isDead);
                 return;
@@ -355,8 +356,10 @@ public class Player : SingletonBase<Player>
     // 애니메이터의 IK 갱신
     private void OnAnimatorIK(int layerIndex)
     {
-        if(weaponPivot == null)
+        if (weaponPivot == null)
+        {
             return;
+        }
         // 총의 기준점 gunPivot을 3D 모델의 오른쪽 팔꿈치 위치로 이동
         weaponPivot.position =
             animator.GetIKHintPosition(AvatarIKHint.RightElbow);
