@@ -11,12 +11,24 @@ public class ChatController : MonoBehaviour
     public int SceneNumber;
     string loadFile;
 
+    public int _intro;
+    public int _body;
+    public int _conclus;
+    public int enemiesDic;
+
     XmlNodeList nodes;
     void Start()
     {
         loadFile = string.Format("Chat_{0}", SceneNumber);
         LoadXml();
-        StartCoroutine(PrintText());
+        StartCoroutine(PrintText(_intro, _body));
+    }
+
+    private void Update() {
+        if(enemiesDic <= 0)
+        {
+            StartCoroutine(PrintTextAfterFight(_body, _conclus));
+        }
     }
 
     void LoadXml()
@@ -47,12 +59,41 @@ public class ChatController : MonoBehaviour
         }
     }
 
-    IEnumerator PrintText()
+    IEnumerator PrintText(int intro, int body)
     {
         string sentence = "";
         string speaker = "";
 
-        foreach(XmlNode node in nodes)
+        // foreach(XmlNode node in nodes)
+        // {
+        //     sentence = node.SelectSingleNode("sentence").InnerText;
+        //     speaker = node.SelectSingleNode("speaker").InnerText;
+        //     yield return StartCoroutine(NormalChat(speaker, sentence));
+        //     yield return new WaitForSeconds(3); 
+        // }
+
+        // 노드 code 1 ~ 노드 code 1
+        for(XmlNode node = nodes[intro]; node != nodes[body]; node=nodes[++intro])
+        {
+            sentence = node.SelectSingleNode("sentence").InnerText;
+            speaker = node.SelectSingleNode("speaker").InnerText;
+            yield return StartCoroutine(NormalChat(speaker, sentence));
+            yield return new WaitForSeconds(3); 
+        }
+    }
+    IEnumerator PrintTextAfterFight(int body, int conclus)
+    {
+        string sentence = "";
+        string speaker = "";
+
+        // foreach(XmlNode node in nodes)
+        // {
+        //     sentence = node.SelectSingleNode("sentence").InnerText;
+        //     speaker = node.SelectSingleNode("speaker").InnerText;
+        //     yield return StartCoroutine(NormalChat(speaker, sentence));
+        //     yield return new WaitForSeconds(3); 
+        // }
+        for(XmlNode node = nodes[body]; node != nodes[conclus]; node=nodes[++body])
         {
             sentence = node.SelectSingleNode("sentence").InnerText;
             speaker = node.SelectSingleNode("speaker").InnerText;
