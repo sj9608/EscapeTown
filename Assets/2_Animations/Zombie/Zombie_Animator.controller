@@ -147,7 +147,7 @@ AnimatorStateMachine:
     m_Position: {x: 290, y: 410, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5828589014234013719}
-    m_Position: {x: 520, y: 220, z: 0}
+    m_Position: {x: 630, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1854944064686227427}
     m_Position: {x: 220, y: 220, z: 0}
@@ -688,7 +688,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Zombie_Atk_Arms_3
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2903762870671508498}
