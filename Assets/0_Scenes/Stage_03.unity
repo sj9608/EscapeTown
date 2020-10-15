@@ -4473,6 +4473,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2951739749170022228, guid: 748fcdb71858d5748af0ea9b5bc2c8a5,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 748fcdb71858d5748af0ea9b5bc2c8a5, type: 3}
 --- !u!1001 &3235635365294325669
@@ -4645,6 +4650,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1857425545}
     m_Modifications:
+    - target: {fileID: 3774044807498328713, guid: 6b593031e02fee74b85eb3c902ba3f7c,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3784382296428367691, guid: 6b593031e02fee74b85eb3c902ba3f7c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4754,6 +4764,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1608173546}
     m_Modifications:
+    - target: {fileID: 3753757147032788424, guid: 57f30ba28b53c704c91c864f12fae2b3,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3813768084891968724, guid: 57f30ba28b53c704c91c864f12fae2b3,
         type: 3}
       propertyPath: m_LocalPosition.x
