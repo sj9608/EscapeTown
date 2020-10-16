@@ -54,7 +54,7 @@ public class UIGamePlay : MonoBehaviour
     public void Show_Bullet_Count()  // 장전 후 사용하고 남은 총알 갯수
     {
         // curBullet : 현재 총알수, remain_Bullet : 최대 총알 수(30발)
-        int cur_Bullet = GameManager.Instance.player.magAmmo;
+        int cur_Bullet = 30;
         curBullet.text = cur_Bullet.ToString(); 
 
         int max_Bullet;
@@ -63,7 +63,7 @@ public class UIGamePlay : MonoBehaviour
 
     private void HandleHP() // HP바 
     {
-        curHP = GameManager.Instance.HP;
+        curHP = 100;
         //hpbar.value = curHP / maxHP;
         hpbar.value = Mathf.Lerp(hpbar.value, curHP / maxHP, Time.deltaTime);
     }

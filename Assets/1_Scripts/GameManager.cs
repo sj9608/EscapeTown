@@ -18,10 +18,13 @@ public class GameManager : SingletonBase<GameManager>
     // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
     int addAmmo = 60;
     public int curSceneNum = 2;
+    public GameKeyInput gameKeyInput;
+    public PlayerAttack playerAttack;
     // Start is called before the first frame update
     void Start()
     {
-        player = Player.Instance;
+        // player = Player.Instance;
+        gameKeyInput = GetComponent<GameKeyInput>();
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 
         enemies = GameObject.Find("Enemies");
@@ -32,13 +35,17 @@ public class GameManager : SingletonBase<GameManager>
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
         IsGameOver = false;
     }
-    // void Update()    c
-    // {
-    //     if(Input.GetMouseButtonDown(0))
-    //     {
-    //         SceneManager.LoadScene(sceneToLoad);
-    //     }
-    // }
+    void Update()
+    {
+        if (gameKeyInput.quickSlot2)
+        {
+            UseMagazine();
+        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    SceneManager.LoadScene(sceneToLoad);
+        //}
+    }
 
     public void ZombieDead(string zName)
     {
@@ -66,13 +73,13 @@ public class GameManager : SingletonBase<GameManager>
                     }
                     break;
                 case "Player":
-                    player.HP = player.HP - damage;
-                    if (player.HP <= 0)
-                    {
-                        player.Die();
-                        player.animator.SetTrigger("Die");
-                        GameOver();
-                    }
+                    //player.HP = player.HP - damage;
+                    //if (player.HP <= 0)
+                    //{
+                    //    player.Die();
+                    //    player.animator.SetTrigger("Die");
+                    //    GameOver();
+                    //}
                     break;
             }
         }
@@ -93,7 +100,7 @@ public class GameManager : SingletonBase<GameManager>
         {
             // 남아 있으면 포션 개수 -1, HP + 30
             QuickSlot.Instance.UsePotion();
-            player.HP += 30;
+            // player.HP += 30;
         }
     }
 
@@ -107,7 +114,7 @@ public class GameManager : SingletonBase<GameManager>
             QuickSlot.Instance.UseMagazine();
             // 총알 + 60
             // Gun 단에서 총알 충전 처리
-            player.gun.AddAmmo(addAmmo);
+            playerAttack.gun.AddAmmo(addAmmo);
         }
     }
     public void GameOver()

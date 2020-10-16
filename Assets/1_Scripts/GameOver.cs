@@ -15,16 +15,16 @@ public class GameOver : MonoBehaviour
     {
         gameover.SetActive(false);
 
-        if(Player.Instance.isDead == true)
-        {
-            gameover.SetActive(true);
-            //Cursor.lockState = CursorLockMode.Confined;
-        }
-        else
-        {    
-            gameover.SetActive(false);
-            //Cursor.lockState = CursorLockMode.Locked;
-        }
+        //if(Player.Instance.isDead == true)
+        //{
+        //    gameover.SetActive(true);
+        //    //Cursor.lockState = CursorLockMode.Confined;
+        //}
+        //else
+        //{    
+        //    gameover.SetActive(false);
+        //    //Cursor.lockState = CursorLockMode.Locked;
+        //}
     }
 
     public void Click_ReTry()
