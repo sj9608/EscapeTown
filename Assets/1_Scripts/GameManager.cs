@@ -20,6 +20,7 @@ public class GameManager : SingletonBase<GameManager>
     public int curSceneNum = 2;
     public GameKeyInput gameKeyInput;
     public PlayerAttack playerAttack;
+    public PlayerHealth playerHealth;
     // Start is called before the first frame update
     void Start()
     {
