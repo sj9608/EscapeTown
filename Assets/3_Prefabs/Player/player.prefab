@@ -1724,9 +1724,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8680058314683632558}
   - component: {fileID: 8680058314692994186}
-  - component: {fileID: 8680058314683366665}
   - component: {fileID: 8680058314683366664}
   - component: {fileID: 8680058314683366667}
+  - component: {fileID: 1048692024}
+  - component: {fileID: 1048692025}
+  - component: {fileID: 1048692026}
+  - component: {fileID: 1048692027}
   m_Layer: 8
   m_Name: player
   m_TagString: Player
@@ -1780,31 +1783,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8680058314683366665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8680058314683366670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e974d2ba7ddc804c88f5cb3486d058a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 8680058314692994186}
-  camTransform: {fileID: 0}
-  jumpHeight: 3
-  gravity: -9.81
-  groundCheck: {fileID: 4028359108939186279}
-  groundDistance: 0.4
-  gun: {fileID: 4028359108559547198}
-  knife: {fileID: 1969730965}
-  gunLeftHandMount: {fileID: 4028359109169743270}
-  gunRightHandMount: {fileID: 4028359108143284627}
-  knifeLeftHandMount: {fileID: 432243830}
-  knifeRightHandMount: {fileID: 585034091}
-  isDead: 0
 --- !u!143 &8680058314683366664
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1837,6 +1815,65 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1048692024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8680058314683366670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ee99cae40bfc14d907a59ba39c520c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1048692025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8680058314683366670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2ca9c8a960f9c49a1b0deeacc115a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 4028359108559547198}
+  knife: {fileID: 1969730965}
+  gunLeftHandMount: {fileID: 4028359109169743270}
+  gunRightHandMount: {fileID: 4028359108143284627}
+  knifeLeftHandMount: {fileID: 432243830}
+  knifeRightHandMount: {fileID: 585034091}
+--- !u!114 &1048692026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8680058314683366670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c05268244447454db76ef00dc638883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+--- !u!114 &1048692027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8680058314683366670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f637e98138fa284fb1ee1b9b441c58c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 3
+  gravity: -9.81
+  groundCheck: {fileID: 4028359108939186279}
+  groundDistance: 0.4
 --- !u!1 &8680058314683366992
 GameObject:
   m_ObjectHideFlags: 0
