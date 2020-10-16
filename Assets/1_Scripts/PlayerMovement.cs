@@ -66,6 +66,10 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("isCrouch", isCrouch);
         }
+        else
+        {
+            playerAnimator.SetBool("isCrouch", isCrouch);
+        }
         isSprint = GameManager.Instance.gameKeyInput.sprint;
 
     }
