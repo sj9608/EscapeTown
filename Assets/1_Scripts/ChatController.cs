@@ -19,6 +19,7 @@ public class ChatController : MonoBehaviour
     XmlNodeList nodes;
     void Start()
     {
+        SceneNumber = GameManager.Instance.curSceneNum;
         loadFile = string.Format("Chat_{0}", SceneNumber);
         LoadXml();
         StartCoroutine(PrintText(_intro, _body));
