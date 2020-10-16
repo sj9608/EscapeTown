@@ -12,8 +12,8 @@ public class UIStartGame : MonoBehaviour
     public void OnClickStart()                          // 새로하기 버튼
     {
         // 씬 로딩 화면 호출
-        UIManager.Instance.sceneName = "New Scene";
-        SceneManager.LoadScene("Loading");
+        UIManager.Instance.sceneName = "Room";
+        SceneManager.LoadScene("LoadingScene");
 
         // 스테이지 1 화면 호출
         // 플레이 화면 호출
@@ -40,7 +40,7 @@ public class UIStartGame : MonoBehaviour
     #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
     #else
-        Application.Quit() // 어플리케이션 종료
+        Application.Quit(); // 어플리케이션 종료
     #endif
     }
 }

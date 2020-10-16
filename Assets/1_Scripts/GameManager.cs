@@ -32,7 +32,7 @@ public class GameManager : SingletonBase<GameManager>
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
         IsGameOver = false;
     }
-    // void Update()    
+    // void Update()    c
     // {
     //     if(Input.GetMouseButtonDown(0))
     //     {
