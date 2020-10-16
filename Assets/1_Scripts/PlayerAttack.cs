@@ -130,15 +130,4 @@ public class PlayerAttack : MonoBehaviour
         playerAnimator.SetIKRotation(AvatarIKGoal.RightHand,
             rightHandMount.rotation);
     }
-    public bool Reload()
-    {
-        if (isGun)
-        {
-            return gun.Reload();
-        }
-        else
-        {
-            return false;
-        }
-    }
 }

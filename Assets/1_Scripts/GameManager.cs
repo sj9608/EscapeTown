@@ -19,6 +19,7 @@ public class GameManager : SingletonBase<GameManager>
     int addAmmo = 60;
     public int curSceneNum = 2;
     public GameKeyInput gameKeyInput;
+    public PlayerAttack playerAttack;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +35,17 @@ public class GameManager : SingletonBase<GameManager>
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
         IsGameOver = false;
     }
-    // void Update()    
-    // {
-    //     if(Input.GetMouseButtonDown(0))
-    //     {
-    //         SceneManager.LoadScene(sceneToLoad);
-    //     }
-    // }
+    void Update()
+    {
+        if (gameKeyInput.quickSlot2)
+        {
+            UseMagazine();
+        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    SceneManager.LoadScene(sceneToLoad);
+        //}
+    }
 
     public void ZombieDead(string zName)
     {
@@ -109,7 +114,7 @@ public class GameManager : SingletonBase<GameManager>
             QuickSlot.Instance.UseMagazine();
             // 총알 + 60
             // Gun 단에서 총알 충전 처리
-            // player.gun.AddAmmo(addAmmo);
+            playerAttack.gun.AddAmmo(addAmmo);
         }
     }
     public void GameOver()
