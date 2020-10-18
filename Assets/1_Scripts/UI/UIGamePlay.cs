@@ -27,7 +27,7 @@ public class UIGamePlay : MonoBehaviour
     private void Start() 
     {
         // numOfPotion 값 불러오기
-        int potion = GameManager.Instance.UsePotion();
+        
         // numOfBullet 값 불러오기
 
         // curHP 값 불러오기
@@ -47,7 +47,7 @@ public class UIGamePlay : MonoBehaviour
         // UI 반영
 
         // curHP 값 불러오기
-         HandleHP();
+        HandleHP();
 
         // 총 탄 수 / 잔 탄 수 불러오기
         Show_Bullet_Count();
