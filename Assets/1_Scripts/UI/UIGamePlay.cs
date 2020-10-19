@@ -70,4 +70,7 @@ public class UIGamePlay : MonoBehaviour
         //hpbar.value = curHP / maxHP;
         hpbar.value = Mathf.Lerp(hpbar.value, curHP / maxHP, Time.deltaTime);
     }
+
+    
+
 }
