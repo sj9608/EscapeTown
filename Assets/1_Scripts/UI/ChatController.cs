@@ -6,12 +6,17 @@ using System.Xml;
 
 public class ChatController : MonoBehaviour
 {
+    // 1. XML 파일에 들어 있는 대화 내용을 읽는다.
+    // 2. 읽으면서 인게임에 출력된 대사는 ChatNote에 저장된다.
+    // 3. 낮 스테이지 : NPC와 하는 대사는 NPC에게 할당
+    // 4. 밤 스테이지 : 플레이어 독백은 전투 전과 전투 후로 나뉨
+
     public Text chatText;
     public Text chatCharacter;
     public int SceneNumber;
     string loadFile;
 
-    public int _intro;
+    public int _intro = 0;
     public int _body;
     public int _conclus;
     public int enemiesDic;
@@ -22,12 +27,14 @@ public class ChatController : MonoBehaviour
         SceneNumber = GameManager.Instance.curSceneNum;
         loadFile = string.Format("Chat_{0}", SceneNumber);
         LoadXml();
+
+        // 전투 전 독백
         StartCoroutine(PrintText(_intro, _body));
     }
 
     private void Update() {
         if(enemiesDic <= 0)
-        {
+        {   // 전투 후 독백
             StartCoroutine(PrintTextAfterFight(_body, _conclus));
         }
     }
@@ -43,7 +50,7 @@ public class ChatController : MonoBehaviour
         
         foreach (XmlNode node in nodes)
         {
-            Debug.Log("Name :: " + node.SelectSingleNode("code").InnerText);
+            Debug.Log("code :: " + node.SelectSingleNode("code").InnerText);
         }
     }
 
@@ -65,14 +72,6 @@ public class ChatController : MonoBehaviour
         string sentence = "";
         string speaker = "";
 
-        // foreach(XmlNode node in nodes)
-        // {
-        //     sentence = node.SelectSingleNode("sentence").InnerText;
-        //     speaker = node.SelectSingleNode("speaker").InnerText;
-        //     yield return StartCoroutine(NormalChat(speaker, sentence));
-        //     yield return new WaitForSeconds(3); 
-        // }
-
         // 노드 code 1 ~ 노드 code 1
         for(XmlNode node = nodes[intro]; node != nodes[body]; node=nodes[++intro])
         {
@@ -87,13 +86,6 @@ public class ChatController : MonoBehaviour
         string sentence = "";
         string speaker = "";
 
-        // foreach(XmlNode node in nodes)
-        // {
-        //     sentence = node.SelectSingleNode("sentence").InnerText;
-        //     speaker = node.SelectSingleNode("speaker").InnerText;
-        //     yield return StartCoroutine(NormalChat(speaker, sentence));
-        //     yield return new WaitForSeconds(3); 
-        // }
         for(XmlNode node = nodes[body]; node != nodes[conclus]; node=nodes[++body])
         {
             sentence = node.SelectSingleNode("sentence").InnerText;
