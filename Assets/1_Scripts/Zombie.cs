@@ -248,7 +248,7 @@ public class Zombie : MonoBehaviour
     {
         if (isPlayerTargeting && !player.isDead)
         {
-            player.OnDamage(ap / 2);
+            //player.OnDamage(ap / 2);
         }
     }
     public void AttackAnimationCompletHandler()

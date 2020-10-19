@@ -50,16 +50,16 @@ public class MainUI : MonoBehaviour
 
     private void HandleHP() // HP바 
     {
-        curHP = Player.Instance.HP;
+        curHP = 100; //Player.Instance.HP;
         //hpbar.value = curHP / maxHP;
         hpbar.value = Mathf.Lerp(hpbar.value, curHP / maxHP, Time.deltaTime);
     }
 
     public void Show_Bullet_Count()  // 현재 총알 수 함수
     {
-        
+
         // curBullet : 현재 총알수, max_Bullet : 최대 총알 수(10발)
-        cur_Bullet = Player.Instance.gun.magAmmo;
+        cur_Bullet = 30;//Player.Instance.gun.magAmmo;
         bullet_Count.text = cur_Bullet.ToString(); 
         
         // if(cur_Bullet < 7 && cur_Bullet >= 4)
@@ -103,18 +103,18 @@ public class MainUI : MonoBehaviour
     {
         gameover.SetActive(false);
 
-        if(Player.Instance.isDead == true)
-        {
-            gameover.SetActive(true);
-            isPopUp = true;
-            //Cursor.lockState = CursorLockMode.Confined;
-            Set_pause();
-        }
-        else
-        {    
-            gameover.SetActive(false);
-            isPopUp = false;
-        }
+        //if(Player.Instance.isDead == true)
+        //{
+        //    gameover.SetActive(true);
+        //    isPopUp = true;
+        //    //Cursor.lockState = CursorLockMode.Confined;
+        //    Set_pause();
+        //}
+        //else
+        //{    
+        //    gameover.SetActive(false);
+        //    isPopUp = false;
+        //}
     }
 
     public void BTN_Continue()  // 팝업 메뉴 <계속하기>버튼
