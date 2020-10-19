@@ -60,8 +60,6 @@ public class UIGamePlay : MonoBehaviour
         int cur_Bullet = GameManager.Instance.playerAttack.gun.magAmmo;
         curBullet.text = cur_Bullet.ToString(); 
         int remainBullet = GameManager.Instance.playerAttack.gun.ammoRemain;
-
-
     }
 
     private void HandleHP() // HP바 
@@ -70,7 +68,4 @@ public class UIGamePlay : MonoBehaviour
         //hpbar.value = curHP / maxHP;
         hpbar.value = Mathf.Lerp(hpbar.value, curHP / maxHP, Time.deltaTime);
     }
-
-    
-
 }
