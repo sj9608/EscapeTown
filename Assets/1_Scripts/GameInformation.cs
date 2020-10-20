@@ -92,4 +92,11 @@ public class GameInformation : SingletonBase<GameInformation>
 
         UpdateCurAmmo();
     }
+    // 남은 탄약을 추가하는 메서드
+    public void GunAddAmmo(int ammo)
+    {
+        RemainAmmo += ammo;
+
+        UpdateCurAmmo();
+    }
 }
