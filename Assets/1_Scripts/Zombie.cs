@@ -257,15 +257,15 @@ public class Zombie : MonoBehaviour
         Battle();
     }
 
-    public void OnDamage(float attackPoint)
+    public void OnDamage(float attackPoint, Vector3 hitPosition)
     {
         isAware = true;
         timeFlag = Time.time;
         currentSearchDistance = awareSearchDistance;
         currentSearchAngle = awareSearchAngle;
 
-        // 이후 매개변수 추가 업데이트로 탄착지점의 정보를 받아와 해당 위치에서 파티클 실행할 예정(지금은 머리부근으로 고정)
-        bloodEffect.transform.position = transform.position + Vector3.up * 1.7f;
+        // 이후 매개변수 추가 업데이트 탄착점의 정보를 받아와 해당 위치에서 파티클 실행할 예정(지금은 머리부근으로 고정)
+        bloodEffect.transform.position = hitPosition;
         bloodEffect.Play();
 
         HP -= attackPoint;
