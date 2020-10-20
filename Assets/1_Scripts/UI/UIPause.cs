@@ -11,6 +11,7 @@ public class UIPause : MonoBehaviour
     // public Button btn_GotoMain; // 메인화면으로
     // public Button btn_Setting;  // 설정
     // public Button btn_Quit;     // 게임종료
+    bool isPopUp;
 
 
 

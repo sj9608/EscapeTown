@@ -29,6 +29,7 @@ public class GameManager : SingletonBase<GameManager>
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 
         enemies = GameObject.Find("Enemies");
+        enemiesDic = new Dictionary<string, Zombie>();
         if (enemies != null)
         {
             enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
@@ -38,7 +39,7 @@ public class GameManager : SingletonBase<GameManager>
     }
     void Update()
     {
-        if (gameKeyInput.quickSlot2)
+        if (gameKeyInput != null && gameKeyInput.quickSlot2)
         {
             UseMagazine();
         }
