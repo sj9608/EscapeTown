@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isCrouch = GameManager.Instance.gameKeyInput.crouch;
+        isCrouch = Input.GetKey(KeyCode.LeftControl);
         if (isCrouch)
         {
             //playerAnimator.SetBool("isCrouch", isCrouch);
@@ -70,14 +70,13 @@ public class PlayerMovement : MonoBehaviour
         {
             //playerAnimator.SetBool("isCrouch", isCrouch);
         }
-        isSprint = GameManager.Instance.gameKeyInput.sprint;
-
+        isSprint = Input.GetKey(KeyCode.LeftShift);
     }
 
     void PlayerMove()
     {
-        float inputX = GameManager.Instance.gameKeyInput.moveX;
-        float inputZ = GameManager.Instance.gameKeyInput.moveY;
+        float inputX = Input.GetAxis("Horizontal");
+        float inputZ = Input.GetAxis("Vertical");
 
         /* 지면 체크 및 중력(낙하속도)*/
         //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); // 캐릭터가 땅에 닿았는지 체크 닿았으면 true 반환

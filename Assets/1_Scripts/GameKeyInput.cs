@@ -42,54 +42,54 @@ public class GameKeyInput : MonoBehaviour
     public bool popupMenu { get; private set; }
 
     // Update is called once per frame
-    void Update()
-    {
-        // 게임오버 상태에서는 사용자 입력을 감지하지 않는다
-        if (GameManager.Instance != null
-            && GameManager.Instance.IsGameOver)
-        {
-            moveX = 0;
-            moveY = 0;
-            fire = false;
-            reload = false;
-            aim = false;
-            interaction = false;
-            openChatNote = false;
-            changeWeapon = false;
-            quickSlot1 = false;
-            quickSlot2 = false;
-            crouch = false;
-            sprint = false;
-            popupMenu = false;
+    //void Update()
+    //{
+    //    // 게임오버 상태에서는 사용자 입력을 감지하지 않는다
+    //    if (GameManager.Instance != null
+    //        && GameManager.Instance.IsGameOver)
+    //    {
+    //        moveX = 0;
+    //        moveY = 0;
+    //        fire = false;
+    //        reload = false;
+    //        aim = false;
+    //        interaction = false;
+    //        openChatNote = false;
+    //        changeWeapon = false;
+    //        quickSlot1 = false;
+    //        quickSlot2 = false;
+    //        crouch = false;
+    //        sprint = false;
+    //        popupMenu = false;
 
-            return;
-        }
+    //        return;
+    //    }
 
-        // move에 관한 입력 감지
-        moveX = Input.GetAxis(moveXAxisName);
-        // rotate에 관한 입력 감지
-        moveY = Input.GetAxis(moveYAxisName);
-        // fire에 관한 입력 감지
-        fire = Input.GetMouseButtonDown(fireKey);
-        // fire에 관한 입력 감지
-        aim = Input.GetMouseButtonDown(aimKey);
-        // reload에 관한 입력 감지
-        reload = Input.GetKeyDown(reloadKey);
-        // reload에 관한 입력 감지
-        interaction = Input.GetKeyDown(interactionKey);
-        // reload에 관한 입력 감지
-        openChatNote = Input.GetKeyDown(openChatNoteKey);
-        // reload에 관한 입력 감지
-        changeWeapon = Input.GetKeyDown(changeWeaponKey);
-        // reload에 관한 입력 감지
-        quickSlot1 = Input.GetKeyDown(quickSlot1Key);
-        // reload에 관한 입력 감지
-        quickSlot2 = Input.GetKeyDown(quickSlot2Key);
-        // reload에 관한 입력 감지
-        crouch = Input.GetKey(crouchKey);
-        // sprint에 관한 입력 감지
-        sprint = Input.GetKey(sprintKey);
-        // reload에 관한 입력 감지
-        popupMenu = Input.GetKeyDown(popupMenuKey);
-    }
+    //    // move에 관한 입력 감지
+    //    moveX = Input.GetAxis(moveXAxisName);
+    //    // rotate에 관한 입력 감지
+    //    moveY = Input.GetAxis(moveYAxisName);
+    //    // fire에 관한 입력 감지
+    //    fire = Input.GetMouseButtonDown(0);
+    //    // fire에 관한 입력 감지
+    //    aim = Input.GetMouseButtonDown(aimKey);
+    //    // reload에 관한 입력 감지
+    //    reload = Input.GetKeyDown(KeyCode.R);
+    //    // reload에 관한 입력 감지
+    //    interaction = Input.GetKeyDown(KeyCode.F);
+    //    // reload에 관한 입력 감지
+    //    openChatNote = Input.GetKeyDown(openChatNoteKey);
+    //    // reload에 관한 입력 감지
+    //    changeWeapon = Input.GetKeyDown(KeyCode.Q);
+    //    // reload에 관한 입력 감지
+    //    quickSlot1 = Input.GetKeyDown(KeyCode.Alpha1);
+    //    // reload에 관한 입력 감지
+    //    quickSlot2 = Input.GetKeyDown(KeyCode.Alpha2);
+    //    // reload에 관한 입력 감지
+    //    crouch = Input.GetKey(KeyCode.LeftControl);
+    //    // sprint에 관한 입력 감지
+    //    sprint = Input.GetKey(KeyCode.LeftShift);
+    //    // reload에 관한 입력 감지
+    //    popupMenu = Input.GetKeyDown(popupMenuKey);
+    //}
 }

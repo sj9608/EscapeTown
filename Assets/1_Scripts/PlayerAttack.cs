@@ -23,17 +23,15 @@ public class PlayerAttack : MonoBehaviour
     // 현재 상태 
     bool isGun;
     bool isKnife;
-    
-    private GameKeyInput gameKeyInput; // 플레이어의 입력
+
     private Animator playerAnimator; // 애니메이터 컴포넌트
     // Start is called before the first frame update
     void Start()
     {
-        gameKeyInput = GameManager.Instance.gameKeyInput;
         playerAnimator = GetComponent<Animator>();
 
         gunPivot = gun.transform.parent;
-        knifePivot = knife.transform.parent;
+        //knifePivot = knife.transform.parent;
 
         isGun = false;
         isKnife = true;
@@ -48,17 +46,17 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameKeyInput.changeWeapon)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             ChangeWeapon();
         }
         // 입력을 감지하고 총 발사하거나 재장전
-        if (gameKeyInput.fire)
+        if (Input.GetMouseButtonDown(0))
         {
             // 발사 입력 감지시 총 발사
             Attack();
         }
-        else if (isGun && gameKeyInput.reload)
+        else if (isGun && Input.GetKeyDown(KeyCode.R))
         {
             // 재장전 입력 감지시 재장전
             if (gun.Reload())
@@ -86,7 +84,7 @@ public class PlayerAttack : MonoBehaviour
         playerAnimator.SetBool("isGun", isGun);
         playerAnimator.SetBool("isKnife", isKnife);
         gun.transform.parent.gameObject.SetActive(isGun);
-        knife.transform.parent.gameObject.SetActive(isKnife);
+        //knife.transform.parent.gameObject.SetActive(isKnife);
         if (isGun)
         {
             weaponPivot = gunPivot;
