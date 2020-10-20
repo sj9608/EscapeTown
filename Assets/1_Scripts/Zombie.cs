@@ -50,9 +50,9 @@ public class Zombie : MonoBehaviour
     private NavMeshAgent nmAgent;                           // 추적AI
     private bool isPlayerTargeting;                         // 공격시점에 플레이어가 공격 범위에 있는지 판단하기위한 구분자
 
-
-    // 테스트용 객체 선언 (주인공으로 인식할 대상)
-    public Player player;
+    Player player;
+    public ParticleSystem bloodEffect;
+    
 
     void Start()
     {
@@ -90,6 +90,7 @@ public class Zombie : MonoBehaviour
 
         // 플레이어를 대체할 테스트용 코드
         player = FindObjectOfType<Player>();
+        bloodEffect = Instantiate(bloodEffect, new Vector3(0, 1.7f, 0), Quaternion.identity);
     }
 
 
@@ -263,8 +264,12 @@ public class Zombie : MonoBehaviour
         currentSearchDistance = awareSearchDistance;
         currentSearchAngle = awareSearchAngle;
 
+        // 이후 매개변수 추가 업데이트로 탄착지점의 정보를 받아와 해당 위치에서 파티클 실행할 예정(지금은 머리부근으로 고정)
+        bloodEffect.transform.position = transform.position + Vector3.up * 1.7f;
+        bloodEffect.Play();
+
         HP -= attackPoint;
-        if (HP < 0)
+        if (HP <= 0)
         {
             HP = 0;
             Die();
@@ -284,7 +289,7 @@ public class Zombie : MonoBehaviour
         StopCoroutine(Think());
     }
 
-    public void DieAnimationCompleHandler ()
+    public void DieAnimationCompletHandler ()
     {
         gameObject.SetActive(false);
     }
