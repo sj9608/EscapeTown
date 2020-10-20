@@ -9,7 +9,7 @@ public class UILoading : MonoBehaviour
     // 게임 로딩 화면 UI
     // 슬라이더 업데이트, 로딩 씬 뒤에 게임 씬 불러오기
 
-    public string sceneName;                                       // 전환하는 씬 이름
+    public int sceneName;                                       // 전환하는 씬 이름
 
     [Header("Editor Settings")]
     public Slider progressBar;                                     // 로딩 바 슬라이더
@@ -22,7 +22,7 @@ public class UILoading : MonoBehaviour
 
     void Start()
     {
-        sceneName = UIManager.Instance.sceneName;
+        sceneName = SceneController.Instance.curSceneNum;
         StartCoroutine(LoadScene());
     }
 
