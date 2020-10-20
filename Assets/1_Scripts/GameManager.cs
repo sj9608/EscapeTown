@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
-    Player player;
     GameObject enemies;
-    Dictionary<string, Zombie> enemiesDic;
+    public Dictionary<string, Zombie> enemiesDic;
 
     // 게임오버 판단
     public bool IsGameOver;
@@ -18,16 +17,10 @@ public class GameManager : SingletonBase<GameManager>
     // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
     int addAmmo = 60;
     public int curSceneNum = 2;
-    public GameKeyInput gameKeyInput;
-    public PlayerAttack playerAttack;
-    public PlayerHealth playerHealth;
-    // Start is called before the first frame update
     void Start()
     {
-        // player = Player.Instance;
-        gameKeyInput = GetComponent<GameKeyInput>();
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
-        // 해당 스테이지는 
+        // 해당 스테이지는 낮 Scene
         enemies = GameObject.Find("Enemies");
         enemiesDic = new Dictionary<string, Zombie>();
         if (enemies != null)
@@ -39,14 +32,14 @@ public class GameManager : SingletonBase<GameManager>
     }
     void Update()
     {
-        if (gameKeyInput != null && gameKeyInput.quickSlot2)
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             UseMagazine();
         }
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    SceneManager.LoadScene(sceneToLoad);
-        //}
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            UseMagazine();
+        }
     }
 
     public void ZombieDead(string zName)
@@ -90,7 +83,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         if (getItem != null)
         {
-            Debug.Log(player.name + "이(가) " + getItem.name + "을 습득했다.");
+            Debug.Log(getItem.name + "을 습득했다.");
             getItem.gameObject.SetActive(false);
         }
     }

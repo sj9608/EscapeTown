@@ -10,14 +10,14 @@ public class Goal : MonoBehaviour
         if (other.tag == "Player")
         {
             // SceneLoader.LoadSceneHandle("Loading", 0);
-            Debug.Log("GameManager.Instance.curSceneNum : " + GameManager.Instance.curSceneNum);
-            GameManager.Instance.curSceneNum = GameManager.Instance.curSceneNum + 1;
-            Debug.Log("GameManager.Instance.curSceneNum : " + GameManager.Instance.curSceneNum);
-            if (GameManager.Instance.curSceneNum > 3)
-            {
-                GameManager.Instance.curSceneNum = 0;
-            }
-            SceneManager.LoadScene(GameManager.Instance.curSceneNum);
+            //Debug.Log("GameManager.Instance.curSceneNum : " + GameManager.Instance.curSceneNum);
+            //GameManager.Instance.curSceneNum = GameManager.Instance.curSceneNum + 1;
+            //Debug.Log("GameManager.Instance.curSceneNum : " + GameManager.Instance.curSceneNum);
+            //if (GameManager.Instance.curSceneNum > 3)
+            //{
+            //    GameManager.Instance.curSceneNum = 0;
+            //}
+            SceneManager.LoadScene(GameInformation.Instance.CurSceneNum);
         }
     }
     // Start is called before the first frame update

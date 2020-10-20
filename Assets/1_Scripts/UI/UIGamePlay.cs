@@ -38,16 +38,11 @@ public class UIGamePlay : MonoBehaviour
         // numOfBullet 값 불러오기
 
         // curHP 값 불러오기
-        hpbar.value = GameManager.Instance.playerHealth.HP;
-        
+        hpbar.value = GameInformation.Instance.HP;
         
         // 총 탄 수 / 잔 탄 수 불러오기
-        // curBullet.text = GameManager.Instance.playerAttack.gun.magAmmo.ToString(); // 잔탄 수;
-        // magCapacity.text = GameManager.Instance.playerAttack.gun.magCapacity.ToString(); // 총탄 수;
-
-        //curBullet.text = cur_Bullet.ToString() + "/" + magCapacity.ToString();
-
-        // GameInformation.Instance.UpdateHpAction += HandleHP;
+        curBullet.text = GameManager.Instance.playerAttack.gun.magAmmo.ToString(); // 잔탄 수;
+        remainBullet.text = GameManager.Instance.playerAttack.gun.ammoRemain.ToString(); // 총탄 수;
     }
 
     private void Update() 
@@ -80,7 +75,7 @@ public class UIGamePlay : MonoBehaviour
 
     private void HandleHP() // HP바 
     {
-        curHP = GameManager.Instance.playerHealth.HP;
+        curHP = GameInformation.Instance.HP;
         //hpbar.value = curHP / maxHP;
         hpbar.value = Mathf.Lerp(hpbar.value, curHP / maxHP, Time.deltaTime);
     }

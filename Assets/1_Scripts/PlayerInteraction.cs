@@ -28,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.gameKeyInput.interaction)
+        if (Input.GetKeyDown(KeyCode.F))
         {
             GetInteraction();
         }
