@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
-    PlayerAttack playerAttack;
+    public PlayerAttack playerAttack;
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
 
@@ -18,7 +18,6 @@ public class GameManager : SingletonBase<GameManager>
     // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
     int addAmmo = 60;
     public int curSceneNum = 2;
-    // Start is called before the first frame update
     void Start()
     {
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
@@ -84,7 +83,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         if (getItem != null)
         {
-            Debug.Log(player.name + "이(가) " + getItem.name + "을 습득했다.");
+            Debug.Log(getItem.name + "을 습득했다.");
             getItem.gameObject.SetActive(false);
         }
     }

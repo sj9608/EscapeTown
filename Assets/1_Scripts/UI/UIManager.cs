@@ -6,20 +6,23 @@ using UnityEngine;
 //
 public class UIManager : MonoBehaviour
 {
-    private static UIManager instance = null;
+    private static UIManager instance;
     public static UIManager Instance
     {
-        get
-        {
-            return instance;
-        }
-        private set{}
+        get{ return instance; }
     }
 
     public string sceneName;
     
     public void Awake()
     {
-        instance = this;
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 }
+
