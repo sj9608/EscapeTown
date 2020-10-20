@@ -109,7 +109,7 @@ public class GameManager : SingletonBase<GameManager>
             QuickSlot.Instance.UseMagazine();
             // 총알 + 60
             // Gun 단에서 총알 충전 처리
-            playerAttack.gun.AddAmmo(addAmmo);
+            //playerAttack.gun.AddAmmo(addAmmo);
         }
     }
     public void GameOver()
