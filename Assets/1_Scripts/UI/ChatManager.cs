@@ -55,7 +55,7 @@ public class ChatManager : MonoBehaviour
         // 대사 출력
         // if(낮 스테이지) - NPC 별로 고유의 대화 내용 출력
         if(GameManager.Instance.curSceneNum < 21 //&& GameManager.Instance.playerInteraction. == true 
-                        && GameManager.Instance.gameKeyInput.interaction == true) // 대화 가능한 사람이 있는지 확인
+                        && Input.GetKeyDown(KeyCode.F) == true) // 대화 가능한 사람이 있는지 확인
         {
             ObjectData objData = GetComponent<ObjectData>();
             StartCoroutine(PrintNormalChat(objData.id, objData.isNpc));

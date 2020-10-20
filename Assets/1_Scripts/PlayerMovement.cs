@@ -43,37 +43,40 @@ public class PlayerMovement : MonoBehaviour
         isSprint = false;
 
         isCrouch = false;
-        playerAnimator.SetBool("isCrouch", isCrouch);
+        //playerAnimator.SetBool("isCrouch", isCrouch);
 
         /* 달리기 상태, 애니메이터 초기화 */
         isSprint = false;
-        playerAnimator.SetBool("isSprint", isSprint);
+        //playerAnimator.SetBool("isSprint", isSprint);
     }
 
     private void FixedUpdate()
     {
-        if (playerHealth.isDead == true || GameManager.Instance.IsGameOver == true)
-        {
-            return;
-        }
+        //if (playerHealth.isDead == true || GameManager.Instance.IsGameOver == true)
+        //{
+        //    return;
+        //}
         PlayerMove();
     }
     // Update is called once per frame
     void Update()
     {
-        isCrouch = GameManager.Instance.gameKeyInput.crouch;
+        isCrouch = Input.GetKey(KeyCode.LeftControl);
         if (isCrouch)
         {
-            playerAnimator.SetBool("isCrouch", isCrouch);
+            //playerAnimator.SetBool("isCrouch", isCrouch);
         }
-        isSprint = GameManager.Instance.gameKeyInput.sprint;
-
+        else
+        {
+            //playerAnimator.SetBool("isCrouch", isCrouch);
+        }
+        isSprint = Input.GetKey(KeyCode.LeftShift);
     }
 
     void PlayerMove()
     {
-        float inputX = GameManager.Instance.gameKeyInput.moveX;
-        float inputZ = GameManager.Instance.gameKeyInput.moveY;
+        float inputX = Input.GetAxis("Horizontal");
+        float inputZ = Input.GetAxis("Vertical");
 
         /* 지면 체크 및 중력(낙하속도)*/
         //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); // 캐릭터가 땅에 닿았는지 체크 닿았으면 true 반환
@@ -112,21 +115,23 @@ public class PlayerMovement : MonoBehaviour
             if (isCrouch)
             {
                 moveSpeed = 1.5f;
-                playerAnimator.SetFloat("Crouch", moveSpeed);
+                //playerAnimator.SetFloat("Crouch", moveSpeed);
             }
             else
             {
                 if (!isSprint) // 달리는 상태가 아닌 걷는상태
                 {
-                    playerAnimator.SetFloat("Move", moveSpeed);
-                    moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
+                    //playerAnimator.SetFloat("Move", moveSpeed);
+                    //moveSpeed = (moveSpeed > 2.5f) ? 2.5f : (moveSpeed + .1f);
                 }
                 else
                 {
-                    playerAnimator.SetFloat("Move", moveSpeed);
-                    moveSpeed = (moveSpeed > 5.0f) ? 5.0f : (moveSpeed + .1f);
+                    //playerAnimator.SetFloat("Move", moveSpeed);
+                    //moveSpeed = (moveSpeed > 5.0f) ? 5.0f : (moveSpeed + .1f);
                 }
             }
+            playerAnimator.SetFloat("InputX", inputX);
+            playerAnimator.SetFloat("InputZ", inputZ);
             controller.Move(transform.forward * moveSpeed * Time.deltaTime); // 해당 벡터의 방향으로 speed 수치만큼 frame간격마다 이동 (카메라가 바라보는 방향으로 움직이게 하기위해서 direction --> moveDir 교체)
         }
         else

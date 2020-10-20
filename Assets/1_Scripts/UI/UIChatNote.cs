@@ -20,7 +20,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        isOpen = GameManager.Instance.gameKeyInput.openChatNote;
+        isOpen = Input.GetKeyDown(KeyCode.E);
         if(isOpen == false)
         {
             if(poolingTempQueue.Count > 0)
