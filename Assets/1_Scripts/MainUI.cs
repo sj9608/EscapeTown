@@ -65,6 +65,14 @@ public class MainUI : MonoBehaviour
 
     }
 
+    private void HandleHP() // HP바  //업데이트 문에서 계속 갱신 말고 이벤트 때만 업데이트하도록
+                                    // 델리게이트 
+    {
+        curHP = 100; //Player.Instance.HP;
+        //hpbar.value = curHP / maxHP;
+        hpbar.value = Mathf.Lerp(hpbar.value, curHP / maxHP, Time.deltaTime);
+    }
+
     public void Show_Bullet_Count()  // 현재 총알 수 함수
     {
 

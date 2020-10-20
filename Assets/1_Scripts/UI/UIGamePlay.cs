@@ -17,9 +17,18 @@ public class UIGamePlay : MonoBehaviour
     
     // 시스템 로그 관련 변수
 
-    public Text remainBullet;            // 총 탄 수
+    //public Text magCapacity;            // 총 탄 수
     public Text curBullet;               // 잔탄 수
+    
 
+    //public ChatController chatController;      // 대화 텍스트
+    public delegate void battle_Event();
+
+    //int cur_Bullet;
+    //int magCapacity;
+
+    int cur_Bullet;
+    int remainBullet;
     [SerializeField] private Slider hpbar; // HP바
 
     private void Start() 
@@ -32,8 +41,8 @@ public class UIGamePlay : MonoBehaviour
         hpbar.value = GameInformation.Instance.HP;
         
         // 총 탄 수 / 잔 탄 수 불러오기
-        curBullet.text = GameManager.Instance.playerAttack.gun.magAmmo.ToString(); // 잔탄 수;
-        remainBullet.text = GameManager.Instance.playerAttack.gun.ammoRemain.ToString(); // 총탄 수;
+        curBullet.text =  GameInformation.Instance.CurAmmo.ToString(); // 잔탄 수;
+                        
     }
 
     private void Update() 
@@ -54,10 +63,12 @@ public class UIGamePlay : MonoBehaviour
 
     public void Show_Bullet_Count()  // 장전 후 사용하고 남은 총알 갯수
     {
-        // curBullet : 현재 총알수, remain_Bullet : 최대 총알 수(30발)
-        int cur_Bullet = GameManager.Instance.playerAttack.gun.magAmmo;
-        curBullet.text = cur_Bullet.ToString(); 
-        int remainBullet = GameManager.Instance.playerAttack.gun.ammoRemain;
+        // curBullet : 현재 총알수, magCapacity : 최대 총알 수(30발)
+        cur_Bullet = GameInformation.Instance.CurAmmo;
+        Debug.Log("cur_Bullet : " + cur_Bullet);
+
+        curBullet.text = cur_Bullet.ToString() + " /  30"; 
+                         //string.Format("{0} / {1}",cur_Bullet, magCapacity);
     }
 
     private void HandleHP() // HP바 

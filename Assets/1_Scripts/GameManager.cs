@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
-    public PlayerAttack playerAttack;
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
 
@@ -23,6 +22,7 @@ public class GameManager : SingletonBase<GameManager>
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 낮 Scene
         enemies = GameObject.Find("Enemies");
+        enemiesDic = new Dictionary<string, Zombie>();
         if (enemies != null)
         {
             enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
@@ -131,3 +131,4 @@ public class GameManager : SingletonBase<GameManager>
         }
     }
 }
+

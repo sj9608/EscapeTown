@@ -64,19 +64,37 @@ public class QuickSlot : SingletonBase<QuickSlot>
 
     public void Show_CoolTime() // 아이템 사용시 쿨타임 표시 UI(쿨 타임 동안 퀵슬롯 이미지 로드)
     {
-        StartCoroutine(CoolTime(3f)); // 쿨타임 4초
-        IEnumerator CoolTime(float coolTime) // 코루틴
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            // if (Input.GetKeyDown(KeyCode.Alpha1))
-            // {
-            while (coolTime > 1f)
+            StartCoroutine(CoolTime(3f)); // 쿨타임 3초
+            IEnumerator CoolTime(float coolTime) // 코루틴
             {
-                coolTime -= Time.deltaTime;            // 쿨타임에서 deltaTime을 빼 적용
-                IMG_magazine.fillAmount = (1f / coolTime); // 쿨타임 동안 magazine 이미지를 수직으로 다시 그리기
-                                                           //}
-                yield return new WaitForFixedUpdate();
+                float curTime = 0f;
+                while (curTime < coolTime)
+                {
+                    curTime += Time.deltaTime;            // 쿨타임에서 deltaTime을 빼 적용
+                    IMG_potion.fillAmount = curTime / coolTime; // 쿨타임 동안 magazine 이미지를 수직으로 다시 그리기
+
+                    yield return new WaitForFixedUpdate();
+                }
+                isUsed = false;
             }
-            isUsed = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            StartCoroutine(CoolTime(3f)); // 쿨타임 3초
+            IEnumerator CoolTime(float coolTime) // 코루틴
+            {
+                float curTime = 0f;
+                while (curTime < coolTime)
+                {
+                    curTime += Time.deltaTime;            // 쿨타임에서 deltaTime을 빼 적용
+                    IMG_magazine.fillAmount = curTime / coolTime; // 쿨타임 동안 magazine 이미지를 수직으로 다시 그리기
+
+                    yield return new WaitForFixedUpdate();
+                }
+                isUsed = false;
+            }
         }
     }
 }
