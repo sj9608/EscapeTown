@@ -46,6 +46,8 @@ public class UIGamePlay : MonoBehaviour
         // magCapacity.text = GameManager.Instance.playerAttack.gun.magCapacity.ToString(); // 총탄 수;
 
         //curBullet.text = cur_Bullet.ToString() + "/" + magCapacity.ToString();
+
+        // GameInformation.Instance.UpdateHpAction += HandleHP;
     }
 
     private void Update() 

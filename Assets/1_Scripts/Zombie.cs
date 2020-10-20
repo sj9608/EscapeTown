@@ -52,7 +52,7 @@ public class Zombie : MonoBehaviour
 
 
     // 테스트용 객체 선언 (주인공으로 인식할 대상)
-    public Player player;
+    public PlayerHealth player;
 
     void Start()
     {
@@ -89,7 +89,7 @@ public class Zombie : MonoBehaviour
         StartCoroutine(Think());
 
         // 플레이어를 대체할 테스트용 코드
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerHealth>();
     }
 
 
@@ -248,7 +248,7 @@ public class Zombie : MonoBehaviour
     {
         if (isPlayerTargeting && !player.isDead)
         {
-            //player.OnDamage(ap / 2);
+            player.OnDamage(ap / 2);
         }
     }
     public void AttackAnimationCompletHandler()
@@ -298,7 +298,7 @@ public class Zombie : MonoBehaviour
         {
             if (hit.collider)
             {
-                Player hitPlayer = hit.collider.GetComponent<Player>();
+                PlayerHealth hitPlayer = hit.collider.GetComponent<PlayerHealth>();
 
                 // 플레이어가 존재하고, 좀비의 시야각 안에 있으며, 탐색거리 안에 있다면 
                 if (hitPlayer
