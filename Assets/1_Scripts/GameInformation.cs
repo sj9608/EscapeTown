@@ -33,7 +33,7 @@ public class GameInformation : SingletonBase<GameInformation>
     private void Awake()
     {
         HP = 100;       // 저
-        RemainAmmo = 0;
+        RemainAmmo = 60;
         CurAmmo = 30;
     }
 

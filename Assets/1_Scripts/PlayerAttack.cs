@@ -21,8 +21,8 @@ public class PlayerAttack : MonoBehaviour
     public Transform knifeRightHandMount; // 칼의 오른쪽 손잡이, 오른손이 위치할 지점
 
     // 현재 상태 
-    bool isGun;
-    bool isKnife;
+    public bool isGun;
+    public bool isKnife;
 
     private Animator playerAnimator; // 애니메이터 컴포넌트
     // Start is called before the first frame update

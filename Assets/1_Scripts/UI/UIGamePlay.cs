@@ -17,7 +17,7 @@ public class UIGamePlay : MonoBehaviour
     
     // 시스템 로그 관련 변수
 
-    //public Text magCapacity;            // 총 탄 수
+    public Text remainBullet;            // 총 탄 수
     public Text curBullet;               // 잔탄 수
     
 
@@ -28,7 +28,7 @@ public class UIGamePlay : MonoBehaviour
     //int magCapacity;
 
     int cur_Bullet;
-    int remainBullet;
+    // int remainBullet;
     [SerializeField] private Slider hpbar; // HP바
 
     private void Start() 
@@ -42,6 +42,7 @@ public class UIGamePlay : MonoBehaviour
         
         // 총 탄 수 / 잔 탄 수 불러오기
         curBullet.text =  GameInformation.Instance.CurAmmo.ToString(); // 잔탄 수;
+        remainBullet.text = GameInformation.Instance.RemainAmmo.ToString(); // 한 탄창에 남은 총알 수
                         
     }
 
@@ -69,6 +70,7 @@ public class UIGamePlay : MonoBehaviour
 
         curBullet.text = cur_Bullet.ToString() + " /  30"; 
                          //string.Format("{0} / {1}",cur_Bullet, magCapacity);
+        remainBullet.text = GameInformation.Instance.RemainAmmo.ToString();
     }
 
     private void HandleHP() // HP바 
