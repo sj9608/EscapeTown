@@ -40,7 +40,7 @@ public class Gun : MonoBehaviour
     // 남은 전체 탄약
     public int ammoRemain;
     // 탄창 용량
-    public int magCapacity;
+    public int magCapacity = 30;
     // 현재 탄창에 남아있는 탄약
     public int magAmmo;
 
@@ -55,6 +55,8 @@ public class Gun : MonoBehaviour
     public void AddAmmo(int ammo)
     {
         ammoRemain += ammo;
+
+        GameInformation.Instance.UpdateCurAmmo();
     }
     private void Awake()
     {
@@ -70,8 +72,6 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         ammoRemain = GameInformation.Instance.RemainAmmo;
-        // 한번 장전 시 쏠 수 있는 총알 수
-        magCapacity = 30;
         // 현재 탄창을 가득채우기
         magAmmo = GameInformation.Instance.CurAmmo;
         // 총의 현재 상태를 총을 쏠 준비가 된 상태로 변경
@@ -106,6 +106,8 @@ public class Gun : MonoBehaviour
             // 레이가 충돌한 위치 저장
             hitPosition = hit.point;
             Zombie zombie = hit.transform.GetComponent<Zombie>();
+            // 레이가 충돌한 위치 저장
+            hitPosition = hit.point;
             if (zombie)
             {
                 zombie.OnDamage(gunDamage, hitPosition);
@@ -125,8 +127,11 @@ public class Gun : MonoBehaviour
         StartCoroutine(ShotEffect(hitPosition));
 
         // 남은 탄환의 수를 -1
-        GameInformation.Instance.GunFire();
-        if (GameInformation.Instance.CurAmmo <= 0)
+        magAmmo--;
+
+        GameInformation.Instance.UpdateCurAmmo();
+
+        if (magAmmo <= 0)
         {
             // 탄창에 남은 탄약이 없다면, 총의 현재 상태를 Empty으로 갱신
             gunState = GunState.Empty;
@@ -159,9 +164,7 @@ public class Gun : MonoBehaviour
     // 재장전 시도
     public bool Reload()
     {
-        if (gunState == GunState.Reloading
-            || GameInformation.Instance.RemainAmmo <= 0
-            || GameInformation.Instance.CurAmmo >= magCapacity)
+        if (gunState == GunState.Reloading|| ammoRemain <= 0 || magAmmo >= magCapacity)
         {
             // 이미 재장전 중이거나, 남은 총알이 없거나
             // 탄창에 총알이 이미 가득한 경우 재장전 할수 없다
@@ -186,8 +189,19 @@ public class Gun : MonoBehaviour
         // 탄창에 채울 탄약을 계산한다
         int ammoToFill = magCapacity - magAmmo;
 
-        GameInformation.Instance.GunReload(ammoToFill);
+        // 탄창에 채워야할 탄약이 남은 탄약보다 많다면,
+        // 채워야할 탄약 수를 남은 탄약 수에 맞춰 줄인다
+        if (ammoRemain < ammoToFill)
+        {
+            ammoToFill = ammoRemain;
+        }
 
+        // 탄창을 채운다
+        magAmmo += ammoToFill;
+        // 남은 탄약에서, 탄창에 채운만큼 탄약을 뺸다
+        ammoRemain -= ammoToFill;
+
+        GameInformation.Instance.UpdateCurAmmo();
         // 총의 현재 상태를 발사 준비된 상태로 변경
         gunState = GunState.Ready;
     }
