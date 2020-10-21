@@ -24,6 +24,7 @@ public class CharacterAiming : MonoBehaviour
     {
         mainCamera = Camera.main;
         weapon = GetComponentInChildren<RayCastWeapon>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
