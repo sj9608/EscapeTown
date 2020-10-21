@@ -22,7 +22,7 @@ public class UILoading : MonoBehaviour
 
     void Start()
     {
-        sceneName = SceneController.Instance.curSceneNum;
+        sceneName = SceneController.Instance.CurSceneNum;
         StartCoroutine(LoadScene());
     }
 

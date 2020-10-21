@@ -8,7 +8,7 @@ public class GameManager : SingletonBase<GameManager>
 {
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
-
+    PlayerAttack playerAttack;
     // 게임오버 판단
     public bool IsGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
@@ -19,6 +19,7 @@ public class GameManager : SingletonBase<GameManager>
     public int curSceneNum = 2;
     void Start()
     {
+        playerAttack = FindObjectOfType<PlayerAttack>();
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 낮 Scene
         enemies = GameObject.Find("Enemies");
@@ -109,7 +110,7 @@ public class GameManager : SingletonBase<GameManager>
             QuickSlot.Instance.UseMagazine();
             // 총알 + 60
             // Gun 단에서 총알 충전 처리
-            GameInformation.Instance.GunAddAmmo(addAmmo);
+            playerAttack.gun.AddAmmo(addAmmo);
         }
     }
     public void GameOver()
