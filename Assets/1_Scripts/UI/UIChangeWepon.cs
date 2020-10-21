@@ -32,7 +32,7 @@ public class UIChangeWepon : MonoBehaviour
         Color Knife_alpha = Selected_Knife.color;
 
         
-        if(!playerAttack.isGun)
+        if(!GameManager.Instance.playerAttack.isGun)
         {
             Debug.Log("************* I'm Working at Selected_Gun! **************");
             Gun.SetActive(true);

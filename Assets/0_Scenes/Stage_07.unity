@@ -7118,6 +7118,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Butte_Base_01
       objectReference: {fileID: 0}
+    - target: {fileID: 2686352193904181811, guid: 92c5b7340544964469ead4fb9312c289,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ce16e995d91e4b268a0693a7068ea80, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92c5b7340544964469ead4fb9312c289, type: 3}
 --- !u!1001 &2930301587163326912
