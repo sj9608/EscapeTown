@@ -89,7 +89,7 @@ public class Zombie : MonoBehaviour
         StartCoroutine(Think());
 
         // 플레이어를 대체할 테스트용 코드
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerHealth>();
         bloodEffect = Instantiate(bloodEffect, new Vector3(0, 1.7f, 0), Quaternion.identity);
     }
 
@@ -303,7 +303,7 @@ public class Zombie : MonoBehaviour
         {
             if (hit.collider)
             {
-                Player hitPlayer = hit.collider.GetComponent<Player>();
+                PlayerHealth hitPlayer = hit.collider.GetComponent<PlayerHealth>();
 
                 // 플레이어가 존재하고, 좀비의 시야각 안에 있으며, 탐색거리 안에 있다면 
                 if (hitPlayer

@@ -28,7 +28,6 @@ public class SaveAndLoad : MonoBehaviour
 public class PlayerData
 {
     public string stage;
-    public string name;
     public float Hp;
     public int ammoMag;
 }
