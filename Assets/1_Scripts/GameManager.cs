@@ -8,7 +8,7 @@ public class GameManager : SingletonBase<GameManager>
 {
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
-    PlayerAttack playerAttack;
+    public PlayerAttack playerAttack;
     // 게임오버 판단
     public bool IsGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴

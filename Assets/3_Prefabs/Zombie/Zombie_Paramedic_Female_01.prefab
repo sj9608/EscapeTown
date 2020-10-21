@@ -4173,13 +4173,17 @@ MonoBehaviour:
   walkForce: 0
   runSpeed: 0
   attackRange: 0
-  searchDistance: 0
-  searchAngle: 120
+  normalSearchDistance: 0
+  awareSearchDistance: 0
+  normalSearchAngle: 0
+  awareSearchAngle: 0
   walkDelayMin: 1
   walkDelayMax: 3.5
   idleDelayMin: 1
   idleDelayMax: 3
-  player: {fileID: 0}
+  thinkIntervalTime: 0
+  bloodEffect: {fileID: 6027082966758478503, guid: 12d0cdcc3e5664e9594d398e338d09df,
+    type: 3}
 --- !u!195 &320781337
 NavMeshAgent:
   m_ObjectHideFlags: 0

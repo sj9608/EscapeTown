@@ -1328,10 +1328,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie_Father_Male_02
       objectReference: {fileID: 0}
-    - target: {fileID: 1991497748344218, guid: 28c137d1b09d0431482e07f875ba93a6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4563243208110248, guid: 28c137d1b09d0431482e07f875ba93a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -37.74511
@@ -3230,10 +3226,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie_Father_Male_01
       objectReference: {fileID: 0}
-    - target: {fileID: 1686375517816074, guid: 39a36fce8a280446aac456bc61f5b5bd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4349028512310044, guid: 39a36fce8a280446aac456bc61f5b5bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -41.09317
@@ -4245,10 +4237,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie_Prisoner_Male_01
       objectReference: {fileID: 0}
-    - target: {fileID: 1448682853809946, guid: 68b71616513e042d0bae897864e34101, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4792705196906170, guid: 68b71616513e042d0bae897864e34101, type: 3}
       propertyPath: m_LocalPosition.x
       value: -45.397915
@@ -5191,10 +5179,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie_Paramedic_Female_01
       objectReference: {fileID: 0}
-    - target: {fileID: 1456145000865774, guid: be3f058acc62549d8b83e046ed23d60c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4559408049434754, guid: be3f058acc62549d8b83e046ed23d60c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -34.031277
@@ -5904,10 +5888,6 @@ PrefabInstance:
     - target: {fileID: 1820573889300922, guid: 1f97ce686a32a4812ba4dda6b70c981d, type: 3}
       propertyPath: m_Name
       value: Zombie_Hobo_Male_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 1820573889300922, guid: 1f97ce686a32a4812ba4dda6b70c981d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4564851161899058, guid: 1f97ce686a32a4812ba4dda6b70c981d, type: 3}
       propertyPath: m_LocalPosition.x

@@ -103,6 +103,8 @@ public class Gun : MonoBehaviour
         // 레이캐스트(시작지점, 방향, 충돌 정보 컨테이너, 사정거리, 레이어마스크)
         if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance, LayerMask.GetMask("Enemy")))
         {
+            // 레이가 충돌한 위치 저장
+            hitPosition = hit.point;
             Zombie zombie = hit.transform.GetComponent<Zombie>();
             // 레이가 충돌한 위치 저장
             hitPosition = hit.point;

@@ -19,8 +19,8 @@ public class Zombie : MonoBehaviour
     public bool isDead = false;
     public float HP;                                        // 좀비의 체력 
     public float ap;                                        // 좀비의 공격력
-    public float walkForce;                                 // 대기상태의 걷기 속도
-    public float runSpeed;                                  // 추적상태의 달리기 속도 (에디터상 동적할당 안됨, 코드상 편	)
+    public float walkSpeed;                                 // 대기상태의 걷기 속도
+    public float runSpeed;                                  // 추적상태의 달리기 속도
     public float attackRange;                               // 좀비 공격의 범위 
     public float normalSearchDistance;                      // 좀비가 주인공을 탐색할 거리
     public float awareSearchDistance;                       // 좀비 피격상태에서의 탐색할 거리
@@ -50,15 +50,15 @@ public class Zombie : MonoBehaviour
     private NavMeshAgent nmAgent;                           // 추적AI
     private bool isPlayerTargeting;                         // 공격시점에 플레이어가 공격 범위에 있는지 판단하기위한 구분자
 
-
-    // 테스트용 객체 선언 (주인공으로 인식할 대상)
-    public PlayerHealth player;
+    PlayerHealth player;
+    public ParticleSystem bloodEffect;
+    
 
     void Start()
     {
         HP = 100;
         ap = 30;
-        walkForce = 100f;
+        walkSpeed = 100f;
         runSpeed = 6f;
         attackRange = 1.3f;
         normalSearchDistance = 12f;                      
@@ -90,6 +90,7 @@ public class Zombie : MonoBehaviour
 
         // 플레이어를 대체할 테스트용 코드
         player = FindObjectOfType<PlayerHealth>();
+        bloodEffect = Instantiate(bloodEffect, new Vector3(0, 1.7f, 0), Quaternion.identity);
     }
 
 
@@ -97,16 +98,16 @@ public class Zombie : MonoBehaviour
     {
         if (isDead) return;                     // 좀비가 죽어있으면 즉시 리턴
 
-        // 물리력 이동 
+        // 속돈 이동 
         if (currentState == State.Walk)
-            rb.velocity = transform.forward * walkForce * Time.deltaTime;
+            rb.velocity = transform.forward * walkSpeed * Time.deltaTime;
     }
 
     IEnumerator Think()
     {
         while (!isDead)
         {
-            // 공격받았을때 인지 범위와 관계없이 주인공을 추적하는 기능 추가
+            // 공격받았을때 무조건 인지 시간을 초과하면 노멀로 초기화
             if (isAware)
             {
                 if (Time.time - timeFlag > awareTime)
@@ -263,8 +264,11 @@ public class Zombie : MonoBehaviour
         currentSearchDistance = awareSearchDistance;
         currentSearchAngle = awareSearchAngle;
 
+        bloodEffect.transform.position = hitPosition;
+        bloodEffect.Play();
+
         HP -= attackPoint;
-        if (HP < 0)
+        if (HP <= 0)
         {
             HP = 0;
             Die();
@@ -284,7 +288,7 @@ public class Zombie : MonoBehaviour
         StopCoroutine(Think());
     }
 
-    public void DieAnimationCompleHandler ()
+    public void DieAnimationCompletHandler ()
     {
         gameObject.SetActive(false);
     }
