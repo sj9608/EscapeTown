@@ -256,7 +256,7 @@ public class Zombie : MonoBehaviour
         Battle();
     }
 
-    public void OnDamage(float attackPoint)
+    public void OnDamage(float attackPoint, Vector3 hitPosition)
     {
         isAware = true;
         timeFlag = Time.time;
