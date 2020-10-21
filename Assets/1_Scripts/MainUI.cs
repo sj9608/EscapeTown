@@ -34,11 +34,28 @@ public class MainUI : MonoBehaviour
         hpbar.value = curHP;
         isPopUp = false;
     }
+    private void OnEnable()
+    {
+        GameInformation.Instance.UpdateHpAction += HandleHP;
+        GameInformation.Instance.UpdateCurAmmoAction += Show_Bullet_Count;
+    }
+
+    private void OnDisable()
+    {
+        //GameInformation.Instance.UpdateHpAction -= HandleHP;
+    }
+
+    private void HandleHP(float hp, float changeValue) // HP바 
+    {
+        //curHP = hp;
+        //hpbar.value = curHP / maxHP;
+        hpbar.value = Mathf.Lerp(hpbar.value, hp / maxHP, Time.deltaTime);
+    }
 
     public void Update()
     {
         
-        HandleHP();    
+        //HandleHP();    
          
         Show_Bullet_Count();
 
@@ -48,7 +65,8 @@ public class MainUI : MonoBehaviour
 
     }
 
-    private void HandleHP() // HP바 
+    private void HandleHP() // HP바  //업데이트 문에서 계속 갱신 말고 이벤트 때만 업데이트하도록
+                                    // 델리게이트 
     {
         curHP = 100; //Player.Instance.HP;
         //hpbar.value = curHP / maxHP;
@@ -59,9 +77,9 @@ public class MainUI : MonoBehaviour
     {
 
         // curBullet : 현재 총알수, max_Bullet : 최대 총알 수(10발)
-        cur_Bullet = 30;//Player.Instance.gun.magAmmo;
-        bullet_Count.text = cur_Bullet.ToString(); 
-        
+        cur_Bullet = GameInformation.Instance.CurAmmo;
+        bullet_Count.text = cur_Bullet.ToString();
+
         // if(cur_Bullet < 7 && cur_Bullet >= 4)
         // {
         //     bullet_Counter.color = new Color(200,96,35,1);
