@@ -9,12 +9,39 @@ EditorBuildSettings:
     path: Assets/0_Scenes/Main.unity
     guid: fbd006994447a0843a1b8020acb66c4a
   - enabled: 1
-    path: Assets/0_Scenes/LoadingScene.unity
-    guid: e133788594ba065418166634930cb3ee
-  - enabled: 1
     path: Assets/0_Scenes/Room.unity
     guid: 446b5faf5f364ec4784b7a34175e7947
   - enabled: 1
+    path: Assets/0_Scenes/Stage_02.unity
+    guid: ea9e245cc329a734a9aed8b19f1fd3a2
+  - enabled: 1
     path: Assets/0_Scenes/Stage_03.unity
     guid: 13e231db220d74b9aa64327df99c94bb
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_04.unity
+    guid: 2a595f4a437a2cc4297ff6ff1e75ffcd
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_041.unity
+    guid: cba8e43e69d6f2c4689c11e694bef721
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_05.unity
+    guid: b51cce71a84702745a1aeca97f2e3a09
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_051.unity
+    guid: bebc8268fdf82dc4f8eddc1c389ba1ec
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_06.unity
+    guid: 39e88640f2d08264f9dda4bf58d907a5
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_07.unity
+    guid: 1e2d6e4972f1ff84fa4adecd27c6c321
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_071.unity
+    guid: 922a42b002cd2db4b974a9a9b1383e3c
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_08.unity
+    guid: e241d8221fc4e0f44aa266d82b5a9554
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_081.unity
+    guid: 2549d37d247372b4284ef6eb36c19a4c
   m_configObjects: {}
