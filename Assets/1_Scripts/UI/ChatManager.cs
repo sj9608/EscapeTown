@@ -37,7 +37,7 @@ public class ChatManager : MonoBehaviour
     
     // 오브젝트 풀링 용 배열
     public int[] chatArray = new int[100];
-    public int i; 
+    public int chatNumber; 
 
     public void Awake()
     {
@@ -56,7 +56,7 @@ public class ChatManager : MonoBehaviour
 
     void Start()
     {
-        i = 0;
+        chatNumber = 0;
     }
 
     public void GenerateData()
@@ -101,8 +101,8 @@ public class ChatManager : MonoBehaviour
         chatCharacter.text = "";
         chatText.text = "";
 
-        chatArray[i] = id;
-        i++;
+        chatArray[chatNumber] = id;
+        chatNumber++;
         // poolingObjectQueue.Enqueue(CreateNewText(id));
     }
 }
