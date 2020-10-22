@@ -3593,6 +3593,11 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 1607997905}
+    - target: {fileID: 2199453394223551528, guid: 00033632b0bc14087aedcea9ec7b5adb,
+        type: 3}
+      propertyPath: aimDuration
+      value: 0.18
+      objectReference: {fileID: 0}
     - target: {fileID: 2203962032812601199, guid: 00033632b0bc14087aedcea9ec7b5adb,
         type: 3}
       propertyPath: m_LocalPosition.x
