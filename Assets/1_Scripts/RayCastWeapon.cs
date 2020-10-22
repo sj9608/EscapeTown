@@ -21,6 +21,7 @@ public class RayCastWeapon : MonoBehaviour
 
         ray.origin =raycastOrigin.position;
         ray.direction = raycastDestination.position - raycastOrigin.position;
+        
         if(Physics.Raycast(ray, out hitInfo))
         {
             Debug.DrawLine(ray.origin, hitInfo.point, Color.red, 1.0f);

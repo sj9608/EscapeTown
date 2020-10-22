@@ -3583,6 +3583,26 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 1607997905}
+    - target: {fileID: 2199453393314573542, guid: 00033632b0bc14087aedcea9ec7b5adb,
+        type: 3}
+      propertyPath: m_Weight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199453393591583948, guid: 00033632b0bc14087aedcea9ec7b5adb,
+        type: 3}
+      propertyPath: m_Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199453393789795152, guid: 00033632b0bc14087aedcea9ec7b5adb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199453393789795154, guid: 00033632b0bc14087aedcea9ec7b5adb,
+        type: 3}
+      propertyPath: muzzleFlash.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2199453393789795154, guid: 00033632b0bc14087aedcea9ec7b5adb,
         type: 3}
       propertyPath: raycastDestination
