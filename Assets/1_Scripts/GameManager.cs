@@ -33,9 +33,9 @@ public class GameManager : SingletonBase<GameManager>
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            UseMagazine();
+            UsePotion();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {

@@ -46,7 +46,7 @@ public class UIChatNote : MonoBehaviour
     {
         // 열림 상태에서 chatArray에 저장된 id 에 해당하는 대화 내용을 가진 텍스트 내용을 프리팹에 넣어 활성화
         // 프리팹에 넣어서 content 밑에 자식으로 텍스트를 넣을 때 위치를 지정해서 삽입
-        for(int j=0; j<ChatManager.Instance.i; j++)
+        for(int j=0; j<ChatManager.Instance.chatNumber; j++)
         {
             // 만약 대화 내용 텍스트가 생성되어 있지 않다면
             if(!isUse[j])

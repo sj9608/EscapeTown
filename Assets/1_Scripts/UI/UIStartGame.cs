@@ -26,7 +26,7 @@ public class UIStartGame : MonoBehaviour
         // 저장된 정보에 있는 씬 불러오기
 
         // 씬 로딩 화면 호출
-        UIManager.Instance.sceneName = "";
+        //SceneController.Instance.CurSceneNum = 0;
         SceneManager.LoadScene("LoadingScene");
     }
 
