@@ -6,21 +6,31 @@ public class ChatTrigger : MonoBehaviour
 {
     public ObjectData objectData;
 
+    public int enemyCnt = 0;
+
+    Collider _collider;
+
     private void Start() {
-        objectData = GetComponent<ObjectData>();
+        _collider = GetComponent<Collider>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    IEnumerator OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && GameManager.Instance.enemiesDic.Count > 0)
+        Debug.Log("OnTriggerEnter");
+        Debug.Log(other.tag);
+        if(other.tag == "Player" && enemyCnt > 0)
         {   // 전투 전
             StartCoroutine(ChatManager.Instance.PrintNormalChat(objectData.id, objectData.isNpc));
-            other.gameObject.SetActive(false);
+            _collider.enabled = false;
+            yield return new WaitForSeconds(4);
+            this.gameObject.SetActive(false);
         }
-        else if(other.tag == "Player" && GameManager.Instance.enemiesDic.Count == 0)
+        else if(other.tag == "Player" && enemyCnt == 0)
         {   // 전투 후
             StartCoroutine(ChatManager.Instance.PrintNormalChat(objectData.id, objectData.isNpc));
-            other.gameObject.SetActive(false);
+            _collider.enabled = false;
+            yield return new WaitForSeconds(4);
+            this.gameObject.SetActive(false);
         }
     }
 }

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<chat>
+		<code>310</code>
+		<situation>해가 뜸</situation>
+		<speaker>당신</speaker>
+		<sentence>어느새 해가 뜨기 시작했다. 다행히 여긴 사람이 사는 곳인 것 같다.</sentence>
+	</chat>
+	<chat>
+		<code>315</code>
+		<situation>사람 발견</situation>
+		<speaker>당신</speaker>
+		<sentence>모든 주민들과 대화해 어제 있었던 일에 대해 알아보자.</sentence>
+	</chat>
+	<chat>
+		<code>320</code>
+		<speaker>당신</speaker>
+		<sentence>혹시 어젯밤에 이상한 사람 못 보셨어요? 마치 좀비 같은?</sentence>
+	</chat>
+	<chat>
+		<code>325</code>
+		<speaker>주민</speaker>
+		<sentence>이상한 사람이라, 지금 제 눈 앞에 있네요. 세상에 좀비가 어디에 있나요?</sentence>
+	</chat>
+	<chat>
+		<code>330</code>
+		<speaker>당신</speaker>
+		<sentence>나를 이상한 눈으로 보는 듯 하다. 다른 주제로 말을 걸자.</sentence>
+	</chat>
+	<chat>
+		<code>335</code>
+		<situation>다른 주민과 대화</situation>
+		<speaker>당신</speaker>
+		<sentence>여긴 어디죠?</sentence>
+	</chat>
+	<chat>
+		<code>340</code>
+		<speaker>주민</speaker>
+		<sentence>다른 곳에서 온 사람인가? 여긴 토박이들만 사는 곳인데 어디서 온 거지?</sentence>
+	</chat>
+	<chat>
+		<code>345</code>
+		<speaker>당신</speaker>
+		<sentence>여긴 어디죠?</sentence>
+	</chat>
+	<chat>
+		<code>350</code>
+		<speaker>주민</speaker>
+		<sentence>타지에서 오셨나요? 마을회관에 가보세요. 윗쪽으로 가면 마을회관이 있어요.</sentence>
+	</chat>
+	<chat>
+		<code>355</code>
+		<situation>독백</situation>
+		<speaker>당신</speaker>
+		<sentence>마을 회관을 가보자.</sentence>
+	</chat>
+	<chat>
+		<code>360</code>
+		<situation>주민 혼잣말</situation>
+		<speaker>주민</speaker>
+		<sentence>요즘 A가 잘 안 보이던데.. 그러고 보니 B도 본지가 오래 됐네.</sentence>
+	</chat>
+	<chat>
+		<code>410</code>
+		<situation>독백</situation>
+		<speaker>당신</speaker>
+		<sentence>저기 사람들이 모여있다. 가서 정보를 얻자.</sentence>
+	</chat>
+	<chat>
+		<code>415</code>
+		<situation>주민들끼리 대화</situation>
+		<speaker>주민</speaker>
+		<sentence>사라진 사람이요? 그러고 보니 요즘 안보이는 사람들이 몇 명 있는 것 같기도..</sentence>
+	</chat>
+	<chat>
+		<code>420</code>
+		<speaker>주민</speaker>
+		<sentence>박사가 데려간 것 아냐? 무슨 실험한다는 소문이 있던데.</sentence>
+	</chat>
+	<chat>
+		<code>425</code>
+		<speaker>당신</speaker>
+		<sentence>박사는 누구죠?</sentence>
+	</chat>
+	<chat>
+		<code>430</code>
+		<speaker>주민</speaker>
+		<sentence>예전에 주민들하고 싸우고 산에 틀어 박힌 사람 있어.</sentence>
+	</chat>
+	<chat>
+		<code>435</code>
+		<speaker>주민</speaker>
+		<sentence>박사가 준 약을 먹어서 그런가. 요즘 밤만 되면 잠이 너무 와.</sentence>
+	</chat>
+	<chat>
+		<code>440</code>
+		<speaker>주민</speaker>
+		<sentence>나도 그래. 밤에 뭘 했는지 기억이 안 나.</sentence>
+	</chat>
+	<chat>
+		<code>445</code>
+		<situation>독백</situation>
+		<speaker>당신</speaker>
+		<sentence>좀비와 사라진 사람.. 이 마을은 뭐지?</sentence>
+	</chat>
+	<chat>
+		<code>510</code>
+		<situation>마을 회관</situation>
+		<speaker>당신</speaker>
+		<sentence>이 마을에서 나가려면 어떻게 하죠? 밖에 있는 자동차는 탈 수 있나요?</sentence>
+	</chat>
+	<chat>
+		<code>515</code>
+		<speaker>주민</speaker>
+		<sentence>자동차? 다 고장 난 거야. 저거 못 타.</sentence>
+	</chat>
+	<chat>
+		<code>520</code>
+		<speaker>주민</speaker>
+		<sentence>산 쪽으로 가면 기차역이 있긴 하지. 근데 기차가 다니는지는 나도 몰라.</sentence>
+	</chat>
+	<chat>
+		<code>525</code>
+		<speaker>주민</speaker>
+		<sentence>그래. 높은 곳을 올라가면 마을이 다 보이지 않을까?</sentence>
+	</chat>
+	<chat>
+		<code>530</code>
+		<speaker>주민</speaker>
+		<sentence>요즘 산지기가 산 입구를 다 막아놔서 산을 못 타긴 하는데..</sentence>
+	</chat>
+	<chat>
+		<code>535</code>
+		<speaker>당신</speaker>
+		<sentence>박사는 누구죠?</sentence>
+	</chat>
+	<chat>
+		<code>540</code>
+		<speaker>주민</speaker>
+		<sentence>박사? 예전에 무슨 건강 약 실험한다고 마을 사람들한테 약을 돌린 적이 있는데 </sentence>
+	</chat>
+	<chat>
+		<code>545</code>
+		<speaker>주민</speaker>
+		<sentence>그때 사람들이 다 부작용이 나서 박사를 마을에서 내쫓았지.</sentence>
+	</chat>
+	<chat>
+		<code>710</code>
+		<situation>산 입구</situation>
+		<speaker>당신</speaker>
+		<sentence>사람들이다! 대화를 걸어보자.</sentence>
+	</chat>
+	<chat>
+		<code>715</code>
+		<speaker>당신</speaker>
+		<sentence>산으로 가려고 하는데 어떻게 하죠?</sentence>
+	</chat>
+	<chat>
+		<code>720</code>
+		<speaker>주민</speaker>
+		<sentence>산지기가 산 입구를 막아 놔서 산으로는 올라갈 수가 없어.</sentence>
+	</chat>
+	<chat>
+		<code>725</code>
+		<speaker>주민</speaker>
+		<sentence>산지기가 가지고 있는 열쇠를 얻을 수 있다면 또 모르지만.</sentence>
+	</chat>
+	<chat>
+		<code>730</code>
+		<speaker>당신</speaker>
+		<sentence>산지기는 어디에 있죠?</sentence>
+	</chat>
+	<chat>
+		<code>735</code>
+		<speaker>주민</speaker>
+		<sentence>산지기가 있는 곳? 이 건너편 구역에 있는 집에 살고 있어.</sentence>
+	</chat>
+	<chat>
+		<code>740</code>
+		<speaker>당신</speaker>
+		<sentence>다른 지역으로 갈 방법이 있나요?</sentence>
+	</chat>
+	<chat>
+		<code>745</code>
+		<speaker>주민</speaker>
+		<sentence>기차역이 있긴 하지만 지금은 사용하지 않아.</sentence>
+	</chat>
+	<chat>
+		<code>750</code>
+		<speaker>주민</speaker>
+		<sentence>근데 가끔 산 건너편에서 기차 소리가 들리긴 해.</sentence>
+	</chat>
+	<chat>
+		<code>755</code>
+		<speaker>당신</speaker>
+		<sentence>박사는 어떤 사람이죠?</sentence>
+	</chat>
+	<chat>
+		<code>760</code>
+		<speaker>주민</speaker>
+		<sentence>박사? 그런 말이 있던데. 박사가 인체 실험을 하는 것 같다고.</sentence>
+	</chat>
+	<chat>
+		<code>765</code>
+		<speaker>주민</speaker>
+		<sentence>가끔 산에서 이상한 소리가 들려.</sentence>
+	</chat>
+	<chat>
+		<code>770</code>
+		<speaker>주민</speaker>
+		<sentence>사람 소리 같기도 하고.. 짐승소리 같기도 한게 영 으스스 해.</sentence>
+	</chat>
+	<chat>
+		<code>1</code>
+		<situation>숙소에서 눈을 뜸</situation>
+		<speaker>당신</speaker>
+		<sentence>여긴 어디지? 온 몸이 두들겨 맞은 듯이 아프다.</sentence>
+	</chat>
+	<chat>
+		<code>2</code>
+		<situation>좀비 소리가 남</situation>
+		<speaker>당신</speaker>
+		<sentence>이건 무슨 소리지? 위험한 소리가 들리는데.</sentence>
+	</chat>
+	<chat>
+		<code>3</code>
+		<situation>걸음</situation>
+		<speaker>당신</speaker>
+		<sentence>무기가 될 만한 것을 들고 나가야겠다.</sentence>
+	</chat>
+	<chat>
+		<code>4</code>
+		<situation>좀비 발견</situation>
+		<speaker>당신</speaker>
+		<sentence>저건 뭐지? 좀비…?</sentence>
+	</chat>
+	<chat>
+		<code>5</code>
+		<situation>좀비 처치 후</situation>
+		<speaker>당신</speaker>
+		<sentence>젠장, 사람을 죽여버렸어..! 여긴 너무 위험해.</sentence>
+	</chat>
+	<chat>
+		<code>6</code>
+		<speaker>당신</speaker>
+		<sentence>사람이 있는 곳으로 가야겠어.</sentence>
+	</chat>
+	<chat>
+		<code>7</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>또 좀비가 나타났다. 여길 벗어나 안전한 곳으로 가야 해.</sentence>
+	</chat>
+	<chat>
+		<code>8</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>밤만 되면 좀비가 나타나는군.</sentence>
+	</chat>
+	<chat>
+		<code>9</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>같은 방에 있던 사람들이 모두 좀비가 됐어.. 박사가 무슨 짓을 한 건가?</sentence>
+	</chat>
+	<chat>
+		<code>10</code>
+		<speaker>당신</speaker>
+		<sentence>내가 죽인 좀비들이 모두.. 나와 얘기를 나눈 마을 사람이었던건가?</sentence>
+	</chat>
+	<chat>
+		<code>11</code>
+		<speaker>당신</speaker>
+		<sentence>…일단 살아야겠어.</sentence>
+	</chat>
+	<chat>
+		<code>12</code>
+		<situation>도로</situation>
+		<speaker>당신</speaker>
+		<sentence>밤이 너무 길군.. 아직도 좀비가 남아있어.</sentence>
+	</chat>
+	<chat>
+		<code>13</code>
+		<speaker>당신</speaker>
+		<sentence>기차다! 멈춰있는 것 같다. 기차로는 돌아갈 방법이 없는 건가?</sentence>
+	</chat>
+	<chat>
+		<code>14</code>
+		<speaker>당신</speaker>
+		<sentence>이 길을 지나면 산이 나올까? 산에는 박사가 있는건가?</sentence>
+	</chat>
+	<chat>
+		<code>15</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>저들은 좀비인가? 아니면 사람인가?</sentence>
+	</chat>
+	<chat>
+		<code>16</code>
+		<speaker>당신</speaker>
+		<sentence>내가 죽인 건 사람인가? 난 살인자가 된 건가?</sentence>
+	</chat>
+</root>
