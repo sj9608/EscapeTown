@@ -17,9 +17,11 @@ public class UIGamePlay : MonoBehaviour
     
     // 시스템 로그 관련 변수
 
-    public Text remainBullet;            // 총 탄 수
+    //public Text remainBullet;            // 총 탄 수
     public Text curBullet;               // 잔탄 수
-    
+
+    public GameObject crossHair;
+
 
     //public ChatController chatController;      // 대화 텍스트
     public delegate void battle_Event();
@@ -42,8 +44,10 @@ public class UIGamePlay : MonoBehaviour
         
         // 총 탄 수 / 잔 탄 수 불러오기
         curBullet.text =  GameInformation.Instance.CurAmmo.ToString(); // 잔탄 수;
-        remainBullet.text = GameInformation.Instance.RemainAmmo.ToString(); // 한 탄창에 남은 총알 수
-                        
+        //remainBullet.text = GameInformation.Instance.RemainAmmo.ToString(); // 한 탄창에 남은 총알 수
+        //show_CrossHair = crossHair.GetComponent<GameObject>();
+
+        crossHair.SetActive(false);                        
     }
 
     private void Update() 
@@ -59,6 +63,7 @@ public class UIGamePlay : MonoBehaviour
 
         // 총 탄 수 / 잔 탄 수 불러오기
         Show_Bullet_Count();
+        Show_CrossHair();
     }
 
 
@@ -70,7 +75,7 @@ public class UIGamePlay : MonoBehaviour
 
         curBullet.text = cur_Bullet.ToString() + " /  30"; 
                          //string.Format("{0} / {1}",cur_Bullet, magCapacity);
-        remainBullet.text = GameInformation.Instance.RemainAmmo.ToString();
+        //remainBullet.text = GameInformation.Instance.RemainAmmo.ToString();
     }
 
     private void HandleHP() // HP바 
@@ -79,4 +84,14 @@ public class UIGamePlay : MonoBehaviour
         //hpbar.value = curHP / maxHP;
         hpbar.value = Mathf.Lerp(hpbar.value, curHP / maxHP, Time.deltaTime);
     }
+
+    public void Show_CrossHair()
+    {
+        if(Input.GetButton("Fire2"))
+        //if(Input.GetMouseButtonDown(1))
+            crossHair.SetActive(true);
+        else
+            crossHair.SetActive(false);
+    }
 }
+ 

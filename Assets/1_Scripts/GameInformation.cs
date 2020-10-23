@@ -20,8 +20,10 @@ public class GameInformation : SingletonBase<GameInformation>
     public const float MAX_HP = 100;
     public int CurSceneNum { get; set; }            // 현재 씬 번호
     public float HP { get; private set; }           // HP
-    private int remainAmmo;
-    public int RemainAmmo;     // 총탄 수
+    private int remainAmmo;                         // 총 총알 수
+    public int RemainAmmo;     // 총 총알 수(접근 가능)
+    private int potion;
+    public int Potion;
     private int curAmmo;
     public int CurAmmo
     {
@@ -48,13 +50,16 @@ public class GameInformation : SingletonBase<GameInformation>
     private void Awake()
     {
         HP = 100;       // 저
-        RemainAmmo = 60;
-        CurAmmo = 30;
+        RemainAmmo = 60;  // 총 총알 수 
+        Potion = 5;
+        CurAmmo = 20;
+
     }
 
-    public void UpdateHp(float changeValue)
+    public void UpdateHp(float changeValue)        //HP회복/차감
     {
-        if (UpdateHpAction != null) UpdateHpAction(HP, changeValue);
+        if (UpdateHpAction != null) 
+            UpdateHpAction(HP, changeValue);
     }
     public void UpdateScene(int changeSceneNum)
     {
@@ -63,33 +68,30 @@ public class GameInformation : SingletonBase<GameInformation>
             UpdateSceneAction(changeSceneNum);
         }
     }
-    public void UpdateCurAmmo()
+    public void UpdateCurAmmo()         // 총에 남아있는 총알 수 
     {
         if (UpdateCurAmmoAction != null)
         {
             UpdateCurAmmoAction();
         }
     }
-    public void UpdatePotion(int change)
+    public void UpdatePotion(int change)       //포션 획득
     {
+        NumOfPotion += change;
+
         if (UpdatePotionAction != null)
         {
-            UpdatePotionAction(change);
+            UpdatePotionAction(NumOfPotion);
         }
     }
-    public void UpdateMagazine(int change)
+    public void UpdateMagazine(int change)  // 갖고 있는 총 총알 수(총알 획득/장전 시 업데이트)
     {
-        if (UpdatePotionAction != null)
+        NumOfMagazine += change;
+
+        if (UpdateMagazineAction != null)
         {
-            UpdatePotionAction(change);
+            UpdateMagazineAction(NumOfMagazine);
         }
     }
 
-    // 남은 탄약을 추가하는 메서드
-    public void GunAddAmmo(int ammo)
-    {
-        RemainAmmo += ammo;
-
-        UpdateCurAmmo();
-    }
 }

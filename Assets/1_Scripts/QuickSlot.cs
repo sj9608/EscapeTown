@@ -18,54 +18,56 @@ public class QuickSlot : SingletonBase<QuickSlot>
     private bool isUsed;
     void Start()
     {
-        numOfPotion = 1;
-        numOfMagazine = 2;
+        numOfPotion = GameInformation.Instance.Potion;
+        numOfMagazine = GameInformation.Instance.RemainAmmo;
         isUsed = false;
         numOfPotion_text.text = numOfPotion.ToString();
         numOfMagazine_text.text = numOfMagazine.ToString();
+
+        GameInformation.Instance.UpdateMagazineAction += GetMagazine;
+        GameInformation.Instance.UpdatePotionAction += GetPotion;
     }
 
     void Update()
     {
-        UsePotion();
-        UseMagazine();
+        // UsePotion();
+        // UseMagazine();
     }
 
-    public void UsePotion()
+    public void UsePotion(int numOfPotion)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && isUsed == false)
+        if (isUsed == false)
         {
-            isUsed = !isUsed;
-            if (numOfPotion > 0 && isUsed == true)
-            {
-                numOfPotion--;
-                numOfPotion_text.text = numOfPotion.ToString();
-                Show_CoolTime();
-            }
-        }
-        // if()
-        // {}
-
-    }
-
-    public void UseMagazine()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha2) && isUsed == false)
-        {
-            isUsed = !isUsed;
-            if (numOfMagazine > 0 && isUsed == true)
-            {
-                numOfMagazine--;
-                numOfMagazine_text.text = numOfMagazine.ToString();
-                Show_CoolTime();
-            }
+            numOfPotion_text.text = numOfPotion.ToString();
+            Potion_CoolTime();
         }
     }
 
-    public void Show_CoolTime() // 아이템 사용시 쿨타임 표시 UI(쿨 타임 동안 퀵슬롯 이미지 로드)
+    public void GetPotion(int numOfPotion)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        numOfPotion_text.text = numOfPotion.ToString();
+    }
+
+    public void UseMagazine(int numOfMagazine)
+    {
+        if (isUsed == false)
         {
+            numOfPotion_text.text = numOfPotion.ToString();
+            Bullet_CoolTime();
+        }
+        
+    }
+
+    void GetMagazine(int numOfMagazine)
+    {
+        numOfMagazine_text.text = numOfMagazine.ToString();
+    }
+
+    public void Potion_CoolTime() // 아이템 사용시 쿨타임 표시 UI(쿨 타임 동안 퀵슬롯 이미지 로드)
+    {
+        // if (isUsed == true)
+        // {
+            isUsed = true;
             StartCoroutine(CoolTime(3f)); // 쿨타임 3초
             IEnumerator CoolTime(float coolTime) // 코루틴
             {
@@ -78,11 +80,15 @@ public class QuickSlot : SingletonBase<QuickSlot>
                     yield return new WaitForFixedUpdate();
                 }
                 isUsed = false;
-            }
+            // }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            StartCoroutine(CoolTime(3f)); // 쿨타임 3초
+    }
+    public void Bullet_CoolTime()
+    {
+        // if (isUsed == true)
+        // {
+            isUsed = true;
+            StartCoroutine(CoolTime(2f)); // 쿨타임 3초
             IEnumerator CoolTime(float coolTime) // 코루틴
             {
                 float curTime = 0f;
@@ -94,7 +100,8 @@ public class QuickSlot : SingletonBase<QuickSlot>
                     yield return new WaitForFixedUpdate();
                 }
                 isUsed = false;
-            }
-        }
+            // }
+        }    
     }
 }
+
