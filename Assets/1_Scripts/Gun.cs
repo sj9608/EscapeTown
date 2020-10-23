@@ -16,6 +16,10 @@ public class Gun : MonoBehaviour
 
     // 탄알이 발사 될 위치
     public Transform fireTransform;
+    Ray ray;
+
+    // 탄알 도착 위치
+    public Transform raycastDestination;
 
     //// 총구 화염 효과
     //public ParticleSystem muzzleFlashEffect;
@@ -102,8 +106,11 @@ public class Gun : MonoBehaviour
         // 총알이 맞은 곳을 저장할 변수
         Vector3 hitPosition = Vector3.zero;
 
+        ray.origin = fireTransform.position;
+        ray.direction = raycastDestination.position - fireTransform.position;
+
         // 레이캐스트(시작지점, 방향, 충돌 정보 컨테이너, 사정거리, 레이어마스크)
-        if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance, LayerMask.GetMask("Enemy")))
+        if (Physics.Raycast(ray, out hit, fireDistance, LayerMask.GetMask("Enemy")))
         {
             // 레이가 충돌한 위치 저장
             hitPosition = hit.point;
