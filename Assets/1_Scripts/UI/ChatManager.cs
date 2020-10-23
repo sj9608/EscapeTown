@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
-public class ChatManager : MonoBehaviour
+public class ChatManager : SingletonBase<ChatManager>
 {
     // 1. 게임 인트로에서 전부 다 불러와서 XML파일을 딕셔너리로 파싱
     // 2. 싱글톤으로 만들어서 
@@ -21,11 +21,6 @@ public class ChatManager : MonoBehaviour
     // 3. 낮 스테이지 : NPC와 하는 대사는 NPC에게 할당
     // 4. 밤 스테이지 : 플레이어 독백은 전투 전과 전투 후로 나뉨
 
-    private static ChatManager instance;                                      // singleton
-    public static ChatManager Instance
-    {
-        get{ return instance; }
-    }
     
     // 대사를 저장하는 딕셔너리
     public Dictionary<int, string> talkData = new Dictionary<int, string>();                           // talk Data 키 번호에 따른 대사
@@ -41,23 +36,16 @@ public class ChatManager : MonoBehaviour
 
     public void Awake()
     {
-        if (instance != null && instance != this)               // singleton
-        {
-            Destroy(this.gameObject);
-        } else {
-            instance = this;
-        }
-        DontDestroyOnLoad(gameObject);
-
         GenerateData();
         chatCharacter.text = "";
         chatText.text = "";
-    }
-
-    void Start()
-    {
         chatNumber = 0;
     }
+
+    // void Start()
+    // {
+        
+    // }
 
     public void GenerateData()
     {   // ChatFile 을 열어 딕셔너리에 대사와 화자를 기입하는 메서드
