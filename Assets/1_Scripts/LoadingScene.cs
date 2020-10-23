@@ -9,60 +9,112 @@ public class LoadingScene : MonoBehaviour
     // 게임 로딩 화면 UI
     // 슬라이더 업데이트, 로딩 씬 뒤에 게임 씬 불러오기
 
-    public int curSceneNum;                                       // 전환하는 씬 이름
+    //public int curSceneNum;                                       // 전환하는 씬 이름
 
-    [Header("Editor Settings")]
-    public Slider progressBar;                                     // 로딩 바 슬라이더
-    public FadeController fader;
-    public Text pressSpace;
+    public Image sr;
+    public Slider progressbar;
+    public Text loadtext;
+    private void OnEnable()
+    {
+        //sr.color.a = 0f;
+        progressbar.value = 0f;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        curSceneNum = SceneController.Instance.CurSceneNum;
-        StartCoroutine(LoadingFade(curSceneNum));
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    IEnumerator LoadingFade(int nextSceneNum)
+    public void ShowLoading(AsyncOperation operation)
     {
-        fader.FadeOut(1f);
+        StartCoroutine(LoadingFade(operation));
+    }
 
-        yield return new WaitForSeconds(1f);
-
-        fader.FadeIn(1f, () =>
+    IEnumerator LoadingFade(AsyncOperation operation) //int nextSceneNum)
+    {
+        FadeIn(1f);
+        yield return null;
+        operation.allowSceneActivation = false; //씬을 비동기로 처리하면서 porgressbar로 상태를 표기
+        while (!operation.isDone)
         {
-            AsyncOperation aOperation = SceneManager.LoadSceneAsync(nextSceneNum, LoadSceneMode.Additive);
-            //aOperation.allowSceneActivation = false;                   // 씬을 불러오는 중에는 화면 비활성화
+            yield return null;
+            //if (loadType == 0) Debug.Log("New Game"); // 새게임 로드
+            //else if (loadType == 1) Debug.Log("Load Game"); // 진행했던 게임 로드
 
-            //float timer = 0.0f;
-            //while (!aOperation.isDone)
-            //{
-            //    timer += Time.deltaTime;
-            //    Debug.Log(aOperation.progress);
+            if (progressbar.value < 0.9f)
+            {
+                progressbar.value = Mathf.MoveTowards(progressbar.value, 0.9f, Time.deltaTime);
+            }
 
-            //    // 로딩 값 받아서 슬라이더 이동
-            //    if (aOperation.progress < 0.9f)
-            //    {
-            //        progressBar.value = Mathf.Lerp(progressBar.value, aOperation.progress, timer);
+            else if (operation.progress >= 0.9f)
+            {
+                progressbar.value = Mathf.MoveTowards(progressbar.value, 1f, Time.deltaTime);
+            }
 
-            //    }
-            //    else
-            //    {
-            //        progressBar.value = Mathf.Lerp(progressBar.value, 1f, timer);
+            if (progressbar.value >= 1f)
+            {
+                loadtext.text = "Press SpaceBar";
 
-            //        pressSpace.text = "Press Space";
-            //        if (Input.GetKeyDown(KeyCode.Space) && aOperation.progress >= 0.9f)
-            //        {
-            //            aOperation.allowSceneActivation = true;         // 씬을 다 불러오면 화면 활성화
-            //        }
-            //    }
-            //}
-        });
-        gameObject.SetActive(false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && progressbar.value >= 1f && operation.progress >= 0.9f)
+            {
+                FadeOut(1f);
+                operation.allowSceneActivation = true;
+                yield return new WaitForSeconds(1f);
+            }
+
+        }
+    }
+    public void FadeIn(float fadeOutTime, System.Action nextEvent = null)
+    {
+        StartCoroutine(CoFadeIn(fadeOutTime, nextEvent));
+    }
+
+    public void FadeOut(float fadeOutTime, System.Action nextEvent = null)
+    {
+        StartCoroutine(CoFadeOut(fadeOutTime, nextEvent));
+    }
+
+    // 투명 -> 불투명
+    IEnumerator CoFadeIn(float fadeOutTime, System.Action nextEvent = null)
+    {
+        Color tempColor = sr.color;
+        while (tempColor.a < 1f)
+        {
+            tempColor.a += Time.deltaTime / fadeOutTime;
+            sr.color = tempColor;
+
+            if (tempColor.a >= 1f) tempColor.a = 1f;
+
+            yield return null;
+        }
+
+        sr.color = tempColor;
+        if (nextEvent != null) nextEvent();
+    }
+
+    // 불투명 -> 투명
+    IEnumerator CoFadeOut(float fadeOutTime, System.Action nextEvent = null)
+    {
+        Color tempColor = sr.color;
+        while (tempColor.a > 0f)
+        {
+            tempColor.a -= Time.deltaTime / fadeOutTime;
+            sr.color = tempColor;
+
+            if (tempColor.a <= 0f) tempColor.a = 0f;
+
+            yield return null;
+        }
+        sr.color = tempColor;
+        if (nextEvent != null) nextEvent();
     }
 }
+

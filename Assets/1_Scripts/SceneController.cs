@@ -18,32 +18,47 @@ public class SceneController : SingletonBase<SceneController>
         }
     }
 
+    // public const string SCENE_MAIN = "MAIN";
+
     public FadeController fader;
     public GameObject loadingObject;
     // Start is called before the first frame update
     void Start()
     {
-        curSceneNum = 3;
-        loadingObject.SetActive(true);
+        curSceneNum = 0;
+        loadingObject.SetActive(false);
+        SceneManager.LoadSceneAsync(curSceneNum, LoadSceneMode.Additive);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    IEnumerator LoadingFade(int nextSceneNum)
-    {
-        fader.FadeOut(1f);
-
-        yield return new WaitForSeconds(1f);
-
-        fader.FadeIn(1f, () =>
+        if (Input.GetKeyDown(KeyCode.N))
         {
-            SceneManager.LoadSceneAsync(curSceneNum, LoadSceneMode.Additive);
-        });
+            NextSecne();
+        }
     }
 
+    public void NextSecne()
+    {
+        StartCoroutine(IENextScene());
+    }
+
+    IEnumerator IENextScene()
+    {
+        loadingObject.SetActive(true);
+        AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(curSceneNum);
+        curSceneNum++;
+
+        yield return new WaitUntil(() => { return unloadAsync.isDone; });
+
+        AsyncOperation loadAsync = SceneManager.LoadSceneAsync(curSceneNum, LoadSceneMode.Additive);
+        LoadingScene loadingScene = loadingObject.GetComponent<LoadingScene>();
+        loadingScene.ShowLoading(loadAsync);
+        // yield return new WaitForSeconds(1f);
+
+        yield return new WaitUntil(() => { return loadAsync.isDone; });
+        loadingObject.SetActive(false);
+    }
 
 }

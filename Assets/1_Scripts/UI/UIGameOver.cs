@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIGameOver : MonoBehaviour
 {
     // 게임 오버 화면 UI
     public GameObject gameover;                                   // 게임오버 패널 창
-    // public Button btn_Retry;                                      // 게임오버 다시하기 버튼
-    // public Button btn_Main;                                       // 게임오버 메인으로 가기
-    bool isOver = false;
+    public Button btn_Retry;                                      // 게임오버 다시하기 버튼
+                                                                  // 저장되어 있던 가장 마지막 데이터를 불러오기
+    public Button btn_Main;                                       // 게임오버 메인으로 가기
+                                                                  // 메인 화면으로 씬 전환
+    public Button btn_Exit;                                       // 게임오버 게임종료 버튼
 
+    bool isOver = false;                                          // 플레이어가 죽었는지 아닌지 판별하고 죽었으면 게임 오버 패널 띄우기
 
     void Start()
     {
@@ -24,59 +28,38 @@ public class UIGameOver : MonoBehaviour
 
     public void Show_GameOver_Pannel()
     {
-        if(isOver == !isOver)
+        if(isOver == true)
             gameover.SetActive(true);
-        
-        else    
+        else
             return;
     }
 
     public void GameOver_BTN_Retry()
-    {
+    {   // 가장 마지막으로 저장했던 데이터를 불러오기
         gameover.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        int s = SceneManager.GetActiveScene().buildIndex; // 현재 씬의 인덱스 번호를 다시 불러옴
-        SceneManager.LoadScene(s); // 현재 씬 다시 부르기       
+        // GameInfomation 에서 마지막 저장 데이터를 로드하는 메서드를 호출
+        // GameInformation.Instance.Load();
+
+
+        // Cursor.lockState = CursorLockMode.Locked;
+        // int s = SceneManager.GetActiveScene().buildIndex; // 현재 씬의 인덱스 번호를 다시 불러옴
+        // SceneManager.LoadScene(s); // 현재 씬 다시 부르기       
     }
     
     public void GameOver_BTN_Main()
-    {
-       
+    {   
+        gameover.SetActive(false);
         SceneManager.LoadScene("Main",0);
-       
-        /*
-        자동저장 기능 삽입 예정
-        */
-
     }
 
+    public void GameOver_BTN_Exit()
+    {   // 게임 종료
+    
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #else
+        Application.Quit(); // 어플리케이션 종료
+    #endif
+    
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    혼자라는게 내게 어울려~ 나 그렇게 마음 닫고 있는데~
-    우연인지 운명인지 모를~ 너와 나의 만남이 문뜩 찾아온거야~
-    워~워~워~워
-    boy meets girl~ 내게 다가와~ 넌 나의 모든 것을 바꿔버렸어~
-    저 하늘의 새들들도 날 보고~ 이런 내~ 마음을 눈치 챘을지도 몰라~
-*/
