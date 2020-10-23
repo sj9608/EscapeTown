@@ -77,7 +77,7 @@ public class GameManager : SingletonBase<GameManager>
                     //    GameOver();
                     //}
                     break;
-            }
+            } 
         }
     }
     public void GetItem(Collider getItem)
