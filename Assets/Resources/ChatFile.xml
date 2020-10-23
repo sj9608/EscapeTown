@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<chat>
+		<code>1</code>
+		<situation>숙소에서 눈을 뜸</situation>
+		<speaker>당신</speaker>
+		<sentence>여긴 어디지? 온 몸이 두들겨 맞은 듯이 아프다.</sentence>
+	</chat>
+	<chat>
+		<code>2</code>
+		<situation>좀비 소리가 남</situation>
+		<speaker>당신</speaker>
+		<sentence>이건 무슨 소리지? 위험한 소리가 들리는데.</sentence>
+	</chat>
+	<chat>
+		<code>3</code>
+		<situation>걸음</situation>
+		<speaker>당신</speaker>
+		<sentence>무기가 될 만한 것을 들고 나가야겠다.</sentence>
+	</chat>
+	<chat>
+		<code>4</code>
+		<situation>좀비 발견</situation>
+		<speaker>당신</speaker>
+		<sentence>저건 뭐지? 좀비…?</sentence>
+	</chat>
+	<chat>
+		<code>5</code>
+		<situation>좀비 처치 후</situation>
+		<speaker>당신</speaker>
+		<sentence>젠장, 사람을 죽여버렸어..! 여긴 너무 위험해.</sentence>
+	</chat>
+	<chat>
+		<code>6</code>
+		<speaker>당신</speaker>
+		<sentence>사람이 있는 곳으로 가야겠어.</sentence>
+	</chat>
+	<chat>
 		<code>310</code>
 		<situation>해가 뜸</situation>
 		<speaker>당신</speaker>
@@ -61,6 +96,12 @@
 		<sentence>요즘 A가 잘 안 보이던데.. 그러고 보니 B도 본지가 오래 됐네.</sentence>
 	</chat>
 	<chat>
+		<code>7</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>또 좀비가 나타났다. 여길 벗어나 안전한 곳으로 가야 해.</sentence>
+	</chat>
+	<chat>
 		<code>410</code>
 		<situation>독백</situation>
 		<speaker>당신</speaker>
@@ -104,6 +145,18 @@
 		<sentence>좀비와 사라진 사람.. 이 마을은 뭐지?</sentence>
 	</chat>
 	<chat>
+		<code>450</code>
+		<situation>독백</situation>
+		<speaker>당신</speaker>
+		<sentence>이 앞이 마을 회관처럼 보이는 군.</sentence>
+	</chat>
+	<chat>
+		<code>8</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>밤만 되면 좀비가 나타나는군.</sentence>
+	</chat>
+	<chat>
 		<code>510</code>
 		<situation>마을 회관</situation>
 		<speaker>당신</speaker>
@@ -143,6 +196,38 @@
 		<code>545</code>
 		<speaker>주민</speaker>
 		<sentence>그때 사람들이 다 부작용이 나서 박사를 마을에서 내쫓았지.</sentence>
+	</chat>
+	<chat>
+		<code>9</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>같은 방에 있던 사람들이 모두 좀비가 됐어.. 박사가 무슨 짓을 한 건가?</sentence>
+	</chat>
+	<chat>
+		<code>10</code>
+		<speaker>당신</speaker>
+		<sentence>내가 죽인 좀비들이 모두.. 나와 얘기를 나눈 마을 사람이었던건가?</sentence>
+	</chat>
+	<chat>
+		<code>11</code>
+		<speaker>당신</speaker>
+		<sentence>…일단 살아야겠어.</sentence>
+	</chat>
+	<chat>
+		<code>12</code>
+		<situation>도로</situation>
+		<speaker>당신</speaker>
+		<sentence>밤이 너무 길군.. 아직도 좀비가 남아있어.</sentence>
+	</chat>
+	<chat>
+		<code>13</code>
+		<speaker>당신</speaker>
+		<sentence>기차다! 멈춰있는 것 같다. 기차로는 돌아갈 방법이 없는 건가?</sentence>
+	</chat>
+	<chat>
+		<code>14</code>
+		<speaker>당신</speaker>
+		<sentence>이 길을 지나면 산이 나올까? 산에는 박사가 있는건가?</sentence>
 	</chat>
 	<chat>
 		<code>710</code>
@@ -211,85 +296,6 @@
 		<sentence>사람 소리 같기도 하고.. 짐승소리 같기도 한게 영 으스스 해.</sentence>
 	</chat>
 	<chat>
-		<code>1</code>
-		<situation>숙소에서 눈을 뜸</situation>
-		<speaker>당신</speaker>
-		<sentence>여긴 어디지? 온 몸이 두들겨 맞은 듯이 아프다.</sentence>
-	</chat>
-	<chat>
-		<code>2</code>
-		<situation>좀비 소리가 남</situation>
-		<speaker>당신</speaker>
-		<sentence>이건 무슨 소리지? 위험한 소리가 들리는데.</sentence>
-	</chat>
-	<chat>
-		<code>3</code>
-		<situation>걸음</situation>
-		<speaker>당신</speaker>
-		<sentence>무기가 될 만한 것을 들고 나가야겠다.</sentence>
-	</chat>
-	<chat>
-		<code>4</code>
-		<situation>좀비 발견</situation>
-		<speaker>당신</speaker>
-		<sentence>저건 뭐지? 좀비…?</sentence>
-	</chat>
-	<chat>
-		<code>5</code>
-		<situation>좀비 처치 후</situation>
-		<speaker>당신</speaker>
-		<sentence>젠장, 사람을 죽여버렸어..! 여긴 너무 위험해.</sentence>
-	</chat>
-	<chat>
-		<code>6</code>
-		<speaker>당신</speaker>
-		<sentence>사람이 있는 곳으로 가야겠어.</sentence>
-	</chat>
-	<chat>
-		<code>7</code>
-		<situation>밤</situation>
-		<speaker>당신</speaker>
-		<sentence>또 좀비가 나타났다. 여길 벗어나 안전한 곳으로 가야 해.</sentence>
-	</chat>
-	<chat>
-		<code>8</code>
-		<situation>밤</situation>
-		<speaker>당신</speaker>
-		<sentence>밤만 되면 좀비가 나타나는군.</sentence>
-	</chat>
-	<chat>
-		<code>9</code>
-		<situation>밤</situation>
-		<speaker>당신</speaker>
-		<sentence>같은 방에 있던 사람들이 모두 좀비가 됐어.. 박사가 무슨 짓을 한 건가?</sentence>
-	</chat>
-	<chat>
-		<code>10</code>
-		<speaker>당신</speaker>
-		<sentence>내가 죽인 좀비들이 모두.. 나와 얘기를 나눈 마을 사람이었던건가?</sentence>
-	</chat>
-	<chat>
-		<code>11</code>
-		<speaker>당신</speaker>
-		<sentence>…일단 살아야겠어.</sentence>
-	</chat>
-	<chat>
-		<code>12</code>
-		<situation>도로</situation>
-		<speaker>당신</speaker>
-		<sentence>밤이 너무 길군.. 아직도 좀비가 남아있어.</sentence>
-	</chat>
-	<chat>
-		<code>13</code>
-		<speaker>당신</speaker>
-		<sentence>기차다! 멈춰있는 것 같다. 기차로는 돌아갈 방법이 없는 건가?</sentence>
-	</chat>
-	<chat>
-		<code>14</code>
-		<speaker>당신</speaker>
-		<sentence>이 길을 지나면 산이 나올까? 산에는 박사가 있는건가?</sentence>
-	</chat>
-	<chat>
 		<code>15</code>
 		<situation>밤</situation>
 		<speaker>당신</speaker>
@@ -299,5 +305,95 @@
 		<code>16</code>
 		<speaker>당신</speaker>
 		<sentence>내가 죽인 건 사람인가? 난 살인자가 된 건가?</sentence>
+	</chat>
+	<chat/>
+	<chat>
+		<code>810</code>
+		<situation>산지기 찾기</situation>
+		<speaker>당신</speaker>
+		<sentence>혹시 산지기가 어디 있는지 아세요?</sentence>
+	</chat>
+	<chat>
+		<code>815</code>
+		<speaker>주민</speaker>
+		<sentence>저기 외딴 집 앞에 있던데.</sentence>
+	</chat>
+	<chat>
+		<code>820</code>
+		<speaker>산지기</speaker>
+		<sentence>내가 산지기야. 박사? 돈을 주더군. 산 입구를 막으라고 말이야.</sentence>
+	</chat>
+	<chat>
+		<code>825</code>
+		<speaker>산지기</speaker>
+		<sentence>산에 틀어박혀서 뭘 하는지는 모르겠지만 제법 짭짤하던걸. </sentence>
+	</chat>
+	<chat>
+		<code>830</code>
+		<speaker>산지기</speaker>
+		<sentence>산에 들어가게 해달라고? 돈을 가져오던가.</sentence>
+	</chat>
+	<chat>
+		<code>835</code>
+		<speaker>주민</speaker>
+		<sentence>산지기네 집에 산 입구 열쇠가 있는 것 같더라고. </sentence>
+	</chat>
+	<chat>
+		<code>840</code>
+		<speaker>주민</speaker>
+		<sentence>문 앞에 버티고 서 있으니 집을 들어갈 수가 있어야지.</sentence>
+	</chat>
+	<chat>
+		<code>845</code>
+		<speaker>주민</speaker>
+		<sentence>사라졌던 애들을 산 속에서 본 것 같아. 아닌가?</sentence>
+	</chat>
+	<chat>
+		<code>17</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>산지기가 좀비가 됐군. 산지기의 집에 들어가려면 산지기를 죽여야 하나?</sentence>
+	</chat>
+	<chat>
+		<code>18</code>
+		<situation>밤</situation>
+		<speaker>당신</speaker>
+		<sentence>박사를 처치하면 집으로 갈 수 있는 것일까?</sentence>
+	</chat>
+	<chat>
+		<code>19</code>
+		<speaker>당신</speaker>
+		<sentence>숲에 있는 좀비들은 박사가 실험을 하고 버린 사람들일까?</sentence>
+	</chat>
+	<chat>
+		<code>20</code>
+		<speaker>당신</speaker>
+		<sentence>마을 사람들을 좀비로 만든 게 당신인가?</sentence>
+	</chat>
+	<chat>
+		<code>21</code>
+		<speaker>박사</speaker>
+		<sentence>좀비? 내가 만들었지! 그러고 보니 너도 약을 먹인 걸로 기억하는데 좀비가 되지 않은건가?</sentence>
+	</chat>
+	<chat>
+		<code>22</code>
+		<speaker>박사</speaker>
+		<sentence>흥미롭군. 얌전히 내 실험체가 돼라.</sentence>
+	</chat>
+	<chat>
+		<code>23</code>
+		<situation>박사 처치</situation>
+		<speaker>당신</speaker>
+		<sentence>뒷문이 샛길로 이어져있다. 다른 길로 통하는 걸까? 이제 마을을 탈출하자.</sentence>
+	</chat>
+	<chat>
+		<code>24</code>
+		<speaker>당신</speaker>
+		<sentence>위험한 곳이었다. 사람을 죽인 이 손으로 다시 이전의 삶으로 돌아갈 수 있을까?</sentence>
+	</chat>
+	<chat>
+		<code>25</code>
+		<speaker>당신</speaker>
+		<sentence>아니야. 그래도 살아남았어. 집으로 가자.</sentence>
 	</chat>
 </root>

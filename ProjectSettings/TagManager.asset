@@ -7,6 +7,7 @@ TagManager:
   - Item
   - Enemy
   - Zombie
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,6 @@ TagManager:
   - Item
   - Ground
   - Zombie
-  - 
   - 
   - 
   - 

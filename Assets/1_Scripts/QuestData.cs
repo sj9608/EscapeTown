@@ -38,22 +38,25 @@ public class QuestData : MonoBehaviour
       Debug.Log("Generate");
       // 퀘스트 딕셔너리에 값(코드당 퀘스트 내용) 삽입
       // 빌드 넘버에 따라 값 int 값 바꾸기
-      QuestDic.Add(1, new string[] {"* 이것은 퀘스트 내용 입니다리"});
-      QuestDic.Add(2, new string[] {"2"});
-      QuestDic.Add(3, new string[] {"3"});
-      QuestDic.Add(4, new string[] {"4"});
-      QuestDic.Add(5, new string[] {"5"});
-      QuestDic.Add(6, new string[] {"6"});
-      QuestDic.Add(7, new string[] {"7"});
-      QuestDic.Add(8, new string[] {"8"});
-      QuestDic.Add(9, new string[] {"9"});
-      QuestDic.Add(10, new string[] {"10"});
-      QuestDic.Add(11, new string[] {"11"});
-      QuestDic.Add(12, new string[] {"12"});
-      QuestDic.Add(13, new string[] {"13"});
-      QuestDic.Add(14, new string[] {"14"});
-      QuestDic.Add(15, new string[] {"15"});
-      QuestDic.Add(16, new string[] {"16"});
+
+      // 남은 좀비 수 / 총 좀비 수
+      // 대화 하지 않은 NPC 머리 위에 "?"표시 대화 후에 지우기
+      // 
+      QuestDic.Add(1, new string[] {"밖으로 나가세요."});
+      QuestDic.Add(2, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
+      QuestDic.Add(3, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
+      QuestDic.Add(4, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
+      QuestDic.Add(5, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
+      QuestDic.Add(6, new string[] {"모든 좀비를 처치하세요.", "마을 회관으로 들어가기 위한 열쇠를 습득하세요."});
+      QuestDic.Add(7, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 건물을 탐색하세요."});
+      QuestDic.Add(8, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하기 위한 열쇠를 습득하세요."});
+      QuestDic.Add(9, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
+      QuestDic.Add(10, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
+      QuestDic.Add(11, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
+      QuestDic.Add(12, new string[] {"모든 주민과 대화하세요.", "산지기를 찾으세요.", "마을을 탐색하세요."});
+      QuestDic.Add(13, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하기 위한 열쇠를 습득하세요."});
+      QuestDic.Add(14, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
+      QuestDic.Add(15, new string[] {"박사는 약물로 신체를 강화한 인물입니다.", "박사를 물리치고 마을을 탈출하세요."});
     }
 
     public void ShowQuest()
