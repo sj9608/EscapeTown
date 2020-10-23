@@ -6,15 +6,17 @@ using UnityEngine.Animations.Rigging;
 public class CharacterLocomotion : MonoBehaviour
 {
     Animator animator;
-    Vector2 input;
-    GameObject rifle;
-    public Rig weaponPoseRig;
-    public Rig handIK;
+    Vector2 input; // x축, y축 입력 받을 벡터
+    GameObject rifle; // 플레이어 자식에 있는 무기 컴포넌트 받아올 용도
+    public Rig weaponPoseRig; // 무기의 위치
+    public Rig handIK; // 무기들었을 때 손의 위치 제어
+    public bool isGun;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        rifle = transform.Find("Rifle").gameObject;
+        rifle = transform.Find("Rifle").gameObject; // 라이플 오브젝트
+        isGun = false;
     }
 
 
@@ -26,7 +28,7 @@ public class CharacterLocomotion : MonoBehaviour
         animator.SetFloat("InputX", input.x);
         animator.SetFloat("InputY", input.y);
 
-        if(Input.GetButton("Fire3"))
+        if(Input.GetButton("Fire3")) // left shift 키 
         {
             animator.SetBool("isSprinting", true);
         }
@@ -39,12 +41,14 @@ public class CharacterLocomotion : MonoBehaviour
                 weaponPoseRig.weight = 1f;
                 handIK.weight = 1f;
                 rifle.SetActive(true);
+                isGun = true;
             }
             else 
             {
                 weaponPoseRig.weight = 0f;
                 handIK.weight = 0f;
                 rifle.SetActive(false);
+                isGun = false;
             }
         }
     }
