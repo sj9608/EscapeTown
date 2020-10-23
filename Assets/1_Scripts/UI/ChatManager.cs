@@ -34,24 +34,28 @@ public class ChatManager : SingletonBase<ChatManager>
     public int[] chatArray = new int[100];
     public int chatNumber; 
 
+    TextAsset textAsset;
+
     public void Awake()
     {
         GenerateData();
         chatCharacter.text = "";
         chatText.text = "";
-        chatNumber = 0;
     }
 
-    // void Start()
-    // {
-        
-    // }
+    void Start()
+    {
+        chatNumber = 0;
+    }
 
     public void GenerateData()
     {   // ChatFile 을 열어 딕셔너리에 대사와 화자를 기입하는 메서드
         string loadFile = "ChatFile";
-        TextAsset textAsset = (TextAsset)Resources.Load(loadFile);
-        Debug.Log(textAsset);
+
+        if(textAsset != null) return;
+        
+        //Debug.Log("this is null state");
+        textAsset = (TextAsset)Resources.Load(loadFile);
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.LoadXml(textAsset.text);
 
@@ -59,7 +63,7 @@ public class ChatManager : SingletonBase<ChatManager>
 
         foreach(XmlNode node in nodes)
         {
-            Debug.Log(node.SelectSingleNode("sentence").InnerText);
+            //Debug.Log(node.SelectSingleNode("sentence").InnerText);
             talkData.Add(Convert.ToInt32(node.SelectSingleNode("code").InnerText), node.SelectSingleNode("sentence").InnerText);
             talkCharacterData.Add(Convert.ToInt32(node.SelectSingleNode("code").InnerText), node.SelectSingleNode("speaker").InnerText);
         }
@@ -67,8 +71,6 @@ public class ChatManager : SingletonBase<ChatManager>
 
     public IEnumerator PrintNormalChat(int id, bool isNpc)
     {   // 대사가 한 글자씩 출력되는 연출
-
-        Debug.Log(id);
         string narrator = talkCharacterData[id];
         string narration = talkData[id];
         

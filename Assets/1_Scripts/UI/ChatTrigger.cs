@@ -18,21 +18,22 @@ public class ChatTrigger : MonoBehaviour
     public bool isAbleToChat;                                       // 전투 완료 상태에 따른 독백 가능 여부
 
     Collider _collider;                                             // 콜라이더 진입 시 독백 출력
+    GameObject enemies;
 
     private void Start() {
         _collider = GetComponent<Collider>();
+        enemies = GameObject.Find("Enemies");
     }
 
     private void Update() {
-        if(GameManager.Instance.enemiesDic.Count == 0)
-        {
-            isAbleToChat = true;
-        }
+        // if(GameManager.Instance.enemiesDic.Count != 0) return 0;
+        
+        if(enemies.transform.childCount != 0) return;    
+        isAbleToChat = true;
+        
     }
     IEnumerator OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter");
-        Debug.Log(other.tag);
         if(other.tag == "Player" && isAbleToChat == true)
         {
             StartCoroutine(ChatManager.Instance.PrintNormalChat(objectData.id, objectData.isNpc));
