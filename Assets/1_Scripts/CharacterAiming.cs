@@ -7,11 +7,9 @@ using Cinemachine;
 public class CharacterAiming : MonoBehaviour
 {
     public float turnSpeed = 15f;
-    public float aimDuration = 0.1f; // 조준하는데 걸리는 시간.
-    public Rig aimLayer;
+    public float aimDuration = 0.18f; // 조준하는데 걸리는 시간.
 
-    RayCastWeapon weapon;
-
+    public Rig aimLayer; // 조준 할 때 팔 위치 조절할 애니메이션 Rig
     Camera mainCamera; // 카메라의 y축 회전에 대한 캐릭터 대응을 하기위한 카메라값 가져올 용도로 선언
 
     public Transform cameraLookAt; // vCam 쳐다보는곳 
@@ -23,7 +21,6 @@ public class CharacterAiming : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        weapon = GetComponentInChildren<RayCastWeapon>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -52,15 +49,5 @@ public class CharacterAiming : MonoBehaviour
                 aimLayer.weight -= Time.deltaTime / aimDuration;
             }
         }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            weapon.StartFiring();
-        }
-        if (Input.GetButtonUp("Fire1"))
-        {
-            weapon.StopFiring();
-        }
-
     }
 }
