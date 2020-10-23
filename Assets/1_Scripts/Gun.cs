@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour
     // 총을 마지막으로 발사한 시점
     private float lastFireTime;
 
-    GameInformation GI = GameInformation.Instance;
+    GameInformation GI;
 
     // 남은 탄약을 추가하는 메서드
     public void AddAmmo(int ammo)
@@ -66,6 +66,7 @@ public class Gun : MonoBehaviour
     }
     private void Awake()
     {
+        GI = GameInformation.Instance;
         // 사용할 컴포넌트들의 참조를 가져오기
         gunAudioPlayer = GetComponent<AudioSource>();
         bulletLineRenderer = GetComponent<LineRenderer>();
