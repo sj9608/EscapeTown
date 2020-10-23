@@ -21,7 +21,19 @@ public class GameInformation : SingletonBase<GameInformation>
     public int CurSceneNum { get; set; }            // 현재 씬 번호
     public float HP { get; private set; }           // HP
     private int remainAmmo;
-    public int RemainAmmo;     // 총탄 수
+    public int RemainAmmo
+    {
+        get
+        {
+            return remainAmmo;
+        }
+        set
+        {
+            remainAmmo = value;
+
+            if (UpdateCurAmmoAction != null) UpdateCurAmmoAction();
+        }
+    }     // 총탄 수
     private int curAmmo;
     public int CurAmmo
     {
@@ -83,13 +95,5 @@ public class GameInformation : SingletonBase<GameInformation>
         {
             UpdatePotionAction(change);
         }
-    }
-
-    // 남은 탄약을 추가하는 메서드
-    public void GunAddAmmo(int ammo)
-    {
-        RemainAmmo += ammo;
-
-        UpdateCurAmmo();
     }
 }
