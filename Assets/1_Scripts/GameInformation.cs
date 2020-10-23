@@ -60,13 +60,16 @@ public class GameInformation : SingletonBase<GameInformation>
     private void Awake()
     {
         HP = 100;       // 저
-        RemainAmmo = 60;
-        CurAmmo = 30;
+        RemainAmmo = 60;  // 총 총알 수 
+        NumOfPotion = 5;
+        CurAmmo = 20;
+
     }
 
-    public void UpdateHp(float changeValue)
+    public void UpdateHp(float changeValue)        //HP회복/차감
     {
-        if (UpdateHpAction != null) UpdateHpAction(HP, changeValue);
+        if (UpdateHpAction != null) 
+            UpdateHpAction(HP, changeValue);
     }
     public void UpdateScene(int changeSceneNum)
     {
@@ -75,25 +78,29 @@ public class GameInformation : SingletonBase<GameInformation>
             UpdateSceneAction(changeSceneNum);
         }
     }
-    public void UpdateCurAmmo()
+    public void UpdateCurAmmo()         // 총에 남아있는 총알 수 
     {
         if (UpdateCurAmmoAction != null)
         {
             UpdateCurAmmoAction();
         }
     }
-    public void UpdatePotion(int change)
+    public void UpdatePotion(int change)       //포션 획득
     {
+        NumOfPotion += change;
+
         if (UpdatePotionAction != null)
         {
-            UpdatePotionAction(change);
+            UpdatePotionAction(NumOfPotion);
         }
     }
-    public void UpdateMagazine(int change)
+    public void UpdateMagazine(int change)  // 갖고 있는 총 총알 수(총알 획득/장전 시 업데이트)
     {
-        if (UpdatePotionAction != null)
+        NumOfMagazine += change;
+
+        if (UpdateMagazineAction != null)
         {
-            UpdatePotionAction(change);
+            UpdateMagazineAction(NumOfMagazine);
         }
     }
 }

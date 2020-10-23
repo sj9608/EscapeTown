@@ -95,7 +95,7 @@ public class GameManager : SingletonBase<GameManager>
         if(QuickSlot.Instance.numOfPotion > 0)
         {
             // 남아 있으면 포션 개수 -1, HP + 30
-            QuickSlot.Instance.UsePotion();
+            QuickSlot.Instance.UsePotion(1);
             // player.HP += 30;
         }
     }
@@ -107,7 +107,7 @@ public class GameManager : SingletonBase<GameManager>
         if(QuickSlot.Instance.numOfMagazine > 0)
         {
             // 남아 있으면 탄창 개수 -1
-            QuickSlot.Instance.UseMagazine();
+            QuickSlot.Instance.UseMagazine(1);
             // 총알 + 60
             // Gun 단에서 총알 충전 처리
             playerAttack.gun.AddAmmo(addAmmo);
