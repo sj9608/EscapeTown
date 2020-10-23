@@ -18,10 +18,9 @@ TagManager:
   - 
   - Player
   - Enemy
-  - Item
+  - Interaction
   - Ground
   - Zombie
-  - 
   - 
   - 
   - 

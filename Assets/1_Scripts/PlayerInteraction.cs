@@ -9,7 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     // 적군 레이어 마스크
     private LayerMask enemyLayer;
     // 아이템 레이어 마스크
-    private LayerMask itemLayer;
+    private LayerMask interactionLayer;
     // 상호작용 거리
     float interactionDistance;
 
@@ -20,7 +20,7 @@ public class PlayerInteraction : MonoBehaviour
     void Start()
     {
         enemyLayer = LayerMask.GetMask("Enemy");
-        itemLayer = LayerMask.GetMask("Item");
+        interactionLayer = LayerMask.GetMask("Interaction");
         attackDistance = 10;
         interactionDistance = 2;
     }
@@ -35,16 +35,32 @@ public class PlayerInteraction : MonoBehaviour
     }
     protected void GetInteraction()
     {
-        // 대화 추가 필요
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, interactionDistance, transform.forward, 0, itemLayer);
+        // f키를 눌렀을 때 주민이 레이캐스트 거리 안에 있으면 주민의 대화 내용을 출력 하고 대화정보를 비활성화 시킴 
+        // 아이템 삭제
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, interactionDistance, transform.forward, 0, interactionLayer);
         if (hits.Length > 0)
         {
             target = hits[0].collider;
+            switch (target.tag)
+            {
+                case "NPC":
+                    ObjectData obj = hits[0].transform.GetComponent<ObjectData>();
+                    if (obj != null && obj.enabled == true)
+                    {
+                        StartCoroutine(ChatManager.Instance.PrintNormalChat(obj.id, obj.isNpc));
+                        obj.enabled = false;
+                    }
+                    break;
+                case "Item":
+                    GameManager.Instance.GetItem(target);
+                    break;
+                default:
+                    break;
+            }
         }
         else
         {
             target = null;
         }
-        GameManager.Instance.GetItem(target);
     }
 }
