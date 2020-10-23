@@ -7,9 +7,9 @@ using Cinemachine;
 public class CharacterAiming : MonoBehaviour
 {
     public float turnSpeed = 15f;
-    public float aimDuration = 0.1f; // 조준하는데 걸리는 시간.
-    public Rig aimLayer;
+    public float aimDuration = 0.18f; // 조준하는데 걸리는 시간.
 
+    public Rig aimLayer; // 조준 할 때 팔 위치 조절할 애니메이션 Rig
     Camera mainCamera; // 카메라의 y축 회전에 대한 캐릭터 대응을 하기위한 카메라값 가져올 용도로 선언
 
     public Transform cameraLookAt; // vCam 쳐다보는곳 
@@ -17,9 +17,11 @@ public class CharacterAiming : MonoBehaviour
     public AxisState xAxis; // 시네머신 FreeLook 카메라에 있는 요소 가져오기 --> 에디터 상에서 수치 조절해줄 것.
     public AxisState yAxis;
 
+
     void Start()
     {
         mainCamera = Camera.main;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -34,15 +36,18 @@ public class CharacterAiming : MonoBehaviour
         yAxis.Update(Time.fixedDeltaTime);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if(Input.GetButton("Fire2"))
+        if (aimLayer)
         {
-            aimLayer.weight += Time.deltaTime / aimDuration;
-        }
-        else
-        {
-            aimLayer.weight -= Time.deltaTime / aimDuration;
+            if (Input.GetButton("Fire2"))
+            {
+                aimLayer.weight += Time.deltaTime / aimDuration;
+            }
+            else
+            {
+                aimLayer.weight -= Time.deltaTime / aimDuration;
+            }
         }
     }
 }
