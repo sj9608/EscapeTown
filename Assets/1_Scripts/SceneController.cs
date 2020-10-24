@@ -47,9 +47,7 @@ public class SceneController : SingletonBase<SceneController>
 
     IEnumerator IENextScene()
     {
-        stageHUDObject.SetActive(false);
-        chatUIObject.SetActive(false);
-        loadingObject.SetActive(true);
+        PopupChange(true);
         AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(curSceneNum);
         curSceneNum++;
 
@@ -61,9 +59,14 @@ public class SceneController : SingletonBase<SceneController>
         // yield return new WaitForSeconds(1f);
 
         yield return new WaitUntil(() => { return loadAsync.isDone; });
-        loadingObject.SetActive(false);
-        stageHUDObject.SetActive(true);
-        chatUIObject.SetActive(true);
+        PopupChange(false);
+    }
+
+    void PopupChange(bool isLoading)
+    {
+        stageHUDObject.SetActive(!isLoading);
+        chatUIObject.SetActive(!isLoading);
+        loadingObject.SetActive(isLoading);
     }
 
 }

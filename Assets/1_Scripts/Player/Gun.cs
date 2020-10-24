@@ -61,8 +61,6 @@ public class Gun : MonoBehaviour
     public void AddAmmo(int ammo)
     {
         GI.RemainAmmo += ammo;
-
-        GI.UpdateCurAmmo();
     }
     private void Awake()
     {
@@ -139,8 +137,6 @@ public class Gun : MonoBehaviour
         // 남은 탄환의 수를 -1
         GI.CurAmmo--;
 
-        GI.UpdateCurAmmo();
-
         if (GI.CurAmmo <= 0)
         {
             // 탄창에 남은 탄약이 없다면, 총의 현재 상태를 Empty으로 갱신
@@ -195,23 +191,25 @@ public class Gun : MonoBehaviour
 
         // 재장전 소요 시간 만큼 처리를 쉬기
         yield return new WaitForSeconds(reloadTime);
-
+        int reloadCurAmmo = GI.CurAmmo;
+        int reloadRemainAmmo = GI.RemainAmmo;
         // 탄창에 채울 탄약을 계산한다
-        int ammoToFill = magCapacity - GI.CurAmmo;
+        int ammoToFill = magCapacity - reloadCurAmmo;
 
         // 탄창에 채워야할 탄약이 남은 탄약보다 많다면,
         // 채워야할 탄약 수를 남은 탄약 수에 맞춰 줄인다
-        if (GI.RemainAmmo < ammoToFill)
+        if (reloadRemainAmmo < ammoToFill)
         {
-            ammoToFill = GI.RemainAmmo;
+            ammoToFill = reloadRemainAmmo;
         }
 
         // 탄창을 채운다
-        GI.RemainAmmo += ammoToFill;
+        reloadCurAmmo += ammoToFill;
         // 남은 탄약에서, 탄창에 채운만큼 탄약을 뺸다
-        GI.RemainAmmo -= ammoToFill;
+        reloadRemainAmmo -= ammoToFill;
 
-        GI.UpdateCurAmmo();
+        GI.CurAmmo = reloadCurAmmo;
+        GI.RemainAmmo = reloadRemainAmmo;
         // 총의 현재 상태를 발사 준비된 상태로 변경
         gunState = GunState.Ready;
     }

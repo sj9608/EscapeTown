@@ -32,7 +32,14 @@ public class UIGamePlay : MonoBehaviour
     int cur_Bullet;
     // int remainBullet;
     [SerializeField] private Slider hpbar; // HP바
-
+    private void OnEnable()
+    {
+        GameInformation.Instance.UpdateCurAmmoAction += Show_Bullet_Count;
+    }
+    private void OnDisable()
+    {
+        GameInformation.Instance.UpdateCurAmmoAction -= Show_Bullet_Count;
+    }
     private void Start() 
     {
         // numOfPotion 값 불러오기
@@ -62,7 +69,7 @@ public class UIGamePlay : MonoBehaviour
         HandleHP();
 
         // 총 탄 수 / 잔 탄 수 불러오기
-        Show_Bullet_Count();
+        // Show_Bullet_Count(); // GameInformation의 UnityAction 델리게이트로 이동
         Show_CrossHair();
     }
 

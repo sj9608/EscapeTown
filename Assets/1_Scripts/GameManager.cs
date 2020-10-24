@@ -37,9 +37,11 @@ public class GameManager : SingletonBase<GameManager>
         {
             UsePotion();
         }
+        // 탄창 습득 시
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            UseMagazine();
+            Debug.Log("Alpha2");
+            GetMagazine();
         }
     }
 
@@ -92,7 +94,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         // 포션 사용 메서드
         // QuickSlot 에서 포션 개수가 남아 있는지 확인
-        if(QuickSlot.Instance.numOfPotion > 0)
+        if(GameInformation.Instance.NumOfPotion > 0)
         {
             // 남아 있으면 포션 개수 -1, HP + 30
             QuickSlot.Instance.UsePotion(1);
@@ -100,18 +102,10 @@ public class GameManager : SingletonBase<GameManager>
         }
     }
 
-    public void UseMagazine()
+    public void GetMagazine()
     {
-        // 탄창 사용 메서드
-        // QuickSlot 에서 탄창 개수가 남아 있는지 확인
-        if(QuickSlot.Instance.numOfMagazine > 0)
-        {
-            // 남아 있으면 탄창 개수 -1
-            QuickSlot.Instance.UseMagazine(1);
-            // 총알 + 60
-            // Gun 단에서 총알 충전 처리
-            playerAttack.gun.AddAmmo(addAmmo);
-        }
+        Debug.Log("GetMagazine playerAttack : " + playerAttack);
+        playerAttack.gun.AddAmmo(addAmmo);
     }
     public void GameOver()
     {

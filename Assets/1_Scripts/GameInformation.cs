@@ -31,7 +31,7 @@ public class GameInformation : SingletonBase<GameInformation>
         {
             remainAmmo = value;
 
-            if (UpdateCurAmmoAction != null) UpdateCurAmmoAction();
+            if (UpdateRemainAmmoAction != null) UpdateRemainAmmoAction();
         }
     }     // 총탄 수
     private int curAmmo;
@@ -45,7 +45,7 @@ public class GameInformation : SingletonBase<GameInformation>
         {
             curAmmo = value;
 
-            if (UpdateCurAmmoAction != null) UpdateCurAmmoAction();
+            UpdateCurAmmo();
         }
     }        // 잔탄 수
     public int NumOfPotion { get; set; }            // 보유 포션 수
@@ -54,6 +54,7 @@ public class GameInformation : SingletonBase<GameInformation>
     public event UnityAction<float, float> UpdateHpAction;
     public event UnityAction<int> UpdateSceneAction;
     public event UnityAction UpdateCurAmmoAction;
+    public event UnityAction UpdateRemainAmmoAction;
     public event UnityAction<int> UpdatePotionAction;
     public event UnityAction<int> UpdateMagazineAction;
 
@@ -71,13 +72,6 @@ public class GameInformation : SingletonBase<GameInformation>
         if (UpdateHpAction != null) 
             UpdateHpAction(HP, changeValue);
     }
-    public void UpdateScene(int changeSceneNum)
-    {
-        if (UpdateSceneAction != null)
-        {
-            UpdateSceneAction(changeSceneNum);
-        }
-    }
     public void UpdateCurAmmo()         // 총에 남아있는 총알 수 
     {
         if (UpdateCurAmmoAction != null)
@@ -92,15 +86,6 @@ public class GameInformation : SingletonBase<GameInformation>
         if (UpdatePotionAction != null)
         {
             UpdatePotionAction(NumOfPotion);
-        }
-    }
-    public void UpdateMagazine(int change)  // 갖고 있는 총 총알 수(총알 획득/장전 시 업데이트)
-    {
-        NumOfMagazine += change;
-
-        if (UpdateMagazineAction != null)
-        {
-            UpdateMagazineAction(NumOfMagazine);
         }
     }
 }
