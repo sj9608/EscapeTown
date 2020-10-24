@@ -88,7 +88,6 @@ public class UIGamePlay : MonoBehaviour
     public void Show_CrossHair()
     {
         if(Input.GetButton("Fire2"))
-        //if(Input.GetMouseButtonDown(1))
             crossHair.SetActive(true);
         else
             crossHair.SetActive(false);
