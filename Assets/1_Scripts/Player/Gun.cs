@@ -58,10 +58,10 @@ public class Gun : MonoBehaviour
     GameInformation GI;
 
     // 남은 탄약을 추가하는 메서드
-    public void AddAmmo(int ammo)
-    {
-        GI.RemainAmmo += ammo;
-    }
+    //public void AddAmmo(int ammo)
+    //{
+    //    GI.RemainAmmo += ammo;
+    //}
     private void Awake()
     {
         GI = GameInformation.Instance;

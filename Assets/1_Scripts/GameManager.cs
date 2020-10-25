@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
+    GameInformation GI;
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
-    public PlayerAttack playerAttack;
     // 게임오버 판단
     public bool IsGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
@@ -17,7 +17,8 @@ public class GameManager : SingletonBase<GameManager>
     // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
     int addAmmo = 60;
     public int curSceneNum = 2;
-    void Start()
+    public PlayerAttack playerAttack;
+    public void InitScene()
     {
         playerAttack = FindObjectOfType<PlayerAttack>();
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
@@ -29,10 +30,20 @@ public class GameManager : SingletonBase<GameManager>
             enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
         }
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
+    }
+
+    void Start()
+    {
+        GI = GameInformation.Instance;
         IsGameOver = false;
+        InitScene();
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GetPotion();
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             UsePotion();
@@ -40,7 +51,6 @@ public class GameManager : SingletonBase<GameManager>
         // 탄창 습득 시
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Debug.Log("Alpha2");
             GetMagazine();
         }
     }
@@ -53,35 +63,9 @@ public class GameManager : SingletonBase<GameManager>
     public void PlayerDead()
     {
         Debug.Log("플레이어가 죽음을 게임매니저가 인식");
+        IsGameOver = true;
     }
 
-    public void Attack(Collider hit, float damage)
-    {
-        if (hit != null)
-        {
-            switch (hit.tag)
-            {
-                case "Enemy":
-                    Zombie enemy = enemiesDic[hit.name];
-                    enemy.HP = enemy.HP - damage;
-                    if (enemy.HP <= 0)
-                    {
-                        enemy.Die();
-                        enemiesDic.Remove(hit.name);
-                    }
-                    break;
-                case "Player":
-                    //player.HP = player.HP - damage;
-                    //if (player.HP <= 0)
-                    //{
-                    //    player.Die();
-                    //    player.animator.SetTrigger("Die");
-                    //    GameOver();
-                    //}
-                    break;
-            }
-        }
-    }
     public void GetItem(Collider getItem)
     {
         if (getItem != null)
@@ -90,22 +74,23 @@ public class GameManager : SingletonBase<GameManager>
             getItem.gameObject.SetActive(false);
         }
     }
+    public void GetPotion()
+    {
+        GI.UpdateUsePotion(1);
+    }
     public void UsePotion()
     {
         // 포션 사용 메서드
         // QuickSlot 에서 포션 개수가 남아 있는지 확인
-        if(GameInformation.Instance.NumOfPotion > 0)
+        if(GI.NumOfPotion > 0)
         {
-            // 남아 있으면 포션 개수 -1, HP + 30
-            QuickSlot.Instance.UsePotion(1);
-            // player.HP += 30;
+            GI.UpdateUsePotion(-1);
+            GI.UpdateHp(30);
         }
     }
-
     public void GetMagazine()
     {
-        Debug.Log("GetMagazine playerAttack : " + playerAttack);
-        playerAttack.gun.AddAmmo(addAmmo);
+        GI.RemainAmmo += addAmmo;
     }
     public void GameOver()
     {

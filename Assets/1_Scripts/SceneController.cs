@@ -60,6 +60,7 @@ public class SceneController : SingletonBase<SceneController>
 
         yield return new WaitUntil(() => { return loadAsync.isDone; });
         PopupChange(false);
+        GameManager.Instance.InitScene();
     }
 
     void PopupChange(bool isLoading)

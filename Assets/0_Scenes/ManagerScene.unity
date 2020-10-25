@@ -1352,9 +1352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be6d248e39946b41b77027688f91e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAttack: {fileID: 0}
   IsGameOver: 0
   curSceneNum: 2
+  playerAttack: {fileID: 0}
 --- !u!1 &759357375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,7 +1801,6 @@ GameObject:
   - component: {fileID: 987351808}
   - component: {fileID: 987351811}
   - component: {fileID: 987351810}
-  - component: {fileID: 987351809}
   - component: {fileID: 987351812}
   m_Layer: 5
   m_Name: HUD
@@ -1833,24 +1832,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &987351809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 987351807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1b0b62c3047e94bb0687b3630cf0f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IMG_potion: {fileID: 1420420278}
-  IMG_magazine: {fileID: 1274198882}
-  numOfPotion: 1
-  numOfMagazine: 2
-  numOfPotion_text: {fileID: 1634525749}
-  numOfMagazine_text: {fileID: 1418011865}
 --- !u!114 &987351810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1863,12 +1844,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5110ff21c8df80f41bf22b0b29a67b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfPotion: {fileID: 1418011865}
-  numOfBullet: {fileID: 1418011865}
-  maxHP: 100
-  curHP: 0
   curBullet: {fileID: 1373688103}
   crossHair: {fileID: 1091078570}
+  IMG_potion: {fileID: 1420420278}
+  IMG_magazine: {fileID: 1274198882}
+  numOfPotion_text: {fileID: 1634525749}
+  numOfMagazine_text: {fileID: 1418011865}
   hpbar: {fileID: 759357376}
 --- !u!114 &987351811
 MonoBehaviour:
@@ -2523,7 +2504,6 @@ GameObject:
   - component: {fileID: 1154909879}
   - component: {fileID: 1154909881}
   - component: {fileID: 1154909880}
-  - component: {fileID: 1154909882}
   m_Layer: 0
   m_Name: QuickSlot
   m_TagString: Untagged
@@ -2549,7 +2529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -883, y: 607}
+  m_AnchoredPosition: {x: -883, y: 440}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1154909880
@@ -2591,24 +2571,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &1154909882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154909878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1b0b62c3047e94bb0687b3630cf0f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IMG_potion: {fileID: 1420420278}
-  IMG_magazine: {fileID: 1274198882}
-  numOfPotion: 0
-  numOfMagazine: 2
-  numOfPotion_text: {fileID: 1634525749}
-  numOfMagazine_text: {fileID: 1418011865}
 --- !u!1 &1157610145
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,6 +3063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 361359de86bab1846831a9b0fa8d5db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MAX_HP: 100
 --- !u!1 &1373688101
 GameObject:
   m_ObjectHideFlags: 0
