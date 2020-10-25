@@ -616,6 +616,7 @@ GameObject:
   - component: {fileID: 548579773}
   - component: {fileID: 548579774}
   - component: {fileID: 548579771}
+  - component: {fileID: 548579775}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -688,6 +689,21 @@ MonoBehaviour:
   curBullet: {fileID: 1373688103}
   crossHair: {fileID: 1091078570}
   hpbar: {fileID: 759357376}
+--- !u!114 &548579775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548579770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17268b6b91626245b75dd0b988ba870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuSet: {fileID: 1930881397}
+  btn_Continue: {fileID: 1119189}
+  btn_Quit: {fileID: 1921858716}
 --- !u!1 &585186333
 GameObject:
   m_ObjectHideFlags: 0
