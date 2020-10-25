@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class GameData
 {
     int saveSceneName;
@@ -16,18 +17,14 @@ public class GameData
 
     public GameData()
     {
-        GameInformation information = GameInformation.Instance;
-        
-        saveSceneName = information.CurSceneNum;
-        saveHP = information.HP;
-        saveRemainAmmo = information.RemainAmmo;
-        saveCurAmmo = information.CurAmmo;
-        saveNumOfPotion = information.NumOfPotion;
-        saveNumOfMagazine = information.NumOfMagazine;
+        saveSceneName = GameInformation.Instance.CurSceneNum;
+        saveHP = GameInformation.Instance.HP;
+        saveRemainAmmo = GameInformation.Instance.RemainAmmo;
+        saveCurAmmo = GameInformation.Instance.CurAmmo;
+        saveNumOfPotion = GameInformation.Instance.NumOfPotion;
 
-        ChatManager saveChat = ChatManager.Instance;
         
-        saveChatArray = saveChat.chatArray;
-        saveChatNumber = saveChat.chatNumber;
+        saveChatArray = ChatManager.Instance.chatArray;
+        saveChatNumber = ChatManager.Instance.chatNumber;
     }
 }

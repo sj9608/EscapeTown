@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,10 @@ public class GameManager : SingletonBase<GameManager>
     int addAmmo = 60;
     public int curSceneNum = 2;
     public PlayerAttack playerAttack;
+
+    // 게임 save load용 data class
+    GameData gameData;
+
     public void InitScene()
     {
         playerAttack = FindObjectOfType<PlayerAttack>();
@@ -109,6 +114,24 @@ public class GameManager : SingletonBase<GameManager>
         {
             Debug.Log("클리어 조건을 만족하지 못하였습니다.");
         }
+    }
+
+    [ContextMenu("To Json Data")]
+    public void SavePlayerDataToJson()
+    {
+        // 저장 데이터 생성
+        gameData = new GameData();
+        string jsonData = JsonUtility.ToJson(gameData, true);
+        string path = Path.Combine(Application.dataPath, "playerData.json");
+        File.WriteAllText(path, jsonData);
+    }
+
+    [ContextMenu("From Json Data")]
+    public void LoadPlayerDataToJson()
+    {
+        string path = Path.Combine(Application.dataPath, "playerData.json");
+        string jsonData = File.ReadAllText(path);
+        gameData = JsonUtility.FromJson<GameData>(jsonData);
     }
 }
 
