@@ -35,13 +35,16 @@ public class ChatManager : SingletonBase<ChatManager>
     
     // 오브젝트 풀링 용 배열
     public int[] chatArray = new int[100];
-    public int chatNumber; 
+    public int chatNumber;
+    
+    QuestData questData;
 
     TextAsset textAsset;
     int curSceneNum = 0;
 
     public void Awake()
     {
+        questData = GetComponent<QuestData>();
         GenerateData();
     }
 
@@ -53,6 +56,7 @@ public class ChatManager : SingletonBase<ChatManager>
             chatCharacter.text = "";
             chatText.text = "";
             curSceneNum = num;
+            questData.ShowQuest(curSceneNum);
         }
     }
 

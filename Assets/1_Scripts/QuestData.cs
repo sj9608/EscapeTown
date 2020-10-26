@@ -25,12 +25,10 @@ public class QuestData : MonoBehaviour
     public GameObject questPanel;                                                                 // 퀘스트 내용을 자식으로 달아 둘 퀘스트 패널 선언
     public Text questPrefab;                                                                      // 퀘스트 내용을 담아서 보여줄 텍스트 프리팹
     public Dictionary<int, string[]> QuestDic = new Dictionary<int, string[]>();                  // 퀘스트 내용을 담아 놓을 딕셔너리 생성
+    int sceneNum = 0; // 현재 씬 넘버 & 퀘스트 코드
 
     private void Awake() {
       GenerateQuest();
-    }
-    private void Start() {
-      ShowQuest();
     }
 
     void GenerateQuest()
@@ -42,31 +40,40 @@ public class QuestData : MonoBehaviour
       // 남은 좀비 수 / 총 좀비 수
       // 대화 하지 않은 NPC 머리 위에 "?"표시 대화 후에 지우기
       // 
-      QuestDic.Add(1, new string[] {"밖으로 나가세요."});
-      QuestDic.Add(2, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
-      QuestDic.Add(3, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
-      QuestDic.Add(4, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
-      QuestDic.Add(5, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
-      QuestDic.Add(6, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
-      QuestDic.Add(7, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 건물을 탐색하세요."});
-      QuestDic.Add(8, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
-      QuestDic.Add(9, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
-      QuestDic.Add(10, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
-      QuestDic.Add(11, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
-      QuestDic.Add(12, new string[] {"모든 주민과 대화하세요.", "산지기를 찾으세요.", "마을을 탐색하세요."});
-      QuestDic.Add(13, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
-      QuestDic.Add(14, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
-      QuestDic.Add(15, new string[] {"박사는 약물로 신체를 강화한 인물입니다.", "박사를 물리치고 마을을 탈출하세요."});
+      QuestDic.Add(1, new string[] {"* 밖으로 나가세요."});
+      QuestDic.Add(2, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
+      QuestDic.Add(3, new string[] {"* 모든 주민과 대화하세요.", "* 밤이 될 때까지 마을을 탐색하세요."});
+      QuestDic.Add(4, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
+      QuestDic.Add(5, new string[] {"* 모든 주민과 대화하세요.", "* 밤이 될 때까지 마을을 탐색하세요."});
+      QuestDic.Add(6, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
+      QuestDic.Add(7, new string[] {"* 모든 주민과 대화하세요.", "* 밤이 될 때까지 건물을 탐색하세요."});
+      QuestDic.Add(8, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
+      QuestDic.Add(9, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
+      QuestDic.Add(10, new string[] {"* 모든 주민과 대화하세요.", "* 밤이 될 때까지 마을을 탐색하세요."});
+      QuestDic.Add(11, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
+      QuestDic.Add(12, new string[] {"* 모든 주민과 대화하세요.", "* 산지기를 찾으세요.", "* 마을을 탐색하세요."});
+      QuestDic.Add(13, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
+      QuestDic.Add(14, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
+      QuestDic.Add(15, new string[] {"* 박사는 약물로 신체를 강화한 인물입니다.", "* 박사를 물리치고 마을을 탈출하세요."});
+    
+      ShowQuest(sceneNum);
     }
 
-    public void ShowQuest()
+    public void ShowQuest(int sceneNum)
     { // 씬 넘버에 따라 퀘스트 내용을 보여줌
-      int code = SceneManager.GetActiveScene().buildIndex;
+      if(questPanel != null)
+      { // 자식이 생성되어 있다면 초기화
+        for(int i=0; i<questPanel.transform.childCount; i++)
+        {
+          var child = questPanel.transform.GetChild(i);
+          child.gameObject.SetActive(false);
+        }
+      }
 
-      for(int i=0; i<QuestDic[code].Length; i++)
-      {
+      for(int i=0; i<QuestDic[sceneNum].Length; i++)
+      {// 씬 넘버에 따라 퀘스트 내용 출력
         var quest = Instantiate(questPrefab).GetComponent<Text>();
-        quest.text = QuestDic[code][i];
+        quest.text = QuestDic[sceneNum][i];
         quest.gameObject.SetActive(true);
         quest.transform.SetParent(questPanel.transform);
       }
