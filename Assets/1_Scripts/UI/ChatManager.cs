@@ -38,12 +38,22 @@ public class ChatManager : SingletonBase<ChatManager>
     public int chatNumber; 
 
     TextAsset textAsset;
+    int curSceneNum = 0;
 
     public void Awake()
     {
         GenerateData();
-        // chatCharacter.text = "";
-        // chatText.text = "";
+    }
+
+    private void Update() {
+        int num = SceneController.Instance.CurSceneNum; 
+
+        if(curSceneNum != num && chatCharacter != null && chatText != null)
+        {   
+            chatCharacter.text = "";
+            chatText.text = "";
+            curSceneNum = num;
+        }
     }
 
     public void GenerateData()
@@ -78,7 +88,7 @@ public class ChatManager : SingletonBase<ChatManager>
         
         // string writerText = "";
 
-        if(isNpc == true) chatCharacter.text = narrator;
+        chatCharacter.text = narrator;
 
         // 대사가 한 글자씩 출력되는 연출
         // for(int i=0; i<narration.Length; i++)

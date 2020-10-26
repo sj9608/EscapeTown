@@ -40,5 +40,5 @@ public class ChatTrigger : MonoBehaviour
             yield return new WaitForSeconds(4);
             this.gameObject.SetActive(false);
         }
-    }
+     }
 }
