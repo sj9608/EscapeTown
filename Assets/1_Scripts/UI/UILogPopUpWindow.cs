@@ -11,9 +11,10 @@ public class UILogPopUpWindow : MonoBehaviour
     public GameObject magazine_LogWindow;
     RectTransform rectTransform_1;
     RectTransform rectTransform_2;
-    Vector3 target = new Vector3(1036, 0, 0);
+    Vector3 target = new Vector3(1850, 0, 0);
     float speed = 0.3f;
     float time = 0f;
+    bool isShow = false;
 
     void Start()
     {
@@ -32,28 +33,32 @@ public class UILogPopUpWindow : MonoBehaviour
     }
     IEnumerator IELogPopUp()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && isShow == false)
         {
             potion_LogWindow.SetActive(true);
+            isShow = true;
 
             for (int i = 0; i < 10; ++i)
             {
                 float a = Vector3.Distance(rectTransform_1.position, target) / 10;
                 rectTransform_1.localPosition += new Vector3(-a, 0f, 0f); // 현 위치, 목표지점, 참조속도, 속도
-                Debug.Log(a);                                                                                   // ref : 참조접근 -> 실시간으로 바뀌는 값 적용 가능
+                Debug.Log(a);                                                                                     // ref : 참조접근 -> 실시간으로 바뀌는 값 적용 가능
 
                 yield return null;
+;
             }
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.5f);
                 potion_LogWindow.SetActive(false);
-                rectTransform_1.localPosition = new Vector3(510, -303, 0);
+                isShow = false;
+                rectTransform_1.localPosition = new Vector3(1090, -303, 0);
         }
         
+        
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4) && isShow == false)
         {
             magazine_LogWindow.SetActive(true);
-
+            isShow = true;
             for (int i = 0; i < 10; ++i)
             {
                 float a = Vector3.Distance(rectTransform_2.position, target) / 10;
@@ -62,9 +67,10 @@ public class UILogPopUpWindow : MonoBehaviour
 
                 yield return null;
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             magazine_LogWindow.SetActive(false);
-            rectTransform_2.localPosition = new Vector3(510, -303, 0);
+            isShow = false;
+            rectTransform_2.localPosition = new Vector3(1090, -303, 0);
         }
     }
 }
