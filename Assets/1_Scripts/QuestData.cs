@@ -33,13 +33,9 @@ public class QuestData : MonoBehaviour
 
     void GenerateQuest()
     {
-      Debug.Log("Generate");
       // 퀘스트 딕셔너리에 값(코드당 퀘스트 내용) 삽입
       // 빌드 넘버에 따라 값 int 값 바꾸기
-
-      // 남은 좀비 수 / 총 좀비 수
-      // 대화 하지 않은 NPC 머리 위에 "?"표시 대화 후에 지우기
-      // 
+      
       QuestDic.Add(0, new string[] {"* 메인."});
       QuestDic.Add(1, new string[] {"* 밖으로 나가세요."});
       QuestDic.Add(2, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
