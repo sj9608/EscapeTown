@@ -28,9 +28,8 @@ public class ChatTrigger : MonoBehaviour
     private void Update() {
         // if(GameManager.Instance.enemiesDic.Count != 0) return 0;
         
-        if(enemies.transform.childCount != 0) return;    
+        if(enemies == null || enemies.transform.childCount != 0) return;    
         isAbleToChat = true;
-        
     }
     IEnumerator OnTriggerEnter(Collider other)
     {
