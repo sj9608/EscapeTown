@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIOption : MonoBehaviour
 {
     public GameObject option;
+    public GameObject menuSet;
     public AudioSource bgmsource;
     public AudioSource gameSound_Source;
     public Button btn_Back;
@@ -19,8 +20,11 @@ public class UIOption : MonoBehaviour
     {
         gameSound_Source.volume = volume;
     }
-    public void Click_Back()
+    public void BTN_Back()
     {
         option.SetActive(false);
+        menuSet.SetActive(true);
     }
 }
+
+
