@@ -14,7 +14,7 @@ public class UILogPopUpWindow : MonoBehaviour
     Vector3 target = new Vector3(1850, 0, 0);
     float speed = 0.3f;
     float time = 0f;
-    bool isShow = false;
+    bool isShow = false;   // 현재 로그창이 떠있는지 안떠있는지 여부
 
     void Start()
     {
