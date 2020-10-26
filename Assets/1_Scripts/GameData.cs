@@ -14,17 +14,4 @@ public class GameData
 
     int[] saveChatArray;
     int saveChatNumber;
-
-    public GameData()
-    {
-        saveSceneName = GameInformation.Instance.CurSceneNum;
-        saveHP = GameInformation.Instance.HP;
-        saveRemainAmmo = GameInformation.Instance.RemainAmmo;
-        saveCurAmmo = GameInformation.Instance.CurAmmo;
-        saveNumOfPotion = GameInformation.Instance.NumOfPotion;
-
-        
-        saveChatArray = ChatManager.Instance.chatArray;
-        saveChatNumber = ChatManager.Instance.chatNumber;
-    }
 }
