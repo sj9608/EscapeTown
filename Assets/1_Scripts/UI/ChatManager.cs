@@ -39,8 +39,8 @@ public class ChatManager : SingletonBase<ChatManager>
     public void Awake()
     {
         GenerateData();
-        chatCharacter.text = "";
-        chatText.text = "";
+        // chatCharacter.text = "";
+        // chatText.text = "";
     }
 
     void Start()

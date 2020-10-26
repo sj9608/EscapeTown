@@ -25,9 +25,9 @@ public class UILogPopUpWindow : MonoBehaviour
 
     void Update()
     {
-        
-            StartCoroutine(IELogPopUp());
-    
+
+        StartCoroutine(IELogPopUp());
+
 
     }
     IEnumerator IELogPopUp()
@@ -36,34 +36,35 @@ public class UILogPopUpWindow : MonoBehaviour
         {
             potion_LogWindow.SetActive(true);
 
-        for (int i = 0; i < 10; ++i)
-        {
-            float a = Vector3.Distance(rectTransform_1.position, target) / 10;
-            rectTransform_1.localPosition += new Vector3(-a, 0f, 0f); // 현 위치, 목표지점, 참조속도, 속도
-            Debug.Log(a);                                                                                   // ref : 참조접근 -> 실시간으로 바뀌는 값 적용 가능
+            for (int i = 0; i < 10; ++i)
+            {
+                float a = Vector3.Distance(rectTransform_1.position, target) / 10;
+                rectTransform_1.localPosition += new Vector3(-a, 0f, 0f); // 현 위치, 목표지점, 참조속도, 속도
+                Debug.Log(a);                                                                                   // ref : 참조접근 -> 실시간으로 바뀌는 값 적용 가능
 
-            yield return null;
-        } 
-        yield return new WaitForSeconds(1f);
-        potion_LogWindow.SetActive(false);
-        rectTransform_1.localPosition = new Vector3(1090,-303,0);
+                yield return null;
+            }
+                yield return new WaitForSeconds(1f);
+                potion_LogWindow.SetActive(false);
+                rectTransform_1.localPosition = new Vector3(510, -303, 0);
         }
+        
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             magazine_LogWindow.SetActive(true);
 
-        for (int i = 0; i < 10; ++i)
-        {
-            float a = Vector3.Distance(rectTransform_2.position, target) / 10;
-            rectTransform_2.localPosition += new Vector3(-a, 0f, 0f); // 현 위치, 목표지점, 참조속도, 속도
-            Debug.Log(a);                                                                                   // ref : 참조접근 -> 실시간으로 바뀌는 값 적용 가능
+            for (int i = 0; i < 10; ++i)
+            {
+                float a = Vector3.Distance(rectTransform_2.position, target) / 10;
+                rectTransform_2.localPosition += new Vector3(-a, 0f, 0f); // 현 위치, 목표지점, 참조속도, 속도
+                Debug.Log(a);                                                                                   // ref : 참조접근 -> 실시간으로 바뀌는 값 적용 가능
 
-            yield return null;
-        } 
-        yield return new WaitForSeconds(1f);
-        magazine_LogWindow.SetActive(false);
-        rectTransform_2.localPosition = new Vector3(1090,-303,0);
+                yield return null;
+            }
+            yield return new WaitForSeconds(1f);
+            magazine_LogWindow.SetActive(false);
+            rectTransform_2.localPosition = new Vector3(510, -303, 0);
         }
     }
 }
