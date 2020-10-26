@@ -77,7 +77,7 @@ public class GameManager : SingletonBase<GameManager>
                     //    GameOver();
                     //}
                     break;
-            }
+            } 
         }
     }
     public void GetItem(Collider getItem)
@@ -126,7 +126,7 @@ public class GameManager : SingletonBase<GameManager>
             Debug.Log("스테이지 클리어");
             SceneManager.LoadScene(0);
         }
-        else
+        else 
         {
             Debug.Log("클리어 조건을 만족하지 못하였습니다.");
         }
