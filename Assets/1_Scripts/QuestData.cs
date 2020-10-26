@@ -40,6 +40,7 @@ public class QuestData : MonoBehaviour
       // 남은 좀비 수 / 총 좀비 수
       // 대화 하지 않은 NPC 머리 위에 "?"표시 대화 후에 지우기
       // 
+      QuestDic.Add(0, new string[] {"* 메인."});
       QuestDic.Add(1, new string[] {"* 밖으로 나가세요."});
       QuestDic.Add(2, new string[] {"* 모든 좀비를 처치하세요.", "* 다음 장소로 이동하세요."});
       QuestDic.Add(3, new string[] {"* 모든 주민과 대화하세요.", "* 밤이 될 때까지 마을을 탐색하세요."});
