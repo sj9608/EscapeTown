@@ -10,9 +10,12 @@ public class PlayerHealth : MonoBehaviour
     public event Action onDeath; // 사망시 발동할 이벤트
 
     private Animator playerAnimator; // 애니메이터 컴포넌트
+
+    GameInformation GI;
     // Start is called before the first frame update
     void Start()
     {
+        GI = GameInformation.Instance;
         playerAnimator = GetComponent<Animator>();
         isDead = false;
     }
@@ -27,10 +30,10 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
 
         // HP -= attackPoint;
-        GameInformation.Instance.UpdateHp(attackPoint);
+        GI.UpdateHp(-attackPoint);
 
-        Debug.Log("플레이어 공격 받음. 남은체력" + GameInformation.Instance.HP);
-        if (GameInformation.Instance.HP <= 0)
+        Debug.Log("플레이어 공격 받음. 남은체력" + GI.HP);
+        if (GI.HP <= 0)
         {
             Die();
         }

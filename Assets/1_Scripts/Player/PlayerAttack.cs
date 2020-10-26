@@ -10,8 +10,6 @@ public class PlayerAttack : MonoBehaviour
 
     // 현재 상태 
     public bool isGun;
-    public CharacterLocomotion character;
-
     private Animator playerAnimator; // 애니메이터 컴포넌트
     // Start is called before the first frame update
     void Start()
@@ -24,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     {
         {
             // 입력을 감지하고 총 발사하거나 재장전
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButton("Fire2") && Input.GetButton("Fire1"))
             {
                 // 발사 입력 감지시 총 발사
                 Attack();

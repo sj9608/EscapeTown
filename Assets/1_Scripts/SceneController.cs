@@ -18,14 +18,15 @@ public class SceneController : SingletonBase<SceneController>
         }
     }
 
-    // public const string SCENE_MAIN = "MAIN";
-
-    public FadeController fader;
+    public GameObject stageHUDObject;
+    public GameObject chatUIObject;
     public GameObject loadingObject;
     // Start is called before the first frame update
     void Start()
     {
         curSceneNum = 0;
+        stageHUDObject.SetActive(false);
+        chatUIObject.SetActive(false);
         loadingObject.SetActive(false);
         SceneManager.LoadSceneAsync(curSceneNum, LoadSceneMode.Additive);
     }
@@ -46,7 +47,7 @@ public class SceneController : SingletonBase<SceneController>
 
     IEnumerator IENextScene()
     {
-        loadingObject.SetActive(true);
+        PopupChange(true);
         AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(curSceneNum);
         curSceneNum++;
 
@@ -58,7 +59,15 @@ public class SceneController : SingletonBase<SceneController>
         // yield return new WaitForSeconds(1f);
 
         yield return new WaitUntil(() => { return loadAsync.isDone; });
-        loadingObject.SetActive(false);
+        PopupChange(false);
+        GameManager.Instance.InitScene();
+    }
+
+    void PopupChange(bool isLoading)
+    {
+        stageHUDObject.SetActive(!isLoading);
+        chatUIObject.SetActive(!isLoading);
+        loadingObject.SetActive(isLoading);
     }
 
 }

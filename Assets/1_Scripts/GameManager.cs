@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
+    GameInformation GI;
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
-    public PlayerAttack playerAttack;
     // 게임오버 판단
     public bool IsGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
@@ -17,7 +18,12 @@ public class GameManager : SingletonBase<GameManager>
     // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
     int addAmmo = 60;
     public int curSceneNum = 2;
-    void Start()
+    public PlayerAttack playerAttack;
+
+    // 게임 save load용 data class
+    GameData gameData;
+
+    public void InitScene()
     {
         playerAttack = FindObjectOfType<PlayerAttack>();
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
@@ -29,17 +35,28 @@ public class GameManager : SingletonBase<GameManager>
             enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
         }
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
+    }
+
+    void Start()
+    {
+        GI = GameInformation.Instance;
         IsGameOver = false;
+        InitScene();
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GetPotion();
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             UsePotion();
         }
+        // 탄창 습득 시
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            UseMagazine();
+            GetMagazine();
         }
     }
 
@@ -51,35 +68,9 @@ public class GameManager : SingletonBase<GameManager>
     public void PlayerDead()
     {
         Debug.Log("플레이어가 죽음을 게임매니저가 인식");
+        IsGameOver = true;
     }
 
-    public void Attack(Collider hit, float damage)
-    {
-        if (hit != null)
-        {
-            switch (hit.tag)
-            {
-                case "Enemy":
-                    Zombie enemy = enemiesDic[hit.name];
-                    enemy.HP = enemy.HP - damage;
-                    if (enemy.HP <= 0)
-                    {
-                        enemy.Die();
-                        enemiesDic.Remove(hit.name);
-                    }
-                    break;
-                case "Player":
-                    //player.HP = player.HP - damage;
-                    //if (player.HP <= 0)
-                    //{
-                    //    player.Die();
-                    //    player.animator.SetTrigger("Die");
-                    //    GameOver();
-                    //}
-                    break;
-            } 
-        }
-    }
     public void GetItem(Collider getItem)
     {
         if (getItem != null)
@@ -88,30 +79,23 @@ public class GameManager : SingletonBase<GameManager>
             getItem.gameObject.SetActive(false);
         }
     }
+    public void GetPotion()
+    {
+        GI.UpdateUsePotion(1);
+    }
     public void UsePotion()
     {
         // 포션 사용 메서드
         // QuickSlot 에서 포션 개수가 남아 있는지 확인
-        if(QuickSlot.Instance.numOfPotion > 0)
+        if(GI.NumOfPotion > 0)
         {
-            // 남아 있으면 포션 개수 -1, HP + 30
-            QuickSlot.Instance.UsePotion(1);
-            // player.HP += 30;
+            GI.UpdateUsePotion(-1);
+            GI.UpdateHp(30);
         }
     }
-
-    public void UseMagazine()
+    public void GetMagazine()
     {
-        // 탄창 사용 메서드
-        // QuickSlot 에서 탄창 개수가 남아 있는지 확인
-        if(QuickSlot.Instance.numOfMagazine > 0)
-        {
-            // 남아 있으면 탄창 개수 -1
-            QuickSlot.Instance.UseMagazine(1);
-            // 총알 + 60
-            // Gun 단에서 총알 충전 처리
-            playerAttack.gun.AddAmmo(addAmmo);
-        }
+        GI.RemainAmmo += addAmmo;
     }
     public void GameOver()
     {
@@ -130,6 +114,24 @@ public class GameManager : SingletonBase<GameManager>
         {
             Debug.Log("클리어 조건을 만족하지 못하였습니다.");
         }
+    }
+
+    [ContextMenu("To Json Data")]
+    public void SavePlayerDataToJson()
+    {
+        // 저장 데이터 생성
+        gameData = new GameData();
+        string jsonData = JsonUtility.ToJson(gameData, true);
+        string path = Path.Combine(Application.dataPath, "playerData.json");
+        File.WriteAllText(path, jsonData);
+    }
+
+    [ContextMenu("From Json Data")]
+    public void LoadPlayerDataToJson()
+    {
+        string path = Path.Combine(Application.dataPath, "playerData.json");
+        string jsonData = File.ReadAllText(path);
+        gameData = JsonUtility.FromJson<GameData>(jsonData);
     }
 }
 
