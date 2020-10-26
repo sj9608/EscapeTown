@@ -21,6 +21,9 @@ public class ChatManager : SingletonBase<ChatManager>
     // 3. 낮 스테이지 : NPC와 하는 대사는 NPC에게 할당
     // 4. 밤 스테이지 : 플레이어 독백은 전투 전과 전투 후로 나뉨
 
+    // 버그 수정 요구 사항 : ChatObject 관련 수정
+    // 1. 대사 나오는 도중 씬 전환시 대사가 남아있는 현상
+    // 2. 대사가 전부 출력되지 않으면 대화수첩으로 들어가지 않는 것 
     
     // 대사를 저장하는 딕셔너리
     public Dictionary<int, string> talkData = new Dictionary<int, string>();                           // talk Data 키 번호에 따른 대사
@@ -43,17 +46,13 @@ public class ChatManager : SingletonBase<ChatManager>
         // chatText.text = "";
     }
 
-    void Start()
-    {
-        chatNumber = 0;
-    }
-
     public void GenerateData()
     {   // ChatFile 을 열어 딕셔너리에 대사와 화자를 기입하는 메서드
         string loadFile = "ChatFile";
 
         if(textAsset != null) return;
         
+        chatNumber = 0;
         //Debug.Log("this is null state");
         textAsset = (TextAsset)Resources.Load(loadFile);
         XmlDocument xmlDoc = new XmlDocument();
@@ -70,7 +69,10 @@ public class ChatManager : SingletonBase<ChatManager>
     }
 
     public IEnumerator PrintNormalChat(int id, bool isNpc)
-    {   // 대사가 한 글자씩 출력되는 연출
+    {   // 대화 수첩에 저장
+        chatArray[chatNumber] = id;
+        chatNumber++;
+
         string narrator = talkCharacterData[id];
         string narration = talkData[id];
         
@@ -78,6 +80,7 @@ public class ChatManager : SingletonBase<ChatManager>
 
         if(isNpc == true) chatCharacter.text = narrator;
 
+        // 대사가 한 글자씩 출력되는 연출
         // for(int i=0; i<narration.Length; i++)
         // {
         //     writerText += narration[i];
@@ -91,8 +94,6 @@ public class ChatManager : SingletonBase<ChatManager>
         chatCharacter.text = "";
         chatText.text = "";
 
-        chatArray[chatNumber] = id;
-        chatNumber++;
         // poolingObjectQueue.Enqueue(CreateNewText(id));
     }
 }

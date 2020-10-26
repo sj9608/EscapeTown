@@ -22,7 +22,6 @@ public class LoadingScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -38,6 +37,7 @@ public class LoadingScene : MonoBehaviour
 
     IEnumerator LoadingFade(AsyncOperation operation) //int nextSceneNum)
     {
+        loadtext.text = "Loading..";
         FadeIn(1f);
         yield return null;
         operation.allowSceneActivation = false; //씬을 비동기로 처리하면서 porgressbar로 상태를 표기

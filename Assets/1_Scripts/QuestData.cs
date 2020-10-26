@@ -47,14 +47,14 @@ public class QuestData : MonoBehaviour
       QuestDic.Add(3, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
       QuestDic.Add(4, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
       QuestDic.Add(5, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
-      QuestDic.Add(6, new string[] {"모든 좀비를 처치하세요.", "마을 회관으로 들어가기 위한 열쇠를 습득하세요."});
+      QuestDic.Add(6, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
       QuestDic.Add(7, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 건물을 탐색하세요."});
-      QuestDic.Add(8, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하기 위한 열쇠를 습득하세요."});
+      QuestDic.Add(8, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
       QuestDic.Add(9, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
       QuestDic.Add(10, new string[] {"모든 주민과 대화하세요.", "밤이 될 때까지 마을을 탐색하세요."});
       QuestDic.Add(11, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
       QuestDic.Add(12, new string[] {"모든 주민과 대화하세요.", "산지기를 찾으세요.", "마을을 탐색하세요."});
-      QuestDic.Add(13, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하기 위한 열쇠를 습득하세요."});
+      QuestDic.Add(13, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
       QuestDic.Add(14, new string[] {"모든 좀비를 처치하세요.", "다음 장소로 이동하세요."});
       QuestDic.Add(15, new string[] {"박사는 약물로 신체를 강화한 인물입니다.", "박사를 물리치고 마을을 탈출하세요."});
     }
