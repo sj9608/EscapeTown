@@ -2,32 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class GameData
 {
-    int saveSceneName;
-    float saveHP;
-    int saveRemainAmmo;
-    int saveCurAmmo;
-    int saveNumOfPotion;
-    int saveNumOfMagazine;
+    public int saveSceneNum;
+    public float saveHP;
+    public int saveRemainAmmo;
+    public int saveCurAmmo;
+    public int saveNumOfPotion;
+    public int[] saveChatArray;
+    public int saveChatNumber;
 
-    int[] saveChatArray;
-    int saveChatNumber;
-
-    public GameData()
+    public GameData(int saveSceneNum, float saveHP, int saveRemainAmmo, int saveCurAmmo, int saveNumOfPotion, int[] saveChatArray, int saveChatNumber)
     {
-        GameInformation information = GameInformation.Instance;
-        
-        saveSceneName = information.CurSceneNum;
-        saveHP = information.HP;
-        saveRemainAmmo = information.RemainAmmo;
-        saveCurAmmo = information.CurAmmo;
-        saveNumOfPotion = information.NumOfPotion;
-        saveNumOfMagazine = information.NumOfMagazine;
-
-        ChatManager saveChat = ChatManager.Instance;
-        
-        saveChatArray = saveChat.chatArray;
-        saveChatNumber = saveChat.chatNumber;
+        this.saveSceneNum = saveSceneNum;
+        this.saveHP = saveHP;
+        this.saveRemainAmmo = saveRemainAmmo;
+        this.saveCurAmmo = saveCurAmmo;
+        this.saveNumOfPotion = saveNumOfPotion;
+        this.saveChatArray = saveChatArray;
+        this.saveChatNumber = saveChatNumber;
     }
 }

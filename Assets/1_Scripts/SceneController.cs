@@ -18,14 +18,18 @@ public class SceneController : SingletonBase<SceneController>
         }
     }
 
-    // public const string SCENE_MAIN = "MAIN";
-
-    public FadeController fader;
+    public GameObject stageHUDObject;
+    public GameObject chatUIObject;
     public GameObject loadingObject;
+    private void Awake()
+    {
+        curSceneNum = 1;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        curSceneNum = 0;
+        stageHUDObject.SetActive(false);
+        chatUIObject.SetActive(false);
         loadingObject.SetActive(false);
         SceneManager.LoadSceneAsync(curSceneNum, LoadSceneMode.Additive);
     }
@@ -35,20 +39,22 @@ public class SceneController : SingletonBase<SceneController>
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            NextSecne();
+            // GameManager.Instance.StageClear();
+            // 테스트용 다음 씬 가기
+            CurSceneNum++;
+            GameManager.Instance.SaveGameDataToJson();
+            NextSecne(CurSceneNum-1);
         }
     }
-
-    public void NextSecne()
+    public void NextSecne(int current)
     {
-        StartCoroutine(IENextScene());
+        StartCoroutine(IENextScene(current));
     }
 
-    IEnumerator IENextScene()
+    IEnumerator IENextScene(int current)
     {
-        loadingObject.SetActive(true);
-        AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(curSceneNum);
-        curSceneNum++;
+        PopupChange(true);
+        AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(current);
 
         yield return new WaitUntil(() => { return unloadAsync.isDone; });
 
@@ -58,7 +64,15 @@ public class SceneController : SingletonBase<SceneController>
         // yield return new WaitForSeconds(1f);
 
         yield return new WaitUntil(() => { return loadAsync.isDone; });
-        loadingObject.SetActive(false);
+        PopupChange(false);
+        GameManager.Instance.InitScene();
+    }
+
+    void PopupChange(bool isLoading)
+    {
+        stageHUDObject.SetActive(!isLoading);
+        chatUIObject.SetActive(!isLoading);
+        loadingObject.SetActive(isLoading);
     }
 
 }

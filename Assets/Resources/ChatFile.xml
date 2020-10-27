@@ -55,7 +55,7 @@
 	<chat>
 		<code>325</code>
 		<speaker>주민</speaker>
-		<sentence>이상한 사람이라, 지금 제 눈 앞에 있네요. 세상에 좀비가 어디에 있나요?</sentence>
+		<sentence>좀비요? 세상에 좀비가 어디에 있나요?</sentence>
 	</chat>
 	<chat>
 		<code>330</code>
@@ -306,7 +306,6 @@
 		<speaker>당신</speaker>
 		<sentence>내가 죽인 건 사람인가? 난 살인자가 된 건가?</sentence>
 	</chat>
-	<chat/>
 	<chat>
 		<code>810</code>
 		<situation>산지기 찾기</situation>
@@ -316,7 +315,7 @@
 	<chat>
 		<code>815</code>
 		<speaker>주민</speaker>
-		<sentence>저기 외딴 집 앞에 있던데.</sentence>
+		<sentence>산지기? 저기 외딴 집 앞에 있던데.</sentence>
 	</chat>
 	<chat>
 		<code>820</code>
@@ -344,6 +343,11 @@
 		<sentence>문 앞에 버티고 서 있으니 집을 들어갈 수가 있어야지.</sentence>
 	</chat>
 	<chat>
+		<code>842</code>
+		<speaker>주민</speaker>
+		<sentence>산지기가 박사에게 돈을 받고 산 입구를 막았대.</sentence>
+	</chat>
+	<chat>
 		<code>845</code>
 		<speaker>주민</speaker>
 		<sentence>사라졌던 애들을 산 속에서 본 것 같아. 아닌가?</sentence>
@@ -353,6 +357,12 @@
 		<situation>밤</situation>
 		<speaker>당신</speaker>
 		<sentence>산지기가 좀비가 됐군. 산지기의 집에 들어가려면 산지기를 죽여야 하나?</sentence>
+	</chat>
+	<chat>
+		<code>1001</code>
+		<situation>프로젝트 엔딩</situation>
+		<speaker>당신</speaker>
+		<sentence>산지기의 집에서 산의 열쇠를 얻었다. 박사를 피해 기차역을 찾았고, 집으로 갈 수 있었다.</sentence>
 	</chat>
 	<chat>
 		<code>18</code>

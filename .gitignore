@@ -62,3 +62,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# test savedata.json
+SaveData.json
+SaveData.json.meta

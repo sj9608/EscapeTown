@@ -17,8 +17,11 @@ public class GameInformation : SingletonBase<GameInformation>
     // 보유 탄창 수
 
     // MAX HP
-    public const float MAX_HP = 100;
-    public int CurSceneNum { get; set; }            // 현재 씬 번호
+    GameManager GMI;
+    SceneController SCI;
+    ChatManager CMI;
+
+    public float MAX_HP = 100;
     public float HP { get; private set; }           // HP
     private int remainAmmo;
     public int RemainAmmo
@@ -31,7 +34,7 @@ public class GameInformation : SingletonBase<GameInformation>
         {
             remainAmmo = value;
 
-            if (UpdateCurAmmoAction != null) UpdateCurAmmoAction();
+            if (UpdateRemainAmmoAction != null) UpdateRemainAmmoAction();
         }
     }     // 총탄 수
     private int curAmmo;
@@ -45,38 +48,52 @@ public class GameInformation : SingletonBase<GameInformation>
         {
             curAmmo = value;
 
-            if (UpdateCurAmmoAction != null) UpdateCurAmmoAction();
+            UpdateCurAmmo();
         }
     }        // 잔탄 수
     public int NumOfPotion { get; set; }            // 보유 포션 수
     public int NumOfMagazine { get; set; }          // 보유 탄창 수
 
-    public event UnityAction<float, float> UpdateHpAction;
+    public event UnityAction UpdateHpAction;
     public event UnityAction<int> UpdateSceneAction;
     public event UnityAction UpdateCurAmmoAction;
-    public event UnityAction<int> UpdatePotionAction;
-    public event UnityAction<int> UpdateMagazineAction;
+    public event UnityAction UpdateRemainAmmoAction;
+    public event UnityAction UpdateGetPotionAction;
+    public event UnityAction UpdateUsePotionAction;
 
     private void Awake()
     {
+        SCI = SceneController.Instance;
+        CMI = ChatManager.Instance;
         HP = 100;       // 저
         RemainAmmo = 60;  // 총 총알 수 
         NumOfPotion = 5;
         CurAmmo = 20;
+    }
 
+    public void GameInformationInit(GameData gameData)
+    {
+        if (gameData == null)
+        {
+            gameData = new GameData(2, 100, 0, 30, 1, new int[100], 0);
+        }
+        SCI.CurSceneNum = gameData.saveSceneNum;
+        
+        HP = gameData.saveHP;
+        RemainAmmo = gameData.saveRemainAmmo;
+        CurAmmo = gameData.saveCurAmmo;
+        NumOfPotion = gameData.saveNumOfPotion;
+
+        CMI.chatArray = gameData.saveChatArray;
+        CMI.chatNumber = gameData.saveChatNumber;
+        
     }
 
     public void UpdateHp(float changeValue)        //HP회복/차감
     {
+        HP += changeValue;
         if (UpdateHpAction != null) 
-            UpdateHpAction(HP, changeValue);
-    }
-    public void UpdateScene(int changeSceneNum)
-    {
-        if (UpdateSceneAction != null)
-        {
-            UpdateSceneAction(changeSceneNum);
-        }
+            UpdateHpAction();
     }
     public void UpdateCurAmmo()         // 총에 남아있는 총알 수 
     {
@@ -85,22 +102,20 @@ public class GameInformation : SingletonBase<GameInformation>
             UpdateCurAmmoAction();
         }
     }
-    public void UpdatePotion(int change)       //포션 획득
+    public void UpdateUsePotion(int change)       //포션 획득
     {
         NumOfPotion += change;
-
-        if (UpdatePotionAction != null)
+        if (change > 0)
         {
-            UpdatePotionAction(NumOfPotion);
+            if (UpdateGetPotionAction != null)
+                UpdateGetPotionAction();
         }
-    }
-    public void UpdateMagazine(int change)  // 갖고 있는 총 총알 수(총알 획득/장전 시 업데이트)
-    {
-        NumOfMagazine += change;
-
-        if (UpdateMagazineAction != null)
+        else if (change < 0)
         {
-            UpdateMagazineAction(NumOfMagazine);
+            if (UpdateUsePotionAction != null)
+            {
+                UpdateUsePotionAction();
+            }
         }
     }
 }
