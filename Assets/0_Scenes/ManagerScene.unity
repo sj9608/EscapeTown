@@ -1943,7 +1943,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGameOver: 0
-  curSceneNum: 2
   playerAttack: {fileID: 0}
 --- !u!1 &759357375
 GameObject:
@@ -2772,6 +2771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   option: {fileID: 1520814178}
+  menuSet: {fileID: 0}
   bgmsource: {fileID: 951782099}
   gameSound_Source: {fileID: 1340802377}
   btn_Back: {fileID: 695017379}
@@ -6883,7 +6883,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 10
   m_Viewport: {fileID: 1472451045}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1747429625}

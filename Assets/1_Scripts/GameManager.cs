@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : SingletonBase<GameManager>
 {
     GameInformation GI;
+    SceneController SCI;
+    ChatManager ChatManager;
+    // 게임 save load용 data class
+    GameData gameData;
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
     // 게임오버 판단
@@ -17,14 +21,16 @@ public class GameManager : SingletonBase<GameManager>
 
     // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
     int addAmmo = 60;
-    public int curSceneNum = 2;
     public PlayerAttack playerAttack;
 
-    // 게임 save load용 data class
-    GameData gameData;
-
+    // 씬로딩에만 쓸 임시 씬번호
+    private int tempCurrentSceneNum;
     public void InitScene()
     {
+        // 현재 페이지에서만 쓸 인자용 씬번호
+        // 저장위치에 따라 쓸모 유무가 생김
+        // 저장위치는 스테이지 클리어 직후 / 로딩 중 / 새 스테이지 씬 로딩 후 
+        tempCurrentSceneNum = SCI.CurSceneNum;
         playerAttack = FindObjectOfType<PlayerAttack>();
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 낮 Scene
@@ -36,10 +42,13 @@ public class GameManager : SingletonBase<GameManager>
         }
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
     }
-
+    private void Awake() {
+        GI = GameInformation.Instance;
+        SCI = SceneController.Instance;
+        ChatManager = ChatManager.Instance;
+    }
     void Start()
     {
-        GI = GameInformation.Instance;
         IsGameOver = false;
         InitScene();
     }
@@ -97,6 +106,26 @@ public class GameManager : SingletonBase<GameManager>
     {
         GI.RemainAmmo += addAmmo;
     }
+    // 새로하기
+    public void NewGame()
+    {
+        // gameData가 null 새로 생성 해서 새 게임
+        // nextScene에 (메인 씬 번호 넘김)
+        gameData = null;
+        SaveGameDataToJson();
+        GI.GameInformationInit(gameData);
+        SCI.NextSecne(tempCurrentSceneNum);
+    }
+    // 이어하기
+    public void LoadGame()
+    {
+        // gameData가 loadData
+        // nextScene에 (메인 씬 번호 넘김)
+        gameData = LoadGameDataToJson();
+        GI.GameInformationInit(gameData);
+        SCI.NextSecne(tempCurrentSceneNum);
+    }
+    // 게임 오버 팝업과 연결
     public void GameOver()
     {
         Debug.Log("게임 오버");
@@ -108,7 +137,9 @@ public class GameManager : SingletonBase<GameManager>
         if (enemiesDic == null || enemiesDic.Count == 0)
         {
             Debug.Log("스테이지 클리어");
-            SceneController.Instance.NextSecne();
+            SCI.CurSceneNum++;
+            SaveGameDataToJson();
+            SCI.NextSecne(tempCurrentSceneNum);
         }
         else 
         {
@@ -117,21 +148,22 @@ public class GameManager : SingletonBase<GameManager>
     }
 
     [ContextMenu("To Json Data")]
-    public void SavePlayerDataToJson()
+    public void SaveGameDataToJson()
     {
         // 저장 데이터 생성
-        // gameData = new GameData();
+        gameData = new GameData(SceneController.Instance.CurSceneNum, GI.HP, GI.RemainAmmo, GI.CurAmmo, GI.NumOfPotion, ChatManager.chatArray, ChatManager.chatNumber);
         string jsonData = JsonUtility.ToJson(gameData, true);
-        string path = Path.Combine(Application.dataPath, "playerData.json");
+        string path = Path.Combine(Application.dataPath, "SaveData.json");
         File.WriteAllText(path, jsonData);
     }
 
     [ContextMenu("From Json Data")]
-    public void LoadPlayerDataToJson()
+    public GameData LoadGameDataToJson()
     {
-        string path = Path.Combine(Application.dataPath, "playerData.json");
+        string path = Path.Combine(Application.dataPath, "SaveData.json");
         string jsonData = File.ReadAllText(path);
         gameData = JsonUtility.FromJson<GameData>(jsonData);
+        return gameData;
     }
 }
 
