@@ -18,7 +18,8 @@ public class Goal : MonoBehaviour
             //    GameManager.Instance.curSceneNum = 0;
             //}
             //SceneManager.LoadScene(GameInformation.Instance.CurSceneNum);
-            SceneController.Instance.NextSecne();
+            //SceneController.Instance.NextSecne();
+            GameManager.Instance.StageClear();
         }
     }
     // Start is called before the first frame update

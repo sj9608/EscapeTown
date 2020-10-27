@@ -12,11 +12,17 @@ EditorBuildSettings:
     path: Assets/0_Scenes/Room.unity
     guid: 446b5faf5f364ec4784b7a34175e7947
   - enabled: 1
-    path: Assets/0_Scenes/Stage_02Copy.unity
-    guid: cf399135bcdd4e64fb836fbffc76b02e
+    path: Assets/0_Scenes/Stage_02.unity
+    guid: ea9e245cc329a734a9aed8b19f1fd3a2
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_03.unity
+    guid: 13e231db220d74b9aa64327df99c94bb
   - enabled: 1
     path: Assets/0_Scenes/Stage_03CopyCopy.unity
     guid: 6a343fbea7811634689d17235b434cdf
+  - enabled: 1
+    path: Assets/0_Scenes/Stage_031.unity
+    guid: 55cee11920b44204ab63416c5c59ce26
   - enabled: 1
     path: Assets/0_Scenes/Stage_04.unity
     guid: 2a595f4a437a2cc4297ff6ff1e75ffcd

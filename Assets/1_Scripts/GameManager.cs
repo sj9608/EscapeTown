@@ -108,7 +108,7 @@ public class GameManager : SingletonBase<GameManager>
         if (enemiesDic == null || enemiesDic.Count == 0)
         {
             Debug.Log("스테이지 클리어");
-            SceneManager.LoadScene(0);
+            SceneController.Instance.NextSecne();
         }
         else 
         {
@@ -120,7 +120,7 @@ public class GameManager : SingletonBase<GameManager>
     public void SavePlayerDataToJson()
     {
         // 저장 데이터 생성
-        gameData = new GameData();
+        // gameData = new GameData();
         string jsonData = JsonUtility.ToJson(gameData, true);
         string path = Path.Combine(Application.dataPath, "playerData.json");
         File.WriteAllText(path, jsonData);

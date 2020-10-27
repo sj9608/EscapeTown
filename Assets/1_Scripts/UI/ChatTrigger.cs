@@ -15,31 +15,23 @@ public class ChatTrigger : MonoBehaviour
     // 전투 전 대사는 isAbleToChat이 true, 전투 후 대사는 isAbleToChat false
 
     public ObjectData objectData;                                   // 채팅 정보(id, 대화 내용)를 가진 클래스
-    public bool isAbleToChat;                                       // 전투 완료 상태에 따른 독백 가능 여부
+    // public bool isAbleToChat;                                       // 전투 완료 상태에 따른 독백 가능 여부
 
     Collider _collider;                                             // 콜라이더 진입 시 독백 출력
-    GameObject enemies;
+    //GameObject enemies;
 
     private void Start() {
         _collider = GetComponent<Collider>();
-        enemies = GameObject.Find("Enemies");
-    }
-
-    private void Update() {
-        // if(GameManager.Instance.enemiesDic.Count != 0) return 0;
-        
-        if(enemies.transform.childCount != 0) return;    
-        isAbleToChat = true;
-        
+        //enemies = GameObject.Find("Enemies");
     }
     IEnumerator OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && isAbleToChat == true)
+        if(other.tag == "Player" /* && isAbleToChat == true*/)
         {
             StartCoroutine(ChatManager.Instance.PrintNormalChat(objectData.id, objectData.isNpc));
             _collider.enabled = false;
             yield return new WaitForSeconds(4);
             this.gameObject.SetActive(false);
         }
-    }
+     }
 }
