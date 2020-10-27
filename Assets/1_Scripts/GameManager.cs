@@ -112,8 +112,8 @@ public class GameManager : SingletonBase<GameManager>
         // gameData가 null 새로 생성 해서 새 게임
         // nextScene에 (메인 씬 번호 넘김)
         gameData = null;
-        SaveGameDataToJson();
         GI.GameInformationInit(gameData);
+        SaveGameDataToJson();
         SCI.NextSecne(tempCurrentSceneNum);
     }
     // 이어하기
