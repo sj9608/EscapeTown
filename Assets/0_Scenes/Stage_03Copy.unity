@@ -849,7 +849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 6936849402252344997}
   isGun: 0
-  isKnife: 0
+  character: {fileID: 0}
 --- !u!114 &782583861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,9 +1259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae9b17291f36c14284b02bb5846c99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoveryPoint: 0
-  potion: {fileID: 0}
-  magazine: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,7 +1363,7 @@ MonoBehaviour:
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
+  m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
@@ -1489,9 +1486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae9b17291f36c14284b02bb5846c99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoveryPoint: 0
-  potion: {fileID: 0}
-  magazine: {fileID: 0}
 --- !u!1001 &1127023329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5706,6 +5700,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994203347705758830, guid: 00033632b0bc14087aedcea9ec7b5adb,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7132518945812001950, guid: 00033632b0bc14087aedcea9ec7b5adb,
         type: 3}

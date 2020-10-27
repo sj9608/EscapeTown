@@ -84,6 +84,7 @@ public class Zombie : MonoBehaviour
         nmAgent = GetComponent<NavMeshAgent>();
 
         nmAgent.speed = runSpeed;
+        nmAgent.updateRotation = false;
 
         // 코루틴 시작
         StartCoroutine(Think());
@@ -98,9 +99,13 @@ public class Zombie : MonoBehaviour
     {
         if (isDead) return;                     // 좀비가 죽어있으면 즉시 리턴
 
-        // 속돈 이동 
+        // 속도 이동 
         if (currentState == State.Walk)
             rb.velocity = transform.forward * walkSpeed * Time.deltaTime;
+
+        // 좀비 네비발동시 자연스러운 회전
+        if (!nmAgent.isStopped)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(nmAgent.desiredVelocity), Time.deltaTime * 7.0f);
     }
 
     IEnumerator Think()
