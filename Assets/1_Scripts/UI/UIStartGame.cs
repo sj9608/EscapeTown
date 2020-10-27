@@ -17,7 +17,7 @@ public class UIStartGame : MonoBehaviour
 
         // 스테이지 1 화면 호출
         // 플레이 화면 호출
-        SceneController.Instance.NextSecne();
+        GameManager.Instance.NewGame();
     }
 
     public void OnClickLoad()                           // 이어하기 버튼
@@ -27,7 +27,7 @@ public class UIStartGame : MonoBehaviour
 
         // 씬 로딩 화면 호출
         //SceneController.Instance.CurSceneNum = 0;
-        SceneManager.LoadScene("LoadingScene");
+        GameManager.Instance.LoadGame();
     }
 
     public void OnClickSettings()                       // 설정 버튼
@@ -38,10 +38,10 @@ public class UIStartGame : MonoBehaviour
     public void OnClickClose()                          // 게임 종료 버튼
     {
         // 게임 종료
-    #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-    #else
-        Application.Quit(); // 어플리케이션 종료
-    #endif
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit(); // 어플리케이션 종료
+        #endif
     }
 }

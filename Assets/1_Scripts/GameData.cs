@@ -5,24 +5,21 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    int saveSceneName;
-    float saveHP;
-    int saveRemainAmmo;
-    int saveCurAmmo;
-    int saveNumOfPotion;
-    int saveNumOfMagazine;
+    public int saveSceneNum;
+    public float saveHP;
+    public int saveRemainAmmo;
+    public int saveCurAmmo;
+    public int saveNumOfPotion;
+    public int[] saveChatArray;
+    public int saveChatNumber;
 
-    int[] saveChatArray;
-    int saveChatNumber;
-
-    public GameData(int saveSceneName, float saveHP, int saveRemainAmmo, int saveCurAmmo, int saveNumOfPotion, int saveNumOfMagazine, int[] saveChatArray, int saveChatNumber)
+    public GameData(int saveSceneNum, float saveHP, int saveRemainAmmo, int saveCurAmmo, int saveNumOfPotion, int[] saveChatArray, int saveChatNumber)
     {
-        this.saveSceneName = saveSceneName;
+        this.saveSceneNum = saveSceneNum;
         this.saveHP = saveHP;
         this.saveRemainAmmo = saveRemainAmmo;
         this.saveCurAmmo = saveCurAmmo;
         this.saveNumOfPotion = saveNumOfPotion;
-        this.saveNumOfMagazine = saveNumOfMagazine;
         this.saveChatArray = saveChatArray;
         this.saveChatNumber = saveChatNumber;
     }

@@ -1943,7 +1943,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGameOver: 0
-  curSceneNum: 2
   playerAttack: {fileID: 0}
 --- !u!1 &759357375
 GameObject:

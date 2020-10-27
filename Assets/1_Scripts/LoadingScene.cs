@@ -9,8 +9,6 @@ public class LoadingScene : MonoBehaviour
     // 게임 로딩 화면 UI
     // 슬라이더 업데이트, 로딩 씬 뒤에 게임 씬 불러오기
 
-    //public int curSceneNum;                                       // 전환하는 씬 이름
-
     public Image sr;
     public Slider progressbar;
     public Text loadtext;
