@@ -21,10 +21,13 @@ public class SceneController : SingletonBase<SceneController>
     public GameObject stageHUDObject;
     public GameObject chatUIObject;
     public GameObject loadingObject;
+    private void Awake()
+    {
+        curSceneNum = 1;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        curSceneNum = 0;
         stageHUDObject.SetActive(false);
         chatUIObject.SetActive(false);
         loadingObject.SetActive(false);
@@ -36,20 +39,22 @@ public class SceneController : SingletonBase<SceneController>
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            NextSecne();
+            // GameManager.Instance.StageClear();
+            // 테스트용 다음 씬 가기
+            CurSceneNum++;
+            GameManager.Instance.SaveGameDataToJson();
+            NextSecne(CurSceneNum-1);
         }
     }
-
-    public void NextSecne()
+    public void NextSecne(int current)
     {
-        StartCoroutine(IENextScene());
+        StartCoroutine(IENextScene(current));
     }
 
-    IEnumerator IENextScene()
+    IEnumerator IENextScene(int current)
     {
         PopupChange(true);
-        AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(curSceneNum);
-        curSceneNum++;
+        AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(current);
 
         yield return new WaitUntil(() => { return unloadAsync.isDone; });
 
