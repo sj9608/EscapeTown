@@ -64,3 +64,4 @@ crashlytics-build.properties
 
 # test savedata.json
 SaveData.json
+SaveData.json.meta
