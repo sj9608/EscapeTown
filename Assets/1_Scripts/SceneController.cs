@@ -39,7 +39,11 @@ public class SceneController : SingletonBase<SceneController>
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            GameManager.Instance.StageClear();
+            // GameManager.Instance.StageClear();
+            // 테스트용 다음 씬 가기
+            CurSceneNum++;
+            GameManager.Instance.SaveGameDataToJson();
+            NextSecne(CurSceneNum-1);
         }
     }
     public void NextSecne(int current)
