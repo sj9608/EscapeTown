@@ -14,24 +14,20 @@ public class UIGameOver : MonoBehaviour
                                                                   // 메인 화면으로 씬 전환
     public Button btn_Exit;                                       // 게임오버 게임종료 버튼
 
-    bool isOver = false;                                          // 플레이어가 죽었는지 아닌지 판별하고 죽었으면 게임 오버 패널 띄우기
-
     void Start()
     {
         gameover.SetActive(false);
     }
 
-    void Update()
-    {
-        Show_GameOver_Pannel();
+    private void OnEnable() {
+        GameManager.Instance.GameOverAction += Show_GameOver_Pannel;
     }
-
+    private void OnDisable(){
+        GameManager.Instance.GameOverAction -= Show_GameOver_Pannel;
+    }
     public void Show_GameOver_Pannel()
     {
-        if(isOver == true)
-            gameover.SetActive(true);
-        else
-            return;
+        gameover.SetActive(true);
     }
 
     public void GameOver_BTN_Retry()
@@ -50,17 +46,18 @@ public class UIGameOver : MonoBehaviour
     public void GameOver_BTN_Main()
     {   
         gameover.SetActive(false);
-        SceneManager.LoadScene("Main",0);
+        // 게임매니저의 메인으로 메서드 호출
+        GameManager.Instance.GoMain();
     }
 
     public void GameOver_BTN_Exit()
     {   // 게임 종료
     
-    #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-    #else
-        Application.Quit(); // 어플리케이션 종료
-    #endif
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit(); // 어플리케이션 종료
+        #endif
     
     }
 }

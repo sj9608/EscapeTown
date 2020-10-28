@@ -57,7 +57,7 @@ public class UIGamePlay : MonoBehaviour
         // numOfBullet 값 불러오기
 
         // curHP 값 불러오기
-        hpbar.value = GI.HP;
+        hpbar.value = 1;
         
         // 총 탄 수 / 잔 탄 수 불러오기
         curBullet.text = GI.CurAmmo.ToString(); // 잔탄 수;
@@ -100,7 +100,7 @@ public class UIGamePlay : MonoBehaviour
 
     private void HandleHP() // HP바 
     {
-        hpbar.value = Mathf.Lerp(hpbar.value, GI.HP, Time.deltaTime);
+        hpbar.value = Mathf.Lerp(hpbar.value, GI.HP / GI.MAX_HP, Time.deltaTime);
     }
 
     public void Show_CrossHair()
