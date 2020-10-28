@@ -20,21 +20,19 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
+        // 입력을 감지하고 총 발사하거나 재장전
+        if (Input.GetButton("Fire2") && Input.GetButton("Fire1"))
         {
-            // 입력을 감지하고 총 발사하거나 재장전
-            if (Input.GetButton("Fire2") && Input.GetButton("Fire1"))
+            // 발사 입력 감지시 총 발사
+            Attack();
+        }
+        else if (isGun && Input.GetKeyDown(KeyCode.R))
+        {
+            // 재장전 입력 감지시 재장전
+            if (gun.Reload())
             {
-                // 발사 입력 감지시 총 발사
-                Attack();
-            }
-            else if (isGun && Input.GetKeyDown(KeyCode.R))
-            {
-                // 재장전 입력 감지시 재장전
-                if (gun.Reload())
-                {
-                    // 재장전 성공시에만 재장전 애니메이션 재생
-                    playerAnimator.SetTrigger("Reload");
-                }
+                // 재장전 성공시에만 재장전 애니메이션 재생
+                playerAnimator.SetTrigger("Reload");
             }
         }
     }
