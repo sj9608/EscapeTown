@@ -6002,6 +6002,7 @@ MonoBehaviour:
   ammoRemain: 100
   magCapacity: 30
   magAmmo: 0
+  bloodEffect: {fileID: 8223473355212488570}
 --- !u!1 &3777043104949546870
 GameObject:
   m_ObjectHideFlags: 0
@@ -6805,13 +6806,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.6
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.06
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &3777043104215094720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6846,6 +6847,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2163b63dcd271f24d9ead003230c4167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpHeight: 3
+  gravity: 20
+  stepDown: 0.3
+  airControl: 2.5
+  jumpDamp: 0.5
+  groundSpeed: 1.2
+  pushPower: 2
   weaponPoseRig: {fileID: 3777043104606958454}
   handIK: {fileID: 3777043104585379081}
 --- !u!114 &3777043104215094727
@@ -8442,6 +8450,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12d0cdcc3e5664e9594d398e338d09df, type: 3}
+--- !u!198 &8223473355212488570 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6027082966758478503, guid: 12d0cdcc3e5664e9594d398e338d09df,
+    type: 3}
+  m_PrefabInstance: {fileID: 2430577607736438237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8223473355212488571 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6027082966758478502, guid: 12d0cdcc3e5664e9594d398e338d09df,
