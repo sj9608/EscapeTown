@@ -33,11 +33,14 @@ public class UIChatNote : MonoBehaviour
         if(isOpen == false)
         {   // 닫힘 상태일 때 노트를 닫음
             scrollView.gameObject.SetActive(false);
+            // Cursor.lockState = CursorLockMode.Locked;
+            // Screen.showCurosor = false;
             // CloseChatNote();
         } 
         else 
         {   // 열림 상태일 때 노트를 열음
             scrollView.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
             OpenChatNote(); 
         }
     }

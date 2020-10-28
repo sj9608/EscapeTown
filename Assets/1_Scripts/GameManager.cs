@@ -125,7 +125,7 @@ public class GameManager : SingletonBase<GameManager>
         GI.GameInformationInit(gameData);
         SCI.NextSecne(tempCurrentSceneNum);
     }
-    // 게임 오버 팝업과 연결
+    // 게임 오버 팝업과 연결 
     public void GameOver()
     {
         Debug.Log("게임 오버");
