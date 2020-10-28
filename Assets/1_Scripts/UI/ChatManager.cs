@@ -4,8 +4,6 @@ using UnityEngine;
 using System.Xml;
 using System;
 using UnityEngine.UI;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 
 public class ChatManager : SingletonBase<ChatManager>
@@ -64,10 +62,9 @@ public class ChatManager : SingletonBase<ChatManager>
     {   // ChatFile 을 열어 딕셔너리에 대사와 화자를 기입하는 메서드
         string loadFile = "ChatFile";
 
-        if(textAsset != null) return;
+        if(textAsset.Equals(null)) return;
         
         chatNumber = 0;
-        //Debug.Log("this is null state");
         textAsset = (TextAsset)Resources.Load(loadFile);
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.LoadXml(textAsset.text);
@@ -76,7 +73,6 @@ public class ChatManager : SingletonBase<ChatManager>
 
         foreach(XmlNode node in nodes)
         {
-            //Debug.Log(node.SelectSingleNode("sentence").InnerText);
             talkData.Add(Convert.ToInt32(node.SelectSingleNode("code").InnerText), node.SelectSingleNode("sentence").InnerText);
             talkCharacterData.Add(Convert.ToInt32(node.SelectSingleNode("code").InnerText), node.SelectSingleNode("speaker").InnerText);
         }
@@ -86,13 +82,12 @@ public class ChatManager : SingletonBase<ChatManager>
     {   // 대화 수첩에 저장
         if(GameManager.Instance.numOfChatObject > 0) GameManager.Instance.numOfChatObject--;
         Debug.Log( GameManager.Instance.numOfChatObject);
+
         chatArray[chatNumber] = id;
         chatNumber++;
 
         string narrator = talkCharacterData[id];
         string narration = talkData[id];
-        
-        // string writerText = "";
 
         chatCharacter.text = narrator;
 
@@ -109,7 +104,5 @@ public class ChatManager : SingletonBase<ChatManager>
         yield return new WaitForSeconds(3);
         chatCharacter.text = "";
         chatText.text = "";
-
-        // poolingObjectQueue.Enqueue(CreateNewText(id));
     }
 }
