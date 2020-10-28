@@ -42,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
     public void Die()
     {
         GameManager.Instance.PlayerDead();
-        playerAnimator.SetTrigger("Die");
         isDead = true;
+        playerAnimator.SetTrigger("Die");
     }
 }

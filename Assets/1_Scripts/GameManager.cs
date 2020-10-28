@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : SingletonBase<GameManager>
 {
@@ -15,7 +15,7 @@ public class GameManager : SingletonBase<GameManager>
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
     // 게임오버 판단
-    public bool IsGameOver;
+    public bool isGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
 
@@ -25,6 +25,9 @@ public class GameManager : SingletonBase<GameManager>
 
     // 씬로딩에만 쓸 임시 씬번호
     private int tempCurrentSceneNum;
+
+    // 게임 오버시 UI호출 Action
+    public event UnityAction GameOverAction;
     public void InitScene()
     {
         // 현재 페이지에서만 쓸 인자용 씬번호
@@ -42,14 +45,15 @@ public class GameManager : SingletonBase<GameManager>
         }
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
     }
-    private void Awake() {
+    private void Awake()
+    {
         GI = GameInformation.Instance;
         SCI = SceneController.Instance;
         ChatManager = ChatManager.Instance;
     }
     void Start()
     {
-        IsGameOver = false;
+        isGameOver = false;
         InitScene();
     }
     void Update()
@@ -77,7 +81,8 @@ public class GameManager : SingletonBase<GameManager>
     public void PlayerDead()
     {
         Debug.Log("플레이어가 죽음을 게임매니저가 인식");
-        IsGameOver = true;
+        isGameOver = true;
+        GameOver();
     }
 
     public void GetItem(Collider getItem)
@@ -106,6 +111,8 @@ public class GameManager : SingletonBase<GameManager>
     {
         GI.RemainAmmo += addAmmo;
     }
+    
+    // Main Scene 버튼 새로하기 이어하기
     // 새로하기
     public void NewGame()
     {
@@ -125,13 +132,36 @@ public class GameManager : SingletonBase<GameManager>
         GI.GameInformationInit(gameData);
         SCI.NextSecne(tempCurrentSceneNum);
     }
+    // Main Scene 버튼 새로하기 이어하기 끝 
+
     // 게임 오버 팝업과 연결
     public void GameOver()
     {
         Debug.Log("게임 오버");
-        SceneManager.LoadScene(0);
+        // 게임 오버 bool
+        // 각 씬 입력값 막기
+        isGameOver = true;
+        
+        if (GameOverAction != null)
+        {
+            GameOverAction();
+        }
+        
     }
     
+    public void GameRetry()
+    {
+        isGameOver = false;
+        LoadGame();
+    }
+    
+    public void GoMain()
+    {
+        // 메인 씬 불러오기
+        isGameOver = false;
+        SCI.CurSceneNum = 1;
+        SCI.NextSecne(tempCurrentSceneNum);
+    }
     public void StageClear()
     {
         if (enemiesDic == null || enemiesDic.Count == 0)
