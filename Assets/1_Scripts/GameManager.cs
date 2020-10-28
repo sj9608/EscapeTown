@@ -15,7 +15,7 @@ public class GameManager : SingletonBase<GameManager>
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
     // 게임오버 판단
-    public bool IsGameOver;
+    public bool isGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
 
@@ -42,14 +42,15 @@ public class GameManager : SingletonBase<GameManager>
         }
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
     }
-    private void Awake() {
+    private void Awake()
+    {
         GI = GameInformation.Instance;
         SCI = SceneController.Instance;
         ChatManager = ChatManager.Instance;
     }
     void Start()
     {
-        IsGameOver = false;
+        isGameOver = false;
         InitScene();
     }
     void Update()
@@ -77,7 +78,7 @@ public class GameManager : SingletonBase<GameManager>
     public void PlayerDead()
     {
         Debug.Log("플레이어가 죽음을 게임매니저가 인식");
-        IsGameOver = true;
+        isGameOver = true;
     }
 
     public void GetItem(Collider getItem)
@@ -125,11 +126,20 @@ public class GameManager : SingletonBase<GameManager>
         GI.GameInformationInit(gameData);
         SCI.NextSecne(tempCurrentSceneNum);
     }
-    // 게임 오버 팝업과 연결 
+    public void GameRetry(){
+        isGameOver = false;
+        SCI.CurSceneNum = 1;
+        SCI.NextSecne(tempCurrentSceneNum);
+    }
+    // 게임 오버 팝업과 연결
+    UIGameOver uig = new UIGameOver();
     public void GameOver()
     {
         Debug.Log("게임 오버");
-        SceneManager.LoadScene(0);
+        // 게임 오버 bool
+        // 각 씬 입력값 막기
+        isGameOver = true;
+        uig.Show_GameOver_Pannel();
     }
     
     public void StageClear()
