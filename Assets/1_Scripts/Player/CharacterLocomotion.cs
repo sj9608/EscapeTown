@@ -5,13 +5,13 @@ using UnityEngine.Animations.Rigging;
 
 public class CharacterLocomotion : MonoBehaviour
 {
-    public float normalSpeed;
-    public float crouchSpeed;
-    public float sprintSpeed;
-    float curruntSpeed;
+    public float jumpHeight;
+    public float gravity;
+    public float stepDown;
 
     bool isCrouch;
     bool isSprint;
+    bool isJumping;
 
     Animator animator;
     Vector2 input; // x축, y축 입력 받을 벡터
@@ -20,8 +20,8 @@ public class CharacterLocomotion : MonoBehaviour
     public Rig handIK; // 무기들었을 때 손의 위치 제어
 
     CharacterController cc;
-    Transform tf;
     Vector3 rootMotion;
+    Vector3 velocity;
 
     PlayerAttack playerAttack;
 
@@ -33,13 +33,6 @@ public class CharacterLocomotion : MonoBehaviour
 
         cc = GetComponent<CharacterController>();
 
-        tf = GetComponent<Transform>();
-
-        normalSpeed = 50;
-        sprintSpeed = 10;
-        crouchSpeed = 3;
-
-        curruntSpeed = normalSpeed;
     }
 
     void Update()
@@ -54,7 +47,6 @@ public class CharacterLocomotion : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift)) 
         {
             isSprint = true;
-            curruntSpeed = sprintSpeed;
             animator.SetBool("isSprinting", isSprint);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -67,13 +59,18 @@ public class CharacterLocomotion : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCrouch = true;
-            curruntSpeed = crouchSpeed;
             animator.SetBool("isCrouch", isCrouch);
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             isCrouch = false;
             animator.SetBool("isCrouch", isCrouch);
+        }
+
+        // 점프감지
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
         }
 
         // 재장전 감지
@@ -103,7 +100,27 @@ public class CharacterLocomotion : MonoBehaviour
 
     private void FixedUpdate()
     {
-        cc.Move(new Vector3(input.x, 0f, input.y) * curruntSpeed * Time.fixedDeltaTime);
-        //rootMotion = Vector3.zero;
+        if (isJumping)
+        {
+            velocity.y -= gravity * Time.fixedDeltaTime;
+            cc.Move(velocity * Time.fixedDeltaTime);
+            isJumping = !cc.isGrounded;
+            rootMotion = Vector3.zero; 
+        }
+        else
+        {
+            cc.Move(rootMotion + velocity * stepDown);
+            rootMotion = Vector3.zero;
+        }
+    }
+
+    void Jump()
+    {
+        if (!isJumping)
+        {
+            isJumping = true;
+            velocity = animator.velocity;
+            velocity.y = Mathf.Sqrt(2 * gravity * jumpHeight);
+        }
     }
 }
