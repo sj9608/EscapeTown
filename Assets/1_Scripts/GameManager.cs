@@ -52,8 +52,11 @@ public class GameManager : SingletonBase<GameManager>
         }
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
 
-        
+        // ChatObject의 자식 수 세기
+        chatObject = GameObject.Find("ChatObject");
+        if(chatObject != null) numOfChatObject = chatObject.transform.childCount;
     }
+
     private void Awake()
     {
         GI = GameInformation.Instance;
@@ -175,10 +178,13 @@ public class GameManager : SingletonBase<GameManager>
     {
         if (enemiesDic == null || enemiesDic.Count == 0)
         {
-            Debug.Log("스테이지 클리어");
-            SCI.CurSceneNum++;
-            SaveGameDataToJson();
-            SCI.NextSecne(tempCurrentSceneNum);
+            if(numOfChatObject == 0)
+            {
+               Debug.Log("스테이지 클리어");
+                SCI.CurSceneNum++;
+                SaveGameDataToJson();
+                SCI.NextSecne(tempCurrentSceneNum); 
+            }
         }
         else 
         {

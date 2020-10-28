@@ -84,6 +84,8 @@ public class ChatManager : SingletonBase<ChatManager>
 
     public IEnumerator PrintNormalChat(int id, bool isNpc)
     {   // 대화 수첩에 저장
+        if(GameManager.Instance.numOfChatObject > 0) GameManager.Instance.numOfChatObject--;
+        Debug.Log( GameManager.Instance.numOfChatObject);
         chatArray[chatNumber] = id;
         chatNumber++;
 
