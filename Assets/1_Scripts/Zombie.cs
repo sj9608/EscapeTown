@@ -27,7 +27,7 @@ public class Zombie : MonoBehaviour
     public float normalSearchAngle;                         // 좀비의 시야각 (플레이어를 감지할 시야각) 
     public float awareSearchAngle;                          // 좀비의 시야각 (플레이어를 감지할 시야각)
     private float currentSearchDistance;
-    private float currentSearchAngle;                       
+    private float currentSearchAngle;
 
     public float walkDelayMin = 2.0f;                       // 좀비의 걷기 최소시간
     public float walkDelayMax = 3.5f;                       // 좀비의 걷기 최대시간
@@ -51,8 +51,7 @@ public class Zombie : MonoBehaviour
     private bool isPlayerTargeting;                         // 공격시점에 플레이어가 공격 범위에 있는지 판단하기위한 구분자
 
     PlayerHealth player;
-    public ParticleSystem bloodEffect;
-    
+
 
     void Start()
     {
@@ -61,9 +60,9 @@ public class Zombie : MonoBehaviour
         walkSpeed = 100f;
         runSpeed = 6f;
         attackRange = 1.3f;
-        normalSearchDistance = 12f;                      
-        awareSearchDistance = 70f;                       
-        normalSearchAngle = 140f;                        
+        normalSearchDistance = 12f;
+        awareSearchDistance = 70f;
+        normalSearchAngle = 140f;
         awareSearchAngle = 360f;
 
         currentSearchDistance = normalSearchDistance;
@@ -91,7 +90,6 @@ public class Zombie : MonoBehaviour
 
         // 플레이어를 대체할 테스트용 코드
         player = FindObjectOfType<PlayerHealth>();
-        bloodEffect = Instantiate(bloodEffect, new Vector3(0, 1.7f, 0), Quaternion.identity);
     }
 
 
@@ -179,7 +177,8 @@ public class Zombie : MonoBehaviour
                     if (Vector3.Distance(player.transform.position, transform.position) > attackRange)
                     {
                         TraceRun();
-                    } else
+                    }
+                    else
                     {
                         Attack();
                     }
@@ -211,7 +210,8 @@ public class Zombie : MonoBehaviour
         if (Random.Range(0, 2) == 0)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + Random.Range(-90, 0) - 30, transform.eulerAngles.z);
-        } else
+        }
+        else
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + Random.Range(0, 90) + 30, transform.eulerAngles.z);
         }
@@ -246,14 +246,17 @@ public class Zombie : MonoBehaviour
 
     void Attack()
     {
+        Debug.Log("좀비 어택 범위에 플레이어 들어옴");
         nmAgent.isStopped = true;
         currentState = State.Attack;
         anim.SetInteger("ZombieState", (int)currentState);
     }
     public void AttackPointHandler()
     {
+        Debug.Log("좀비 어택 포인트 들어옴");
         if (isPlayerTargeting && !player.isDead)
         {
+            Debug.Log("좀비 어택 포인트 성공");
             player.OnDamage(ap / 2);
         }
     }
@@ -268,9 +271,6 @@ public class Zombie : MonoBehaviour
         timeFlag = Time.time;
         currentSearchDistance = awareSearchDistance;
         currentSearchAngle = awareSearchAngle;
-
-        bloodEffect.transform.position = hitPosition;
-        bloodEffect.Play();
 
         HP -= attackPoint;
         if (HP <= 0)
@@ -293,7 +293,7 @@ public class Zombie : MonoBehaviour
         StopCoroutine(Think());
     }
 
-    public void DieAnimationCompletHandler ()
+    public void DieAnimationCompletHandler()
     {
         gameObject.SetActive(false);
     }
@@ -345,6 +345,7 @@ public class Zombie : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Debug.Log("좀비 어택 범위에 플레이어 들어옴");
             isPlayerTargeting = true;
         }
     }
@@ -353,6 +354,7 @@ public class Zombie : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Debug.Log("좀비 어택 범위에서 플레이어 나감");
             isPlayerTargeting = false;
         }
     }
