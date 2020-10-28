@@ -37,6 +37,9 @@ public class PlayerInteraction : MonoBehaviour
     {
         // f키를 눌렀을 때 주민이 레이캐스트 거리 안에 있으면 주민의 대화 내용을 출력 하고 대화정보를 비활성화 시킴 
         // 아이템 삭제
+        // 타겟의 이름으로 item의 속성 판정 Potion, Magazine
+
+                                                                                                                // Raycast 반경 수정
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, interactionDistance, transform.forward, 0, interactionLayer);
         if (hits.Length > 0)
         {

@@ -23,7 +23,6 @@ public class UIGamePlay : MonoBehaviour
     public Image IMG_magazine;
     public Text numOfPotion_text;
     public Text numOfMagazine_text;
-    private bool isUsed;
 
     //public ChatController chatController;      // 대화 텍스트
     public delegate void battle_Event();
@@ -46,8 +45,8 @@ public class UIGamePlay : MonoBehaviour
     {
         GI.UpdateCurAmmoAction -= Show_Bullet_Count;
         GI.UpdateRemainAmmoAction -= GetMagazine;
-        GI.UpdateGetPotionAction += GetPotion;
-        GI.UpdateUsePotionAction += UsePotion;
+        GI.UpdateGetPotionAction -= GetPotion;
+        GI.UpdateUsePotionAction -= UsePotion;
         GI.UpdateHpAction -= HandleHP;
     }
     private void Start() 
@@ -64,8 +63,6 @@ public class UIGamePlay : MonoBehaviour
         //remainBullet.text = GameInformation.Instance.RemainAmmo.ToString(); // 한 탄창에 남은 총알 수
         //show_CrossHair = crossHair.GetComponent<GameObject>();
         
-
-        isUsed = false;
         numOfPotion_text.text = GI.NumOfPotion.ToString();
         numOfMagazine_text.text = GI.RemainAmmo.ToString();
 
@@ -112,11 +109,8 @@ public class UIGamePlay : MonoBehaviour
     }
     public void UsePotion()
     {
-        if (isUsed == false)
-        {
-            numOfPotion_text.text = GI.NumOfPotion.ToString();
-            Potion_CoolTime();
-        }
+        numOfPotion_text.text = GI.NumOfPotion.ToString();
+        Potion_CoolTime();
     }
     public void GetPotion()
     {
@@ -129,7 +123,6 @@ public class UIGamePlay : MonoBehaviour
 
     public void Potion_CoolTime() // 아이템 사용시 쿨타임 표시 UI(쿨 타임 동안 퀵슬롯 이미지 로드)
     {
-        isUsed = true;
         StartCoroutine(CoolTime(3f)); // 쿨타임 3초
         IEnumerator CoolTime(float coolTime) // 코루틴
         {
@@ -141,7 +134,6 @@ public class UIGamePlay : MonoBehaviour
 
                 yield return new WaitForFixedUpdate();
             }
-            isUsed = false;
         }
     }
 }

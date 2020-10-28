@@ -23,6 +23,7 @@ public class GameManager : SingletonBase<GameManager>
 
     // 게임오버 판단
     public bool isGameOver;
+    public bool isUsePotion;
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
 
@@ -63,6 +64,7 @@ public class GameManager : SingletonBase<GameManager>
     void Start()
     {
         isGameOver = false;
+        isUsePotion = false;
         InitScene();
     }
     void Update()
@@ -98,6 +100,15 @@ public class GameManager : SingletonBase<GameManager>
     {
         if (getItem != null)
         {
+            switch (getItem.name)
+            {
+                case "Potion":
+                    GetPotion();
+                    break;
+                case "Magazine":
+                    GetMagazine();
+                    break;
+            }
             Debug.Log(getItem.name + "을 습득했다.");
             getItem.gameObject.SetActive(false);
         }
@@ -110,10 +121,12 @@ public class GameManager : SingletonBase<GameManager>
     {
         // 포션 사용 메서드
         // QuickSlot 에서 포션 개수가 남아 있는지 확인
-        if(GI.NumOfPotion > 0)
+        if(isUsePotion != true && GI.NumOfPotion > 0)
         {
+            isUsePotion = !isUsePotion;
             GI.UpdateUsePotion(-1);
             GI.UpdateHp(30);
+            isUsePotion = !isUsePotion;
         }
     }
     public void GetMagazine()
