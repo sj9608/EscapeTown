@@ -55,6 +55,8 @@ public class Gun : MonoBehaviour
     // 총을 마지막으로 발사한 시점
     private float lastFireTime;
 
+    public ParticleSystem bloodEffect;
+
     GameInformation GI;
 
     // 남은 탄약을 추가하는 메서드
@@ -120,6 +122,8 @@ public class Gun : MonoBehaviour
             {
                 zombie.OnDamage(gunDamage, hitPosition);
             }
+            bloodEffect.transform.position = hitPosition;
+            bloodEffect.Play();
             // 레이가 어떤 물체와 충돌한 경우
             //GameManager.Instance.Attack(hit.collider, damage);
         }
@@ -170,7 +174,7 @@ public class Gun : MonoBehaviour
     // 재장전 시도
     public bool Reload()
     {
-        if (gunState == GunState.Reloading|| GI.RemainAmmo <= 0 || GI.CurAmmo >= magCapacity)
+        if (gunState == GunState.Reloading || GI.RemainAmmo <= 0 || GI.CurAmmo >= magCapacity)
         {
             // 이미 재장전 중이거나, 남은 총알이 없거나
             // 탄창에 총알이 이미 가득한 경우 재장전 할수 없다
