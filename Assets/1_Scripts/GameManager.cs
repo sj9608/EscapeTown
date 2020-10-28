@@ -12,8 +12,15 @@ public class GameManager : SingletonBase<GameManager>
     ChatManager ChatManager;
     // 게임 save load용 data class
     GameData gameData;
+
+    // 적 수를 딕셔너리에 넣어 좀비 수로 골포인트 판별
     GameObject enemies;
     public Dictionary<string, Zombie> enemiesDic;
+
+    // ChatObject 자식 오브젝트의(ObjectData 컴포넌트) 수로 골포인트 판별
+    GameObject chatObject;
+    public int numOfChatObject;
+
     // 게임오버 판단
     public bool isGameOver;
     // 무기 데미지 나중 무기클래스에서 얻어옴
@@ -44,6 +51,8 @@ public class GameManager : SingletonBase<GameManager>
             enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
         }
         Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
+
+        
     }
     private void Awake()
     {
