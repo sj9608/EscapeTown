@@ -152,7 +152,7 @@ public class GameManager : SingletonBase<GameManager>
     public void GameRetry()
     {
         isGameOver = false;
-        SCI.NextSecne(tempCurrentSceneNum);
+        LoadGame();
     }
     
     public void GoMain()

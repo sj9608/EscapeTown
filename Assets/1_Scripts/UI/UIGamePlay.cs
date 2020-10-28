@@ -57,7 +57,7 @@ public class UIGamePlay : MonoBehaviour
         // numOfBullet 값 불러오기
 
         // curHP 값 불러오기
-        hpbar.value = 1;
+        hpbar.value = GI.HP;
         
         // 총 탄 수 / 잔 탄 수 불러오기
         curBullet.text = GI.CurAmmo.ToString(); // 잔탄 수;
