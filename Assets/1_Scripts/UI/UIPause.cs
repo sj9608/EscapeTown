@@ -25,19 +25,28 @@ public class UIPause : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cursor.lockState = CursorLockMode.Confined;
+           
             if (menuSet.activeSelf)
             {
+                // 마우스 커서를 화면 중앙에 고정
                 Cursor.lockState = CursorLockMode.Locked;
+                Debug.Log("커서 비활성화");
+                // 마우스 커서를 안보이게 함
+                Cursor.visible = false;
                 menuSet.SetActive(false);
                 isPopUp = false;
+                Debug.Log("isPopUp :"+ isPopUp);
                 Set_Outpause(); // 일시정지 해제
                 
             }
             else
             {
                 menuSet.SetActive(true);
-                isPopUp = true;
+                isPopUp = true; 
+                // 마우스 커서 고정을 해제
+                Cursor.lockState = CursorLockMode.None;
+                // 마우스 커서를 보이게 함
+                Cursor.visible = true;
                 Set_pause(); // 게임 일시정지
             }
         }

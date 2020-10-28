@@ -29,7 +29,11 @@ public class UIGameOver : MonoBehaviour
     public void Show_GameOver_Pannel()
     {
         if(isOver == true)
+        {
             gameover.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
         else
             return;
     }
