@@ -44,6 +44,7 @@ public class UIGameOver : MonoBehaviour
         // Cursor.lockState = CursorLockMode.Locked;
         // int s = SceneManager.GetActiveScene().buildIndex; // 현재 씬의 인덱스 번호를 다시 불러옴
         // SceneManager.LoadScene(s); // 현재 씬 다시 부르기       
+        GameManager.Instance.GameRetry();
     }
     
     public void GameOver_BTN_Main()
