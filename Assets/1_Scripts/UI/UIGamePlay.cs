@@ -100,7 +100,7 @@ public class UIGamePlay : MonoBehaviour
 
     private void HandleHP() // HP바 
     {
-        hpbar.value = Mathf.Lerp(hpbar.value, GI.HP, Time.deltaTime);
+        hpbar.value = Mathf.Lerp(hpbar.value, GI.HP / GI.MAX_HP, Time.deltaTime);
     }
 
     public void Show_CrossHair()
