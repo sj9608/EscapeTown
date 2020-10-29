@@ -82,7 +82,7 @@ public class Gun : MonoBehaviour
         // 현재 탄창을 가득채우기
         magAmmo = GI.CurAmmo;
         // 총의 현재 상태를 총을 쏠 준비가 된 상태로 변경
-        gunState = GunState.Ready;
+        gunState = (magAmmo > 0) ? GunState.Ready : GunState.Empty;
         // 마지막으로 총을 쏜 시점을 초기화
         lastFireTime = 0;
     }
