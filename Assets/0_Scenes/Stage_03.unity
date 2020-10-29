@@ -378,7 +378,7 @@ PrefabInstance:
     - target: {fileID: 5488744668466736295, guid: 57af698c90e326641b9262b9afc534d7,
         type: 3}
       propertyPath: m_Name
-      value: Potion (1)
+      value: Potion
       objectReference: {fileID: 0}
     - target: {fileID: 5492598301962027341, guid: 57af698c90e326641b9262b9afc534d7,
         type: 3}
@@ -609,7 +609,7 @@ PrefabInstance:
     - target: {fileID: 461514626999073948, guid: 36d69d333fb032640bb81e3dca584994,
         type: 3}
       propertyPath: m_Name
-      value: Magazine (1)
+      value: Magazine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d69d333fb032640bb81e3dca584994, type: 3}
@@ -2509,7 +2509,7 @@ PrefabInstance:
     - target: {fileID: 461514626999073948, guid: 36d69d333fb032640bb81e3dca584994,
         type: 3}
       propertyPath: m_Name
-      value: Magazine (2)
+      value: Magazine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d69d333fb032640bb81e3dca584994, type: 3}
