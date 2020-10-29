@@ -71,6 +71,10 @@ public class UIGamePlay : MonoBehaviour
 
     private void Update() 
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         // numOfPotion 값 불러오기
         // 
 

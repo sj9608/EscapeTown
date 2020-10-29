@@ -27,6 +27,10 @@ public class CharacterAiming : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         float yawCamera = mainCamera.transform.rotation.eulerAngles.y; // 카메라의 y축 각도
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yawCamera, 0), turnSpeed * Time.fixedDeltaTime); // 캐릭터가 카메라의 회전에 대응하여 회전 하는 것
 
@@ -38,6 +42,10 @@ public class CharacterAiming : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         if (aimLayer)
         {
             if (Input.GetButton("Fire2"))

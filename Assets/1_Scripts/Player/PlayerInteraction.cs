@@ -28,6 +28,10 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.F))
         {
             GetInteraction();

@@ -27,6 +27,10 @@ public class UIChatNote : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         // E키를 누를 때 마다 열림/닫힘 상태 토글
         if(Input.GetKeyDown(KeyCode.E)) isOpen = !isOpen;
 

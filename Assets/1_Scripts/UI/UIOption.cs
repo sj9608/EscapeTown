@@ -18,6 +18,10 @@ public class UIOption : MonoBehaviour
 
     public void Popup_Option()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
        if(Input.GetKeyDown(KeyCode.Escape) && isShow == false)
        {
            option.SetActive(false);

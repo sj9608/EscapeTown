@@ -42,6 +42,10 @@ public class CharacterLocomotion : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical"); 
 
@@ -63,7 +67,7 @@ public class CharacterLocomotion : MonoBehaviour
         //}
 
         // 크라우치 감지
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             isCrouch = true;
             animator.SetBool("isCrouch", isCrouch);
@@ -78,25 +82,6 @@ public class CharacterLocomotion : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //Jump();               // 벨런스 문제로 점프기능 잠금
-        }
-
-        // 재장전 감지
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if(playerAttack.isGun == false)
-            {
-                weaponPoseRig.weight = 1f;
-                handIK.weight = 1f;
-                rifle.SetActive(true);
-                playerAttack.isGun = true;
-            }
-            else 
-            {
-                weaponPoseRig.weight = 0f;
-                handIK.weight = 0f;
-                rifle.SetActive(false);
-                playerAttack.isGun = false;
-            }
         }
     }
 
@@ -193,5 +178,19 @@ public class CharacterLocomotion : MonoBehaviour
 
         // Apply the push
         body.velocity = pushDir * pushPower;
+    }
+    public void ChangePose(bool isDay){
+        if (isDay)
+        {
+            weaponPoseRig.weight = 1f;
+            handIK.weight = 1f;
+        }
+        else
+        {
+            weaponPoseRig.weight = 0f;
+            handIK.weight = 0f;
+        }
+        rifle.SetActive(isDay);
+        playerAttack.isGun = isDay;
     }
 }

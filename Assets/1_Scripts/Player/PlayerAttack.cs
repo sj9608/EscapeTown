@@ -20,6 +20,10 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         // 입력을 감지하고 총 발사하거나 재장전
         if (Input.GetButton("Fire2") && Input.GetButton("Fire1"))
         {
