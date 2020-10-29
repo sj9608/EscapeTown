@@ -62,7 +62,7 @@ public class ChatManager : SingletonBase<ChatManager>
     {   // ChatFile 을 열어 딕셔너리에 대사와 화자를 기입하는 메서드
         string loadFile = "ChatFile";
 
-        if(textAsset.Equals(null)) return;
+        if(textAsset != null) return;
         
         chatNumber = 0;
         textAsset = (TextAsset)Resources.Load(loadFile);
