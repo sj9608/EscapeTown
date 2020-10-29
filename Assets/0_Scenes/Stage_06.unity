@@ -398,7 +398,7 @@ PrefabInstance:
     - target: {fileID: 461514626999073948, guid: 36d69d333fb032640bb81e3dca584994,
         type: 3}
       propertyPath: m_Name
-      value: Magazine (1)
+      value: Magazine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d69d333fb032640bb81e3dca584994, type: 3}
@@ -493,7 +493,7 @@ PrefabInstance:
     - target: {fileID: 5488744668466736295, guid: 57af698c90e326641b9262b9afc534d7,
         type: 3}
       propertyPath: m_Name
-      value: Potion (3)
+      value: Potion
       objectReference: {fileID: 0}
     - target: {fileID: 5492598301962027341, guid: 57af698c90e326641b9262b9afc534d7,
         type: 3}
@@ -729,7 +729,7 @@ PrefabInstance:
     - target: {fileID: 5488744668466736295, guid: 57af698c90e326641b9262b9afc534d7,
         type: 3}
       propertyPath: m_Name
-      value: Potion (4)
+      value: Potion
       objectReference: {fileID: 0}
     - target: {fileID: 5492598301962027341, guid: 57af698c90e326641b9262b9afc534d7,
         type: 3}
@@ -1390,17 +1390,17 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1639840342}
-  - {fileID: 291875625}
-  - {fileID: 160275547}
-  - {fileID: 94814209}
   - {fileID: 106002972}
+  - {fileID: 1139050020}
   - {fileID: 1598870165}
   - {fileID: 1879527421}
-  - {fileID: 1139050020}
+  - {fileID: 1639840342}
   - {fileID: 869106775}
+  - {fileID: 291875625}
+  - {fileID: 160275547}
   - {fileID: 1672041492}
   - {fileID: 6130839752313165106}
+  - {fileID: 94814209}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1904,7 +1904,7 @@ PrefabInstance:
     - target: {fileID: 461514626999073948, guid: 36d69d333fb032640bb81e3dca584994,
         type: 3}
       propertyPath: m_Name
-      value: Magazine (5)
+      value: Magazine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d69d333fb032640bb81e3dca584994, type: 3}
@@ -2671,7 +2671,7 @@ PrefabInstance:
     - target: {fileID: 461514626999073948, guid: 36d69d333fb032640bb81e3dca584994,
         type: 3}
       propertyPath: m_Name
-      value: Magazine (4)
+      value: Magazine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d69d333fb032640bb81e3dca584994, type: 3}
@@ -3974,7 +3974,7 @@ PrefabInstance:
     - target: {fileID: 461514626999073948, guid: 36d69d333fb032640bb81e3dca584994,
         type: 3}
       propertyPath: m_Name
-      value: Magazine (2)
+      value: Magazine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d69d333fb032640bb81e3dca584994, type: 3}
@@ -4024,7 +4024,7 @@ PrefabInstance:
     - target: {fileID: 5488744668466736295, guid: 57af698c90e326641b9262b9afc534d7,
         type: 3}
       propertyPath: m_Name
-      value: Potion (5)
+      value: Potion
       objectReference: {fileID: 0}
     - target: {fileID: 5492598301962027341, guid: 57af698c90e326641b9262b9afc534d7,
         type: 3}
@@ -4266,7 +4266,7 @@ PrefabInstance:
     - target: {fileID: 461514626999073948, guid: 36d69d333fb032640bb81e3dca584994,
         type: 3}
       propertyPath: m_Name
-      value: Magazine (6)
+      value: Magazine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d69d333fb032640bb81e3dca584994, type: 3}
@@ -4734,7 +4734,7 @@ PrefabInstance:
     - target: {fileID: 461514626999073948, guid: 36d69d333fb032640bb81e3dca584994,
         type: 3}
       propertyPath: m_Name
-      value: Magazine (3)
+      value: Magazine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d69d333fb032640bb81e3dca584994, type: 3}
