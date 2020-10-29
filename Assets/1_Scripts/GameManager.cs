@@ -24,6 +24,8 @@ public class GameManager : SingletonBase<GameManager>
     // 게임오버 판단
     public bool isGameOver;
     public bool isUsePotion;
+    public bool isLoading;
+
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
 
@@ -68,19 +70,27 @@ public class GameManager : SingletonBase<GameManager>
     {
         isGameOver = false;
         isUsePotion = false;
+        isLoading = false;
         InitScene();
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
         {
-            GetPotion();
+            return;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             UsePotion();
         }
-        // 탄창 습득 시
+
+
+
+        // 테스틀용 코드 정식 버전에서 삭제
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GetPotion();
+        }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             GetMagazine();

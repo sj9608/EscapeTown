@@ -37,6 +37,10 @@ public class SceneController : SingletonBase<SceneController>
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.N))
         {
             // GameManager.Instance.StageClear();
@@ -53,6 +57,7 @@ public class SceneController : SingletonBase<SceneController>
 
     IEnumerator IENextScene(int current)
     {
+        
         PopupChange(true);
         AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(current);
 
@@ -70,6 +75,7 @@ public class SceneController : SingletonBase<SceneController>
 
     void PopupChange(bool isLoading)
     {
+        GameManager.Instance.isLoading = isLoading;
         stageHUDObject.SetActive(!isLoading);
         chatUIObject.SetActive(!isLoading);
         loadingObject.SetActive(isLoading);

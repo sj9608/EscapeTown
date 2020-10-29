@@ -16,7 +16,11 @@ public class UIPause : MonoBehaviour
     bool isPopUp;
 
     void Update()
-    { 
+    {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         popUp_Menu();
     }
 

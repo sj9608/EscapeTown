@@ -42,6 +42,10 @@ public class CharacterLocomotion : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        {
+            return;
+        }
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical"); 
 
@@ -63,7 +67,7 @@ public class CharacterLocomotion : MonoBehaviour
         //}
 
         // 크라우치 감지
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             isCrouch = true;
             animator.SetBool("isCrouch", isCrouch);
@@ -80,7 +84,10 @@ public class CharacterLocomotion : MonoBehaviour
             //Jump();               // 벨런스 문제로 점프기능 잠금
         }
 
-        // 재장전 감지
+
+
+
+        // 삭제 후 낮 밤으로 자세 변경
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if(playerAttack.isGun == false)
