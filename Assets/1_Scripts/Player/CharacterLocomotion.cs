@@ -83,28 +83,6 @@ public class CharacterLocomotion : MonoBehaviour
         {
             //Jump();               // 벨런스 문제로 점프기능 잠금
         }
-
-
-
-
-        // 삭제 후 낮 밤으로 자세 변경
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if(playerAttack.isGun == false)
-            {
-                weaponPoseRig.weight = 1f;
-                handIK.weight = 1f;
-                rifle.SetActive(true);
-                playerAttack.isGun = true;
-            }
-            else 
-            {
-                weaponPoseRig.weight = 0f;
-                handIK.weight = 0f;
-                rifle.SetActive(false);
-                playerAttack.isGun = false;
-            }
-        }
     }
 
     public void UpdateIsSprinting()
@@ -200,5 +178,19 @@ public class CharacterLocomotion : MonoBehaviour
 
         // Apply the push
         body.velocity = pushDir * pushPower;
+    }
+    public void ChangePose(bool isDay){
+        if (isDay)
+        {
+            weaponPoseRig.weight = 1f;
+            handIK.weight = 1f;
+        }
+        else
+        {
+            weaponPoseRig.weight = 0f;
+            handIK.weight = 0f;
+        }
+        rifle.SetActive(isDay);
+        playerAttack.isGun = isDay;
     }
 }
