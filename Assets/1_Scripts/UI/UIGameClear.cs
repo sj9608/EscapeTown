@@ -15,7 +15,8 @@ public class UIGameClear : MonoBehaviour
     public Button BtnRetry;
     public Button BtnExit;
 
-    private void Start() {
+    private void Start() 
+    {
         ThanksText.gameObject.SetActive(false);
         BtnExit.gameObject.SetActive(false);
         BtnRetry.gameObject.SetActive(false);
