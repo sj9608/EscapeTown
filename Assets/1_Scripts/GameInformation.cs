@@ -66,16 +66,16 @@ public class GameInformation : SingletonBase<GameInformation>
         SCI = SceneController.Instance;
         CMI = ChatManager.Instance;
         HP = 100;       // 저
-        RemainAmmo = 60;  // 총 총알 수 
-        NumOfPotion = 5;
-        CurAmmo = 20;
+        RemainAmmo = 0;  // 총 총알 수 
+        NumOfPotion = 0;
+        CurAmmo = 30;
     }
 
     public void GameInformationInit(GameData gameData)
     {
         if (gameData == null)
         {
-            gameData = new GameData(2, 100, 0, 30, 1, new int[100], 0);
+            gameData = new GameData(2, 100, 0, 30, 0, new int[100], 0);
         }
         SCI.CurSceneNum = gameData.saveSceneNum;
         
