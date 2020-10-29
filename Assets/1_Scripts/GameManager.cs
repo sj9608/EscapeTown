@@ -32,7 +32,12 @@ public class GameManager : SingletonBase<GameManager>
     // 퀵슬롯에서 2번(탄창 누를 시 충전 될 총알 수
     int addAmmo = 60;
     public PlayerAttack playerAttack;
-
+    public CharacterLocomotion characterLocomotion;
+    // 씬 별 낮 밤 체크 bool 배열
+    // 0번은 false 고정 MainScene
+    // 마지막 번호는 EndingScene
+    bool[] isDays = {false, true, false, true, false, true, false, true, false, true, true, false, true, false, true};
+    //                0       1     2       3     4     5     6     7       8     9     10    11    12      13    14     15
     // 씬로딩에만 쓸 임시 씬번호
     private int tempCurrentSceneNum;
 
@@ -45,6 +50,8 @@ public class GameManager : SingletonBase<GameManager>
         // 저장위치는 스테이지 클리어 직후 / 로딩 중 / 새 스테이지 씬 로딩 후 
         tempCurrentSceneNum = SCI.CurSceneNum;
         playerAttack = FindObjectOfType<PlayerAttack>();
+        characterLocomotion = FindObjectOfType<CharacterLocomotion>();
+        characterLocomotion.ChangePose(isDays[tempCurrentSceneNum]);
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 낮 Scene
         enemies = GameObject.Find("Enemies");
