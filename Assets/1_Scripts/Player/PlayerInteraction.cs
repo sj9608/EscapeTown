@@ -12,8 +12,8 @@ public class PlayerInteraction : MonoBehaviour
     private LayerMask interactionLayer;
     // 상호작용 거리
     float interactionDistance;
-
-    // 
+    // 상호 작용 각도
+    private float currentSearchAngle;
     Collider target = null;
 
     // Start is called before the first frame update
@@ -21,8 +21,9 @@ public class PlayerInteraction : MonoBehaviour
     {
         enemyLayer = LayerMask.GetMask("Enemy");
         interactionLayer = LayerMask.GetMask("Interaction");
-        attackDistance = 10;
-        interactionDistance = 2;
+        attackDistance = 10f;
+        interactionDistance = 2f;
+        currentSearchAngle = 120f;
     }
 
     // Update is called once per frame
@@ -44,8 +45,10 @@ public class PlayerInteraction : MonoBehaviour
         // 타겟의 이름으로 item의 속성 판정 Potion, Magazine
 
                                                                                                                 // Raycast 반경 수정
+        
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, interactionDistance, transform.forward, 0, interactionLayer);
-        if (hits.Length > 0)
+        if (hits.Length > 0 &&
+            Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(hits[0].transform.position)) < currentSearchAngle / 2.0f)
         {
             target = hits[0].collider;
             switch (target.tag)
@@ -54,6 +57,7 @@ public class PlayerInteraction : MonoBehaviour
                     ObjectData obj = hits[0].transform.GetComponent<ObjectData>();
                     if (obj != null && obj.enabled == true)
                     {
+                        hits[0].transform.LookAt(transform);
                         StartCoroutine(ChatManager.Instance.PrintNormalChat(obj.id, obj.isNpc));
                         obj.enabled = false;
                     }
