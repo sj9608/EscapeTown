@@ -77,7 +77,7 @@ public class CharacterLocomotion : MonoBehaviour
         // 점프감지
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            //Jump();               // 벨런스 문제로 점프기능 잠금
         }
 
         // 재장전 감지

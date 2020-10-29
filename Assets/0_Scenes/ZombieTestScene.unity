@@ -1341,7 +1341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be6d248e39946b41b77027688f91e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsGameOver: 0
+  numOfChatObject: 0
+  isGameOver: 0
   playerAttack: {fileID: 0}
 --- !u!4 &341924257
 Transform:
@@ -2514,7 +2515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be6d248e39946b41b77027688f91e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsGameOver: 0
+  numOfChatObject: 0
+  isGameOver: 0
   playerAttack: {fileID: 0}
 --- !u!1 &759357375
 GameObject:
@@ -3854,6 +3856,7 @@ MonoBehaviour:
   menuSet: {fileID: 1715512274}
   optionSet: {fileID: 1520814178}
   btn_Continue: {fileID: 1119189}
+  btn_GotoMain: {fileID: 0}
   btn_Setting: {fileID: 979299968}
   btn_Quit: {fileID: 1921858716}
 --- !u!1 &1028827954
