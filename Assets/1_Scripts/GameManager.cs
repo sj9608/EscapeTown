@@ -115,7 +115,7 @@ public class GameManager : SingletonBase<GameManager>
     }
     public void GetPotion()
     {
-        GI.UpdateUsePotion(1);
+        GI.UpdatePotion(1);
     }
     public void UsePotion()
     {
@@ -123,10 +123,8 @@ public class GameManager : SingletonBase<GameManager>
         // QuickSlot 에서 포션 개수가 남아 있는지 확인
         if(isUsePotion != true && GI.NumOfPotion > 0)
         {
-            isUsePotion = !isUsePotion;
-            GI.UpdateUsePotion(-1);
+            GI.UpdatePotion(-1);
             GI.UpdateHp(30);
-            isUsePotion = !isUsePotion;
         }
     }
     public void GetMagazine()

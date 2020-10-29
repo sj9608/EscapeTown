@@ -102,7 +102,7 @@ public class GameInformation : SingletonBase<GameInformation>
             UpdateCurAmmoAction();
         }
     }
-    public void UpdateUsePotion(int change)       //포션 획득
+    public void UpdatePotion(int change)       //포션 획득
     {
         NumOfPotion += change;
         if (change > 0)

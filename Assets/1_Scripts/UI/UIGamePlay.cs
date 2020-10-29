@@ -123,6 +123,7 @@ public class UIGamePlay : MonoBehaviour
 
     public void Potion_CoolTime() // 아이템 사용시 쿨타임 표시 UI(쿨 타임 동안 퀵슬롯 이미지 로드)
     {
+        GameManager.Instance.isUsePotion = true;
         StartCoroutine(CoolTime(3f)); // 쿨타임 3초
         IEnumerator CoolTime(float coolTime) // 코루틴
         {
@@ -134,6 +135,7 @@ public class UIGamePlay : MonoBehaviour
 
                 yield return new WaitForFixedUpdate();
             }
+            GameManager.Instance.isUsePotion = false;
         }
     }
 }
