@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
+        isGun = true;
         isAim = false;
     }
 

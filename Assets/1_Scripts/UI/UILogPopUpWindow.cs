@@ -21,11 +21,11 @@ public class UILogPopUpWindow : MonoBehaviour
         GI = GameInformation.Instance;
     }
     private void OnEnable() {
-        GI.UpdateRemainAmmoAction += GetMagazineLog;
+        GameManager.Instance.GetMagazineAction += GetMagazineLog;
         GI.UpdateGetPotionAction += GetPotionLog;
     }
     private void OnDisable() {
-        GI.UpdateRemainAmmoAction -= GetMagazineLog;
+        GameManager.Instance.GetMagazineAction -= GetMagazineLog;
         GI.UpdateGetPotionAction -= GetPotionLog;
     }
     void Start()

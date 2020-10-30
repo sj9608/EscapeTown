@@ -197,15 +197,15 @@ public class CharacterLocomotion : MonoBehaviour
     public void ChangePose(bool isDay){
         if (isDay)
         {
-            weaponPoseRig.weight = 1f;
-            handIK.weight = 1f;
-        }
-        else
-        {
             weaponPoseRig.weight = 0f;
             handIK.weight = 0f;
         }
-        rifle.SetActive(isDay);
-        playerAttack.isGun = isDay;
+        else
+        {
+            weaponPoseRig.weight = 1f;
+            handIK.weight = 1f;
+        }
+        rifle.SetActive(!isDay);
+        playerAttack.isGun = !isDay;
     }
 }
