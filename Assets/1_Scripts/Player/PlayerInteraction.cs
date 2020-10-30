@@ -58,7 +58,9 @@ public class PlayerInteraction : MonoBehaviour
                     if (obj != null && obj.enabled == true)
                     {
                         hits[0].transform.LookAt(transform);
+                        StopCoroutine(ChatManager.Instance.PrintNormalChat(obj.id, obj.isNpc));
                         StartCoroutine(ChatManager.Instance.PrintNormalChat(obj.id, obj.isNpc));
+                        obj.questionMark.SetActive(false);
                         obj.enabled = false;
                     }
                     break;
