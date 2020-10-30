@@ -24,14 +24,14 @@ public class ChatTrigger : MonoBehaviour
         _collider = GetComponent<Collider>();
         //enemies = GameObject.Find("Enemies");
     }
-    IEnumerator OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player" /* && isAbleToChat == true*/)
         {
             StartCoroutine(ChatManager.Instance.PrintNormalChat(objectData.id, objectData.isNpc));
             _collider.enabled = false;
-            yield return new WaitForSeconds(4);
-            this.gameObject.SetActive(false);
+            // yield return new WaitForSeconds(4);
+            // this.gameObject.SetActive(false);
         }
      }
 }

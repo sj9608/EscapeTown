@@ -59,7 +59,9 @@ public class PlayerInteraction : MonoBehaviour
                     {
                         hits[0].transform.LookAt(transform);
                         StartCoroutine(ChatManager.Instance.PrintNormalChat(obj.id, obj.isNpc));
+                        obj.questionMark.SetActive(false);
                         obj.enabled = false;
+                        obj.gameObject.layer = 0;
                     }
                     break;
                 case "Item":

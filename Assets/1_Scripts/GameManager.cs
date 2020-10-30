@@ -43,6 +43,7 @@ public class GameManager : SingletonBase<GameManager>
 
     // 게임 오버시 UI호출 Action
     public event UnityAction GameOverAction;
+    public UnityAction<bool> IsAimAction;
     public void InitScene()
     {
         // 현재 페이지에서만 쓸 인자용 씬번호
