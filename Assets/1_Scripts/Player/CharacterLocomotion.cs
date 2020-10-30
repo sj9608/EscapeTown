@@ -8,6 +8,7 @@ public class CharacterLocomotion : MonoBehaviour
     public float jumpHeight;
     public float gravity;
     public float stepDown;
+    public float crouchSpeed;
     public float airControl;
     public float jumpDamp;
     public float groundSpeed;
@@ -91,10 +92,10 @@ public class CharacterLocomotion : MonoBehaviour
         animator.SetBool(isSprintingParam, isSprinting);
     }
 
-    private void OnAnimatorMove()
-    {
-        rootMotion += animator.deltaPosition;
-    }
+    //private void OnAnimatorMove()
+    //{
+    //    rootMotion += animator.deltaPosition;
+    //}
 
     private void FixedUpdate()
     {
@@ -121,10 +122,19 @@ public class CharacterLocomotion : MonoBehaviour
 
     void UpdateOnGround()
     {
-        Vector3 stepForwardAmount = rootMotion * groundSpeed;
-        Vector3 stepDownAmount = Vector3.down * stepDown;
-        cc.Move(stepForwardAmount + stepDownAmount);
-        rootMotion = Vector3.zero;
+        if (isCrouch)
+        {
+            cc.Move(CalculateCrouchControl());
+        }
+        else
+        {
+            Vector3 stepForwardAmount = rootMotion * groundSpeed;
+            Vector3 stepDownAmount = Vector3.down * stepDown;
+            cc.Move(stepForwardAmount + stepDownAmount);
+            rootMotion = Vector3.zero;
+        }
+
+        
         if (!cc.isGrounded)
         {
             SetInAir(0);
@@ -138,6 +148,11 @@ public class CharacterLocomotion : MonoBehaviour
             float jumpVelocity = Mathf.Sqrt(2 * gravity * jumpHeight);
             SetInAir(jumpVelocity);
         }
+    }
+
+    Vector3 CalculateCrouchControl()
+    {
+        return ((transform.forward * input.y) + (transform.right * input.x)) * crouchSpeed;
     }
 
     Vector3 CalculateAirControl()

@@ -288,6 +288,11 @@ public class Zombie : MonoBehaviour
         currentState = State.Dead;
         anim.SetTrigger("isDead");
         isDead = true;
+        GetComponent<CapsuleCollider>().height = 0.1f;
+        GetComponent<CapsuleCollider>().center = new Vector3(0, 0.2f, 0);
+
+        gameObject.layer = 0;
+
         GameManager.Instance.ZombieDead(name);
 
         StopCoroutine(Think());

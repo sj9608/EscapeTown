@@ -1343,7 +1343,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfChatObject: 0
   isGameOver: 0
+  isUsePotion: 0
+  isLoading: 0
   playerAttack: {fileID: 0}
+  characterLocomotion: {fileID: 0}
 --- !u!4 &341924257
 Transform:
   m_ObjectHideFlags: 0
@@ -2517,7 +2520,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfChatObject: 0
   isGameOver: 0
+  isUsePotion: 0
+  isLoading: 0
   playerAttack: {fileID: 0}
+  characterLocomotion: {fileID: 0}
 --- !u!1 &759357375
 GameObject:
   m_ObjectHideFlags: 0
