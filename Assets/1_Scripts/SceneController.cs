@@ -31,7 +31,7 @@ public class SceneController : SingletonBase<SceneController>
         stageHUDObject.SetActive(false);
         chatUIObject.SetActive(false);
         loadingObject.SetActive(false);
-        //SceneManager.LoadSceneAsync(curSceneNum, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(curSceneNum, LoadSceneMode.Additive);
     }
 
     // Update is called once per frame
