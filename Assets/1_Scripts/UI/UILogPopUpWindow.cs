@@ -12,7 +12,7 @@ public class UILogPopUpWindow : MonoBehaviour
     public GameObject magazine_LogWindow;
     RectTransform rectTransform_1;
     RectTransform rectTransform_2;
-    Vector3 target = new Vector3(1850, 0, 0);
+    Vector3 target = new Vector3(920, 0, 0);
     float speed = 0.3f;
     float time = 0f;
     bool isShow = false;   // 현재 로그창이 떠있는지 안떠있는지 여부
@@ -58,7 +58,7 @@ public class UILogPopUpWindow : MonoBehaviour
 
         magazine_LogWindow.SetActive(false);
         isShow = false;
-        rectTransform_2.localPosition = new Vector3(1090, -303, 0);
+        rectTransform_2.localPosition = new Vector3(680, -237, 0);
     }
     IEnumerator IELogPotionPopUp()
     {
@@ -77,6 +77,6 @@ public class UILogPopUpWindow : MonoBehaviour
         
         potion_LogWindow.SetActive(false);
         isShow = false;
-        rectTransform_1.localPosition = new Vector3(1090, -303, 0);
+        rectTransform_1.localPosition = new Vector3(680, -237, 0);
     }
 }
