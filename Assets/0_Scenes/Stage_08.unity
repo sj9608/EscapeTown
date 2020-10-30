@@ -2786,6 +2786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 842
   isNpc: 1
+  questionMark: {fileID: 1513430062}
 --- !u!1001 &2388156229433738198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8543,6 +8544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 845
   isNpc: 1
+  questionMark: {fileID: 89691692}
 --- !u!1001 &5070560361944382102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8626,6 +8628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 815
   isNpc: 1
+  questionMark: {fileID: 136536606}
 --- !u!95 &5352532599910983292
 Animator:
   serializedVersion: 3
@@ -10358,6 +10361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 840
   isNpc: 1
+  questionMark: {fileID: 454674595}
 --- !u!95 &6941894523460660824
 Animator:
   serializedVersion: 3
@@ -12159,6 +12163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 820
   isNpc: 1
+  questionMark: {fileID: 159118691}
 --- !u!4 &7799866443839299451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3267869335896438574, guid: cb1be8afdbca9a24792fc1272fb940eb,
@@ -13972,6 +13977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 835
   isNpc: 1
+  questionMark: {fileID: 1320253379}
 --- !u!4 &8632923307856294064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3799170581612225107, guid: 8fc5e3ae944e2954b8ff7d69a4004d00,

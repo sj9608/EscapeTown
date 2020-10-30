@@ -3333,8 +3333,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059051079}
   m_LocalRotation: {x: 0, y: 0.37848702, z: 0, w: 0.92560667}
-  m_LocalPosition: {x: 2.75, y: 0.78, z: 15}
-  m_LocalScale: {x: 7.59, y: 1, z: 5.5}
+  m_LocalPosition: {x: 1.63, y: 0.78, z: 14.23}
+  m_LocalScale: {x: 10, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -11569,6 +11569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 440
   isNpc: 1
+  questionMark: {fileID: 1103676170}
 --- !u!95 &3319491079515402995
 Animator:
   serializedVersion: 3
@@ -15888,6 +15889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 420
   isNpc: 1
+  questionMark: {fileID: 994756309}
 --- !u!1001 &5095132602495327392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16021,6 +16023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 445
   isNpc: 0
+  questionMark: {fileID: 0}
 --- !u!4 &5524131253085480817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4757581854049282726, guid: 3937af4adec8efb4e91ace193827e313,
@@ -18332,6 +18335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 435
   isNpc: 1
+  questionMark: {fileID: 921883125}
 --- !u!23 &7533465010196801395
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20336,6 +20340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 415
   isNpc: 1
+  questionMark: {fileID: 1780405869}
 --- !u!1 &8363460180774031026
 GameObject:
   m_ObjectHideFlags: 0
@@ -20416,6 +20421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 410
   isNpc: 0
+  questionMark: {fileID: 0}
 --- !u!64 &8427672972498709108
 MeshCollider:
   m_ObjectHideFlags: 0

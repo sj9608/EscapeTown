@@ -1642,6 +1642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 315
   isNpc: 0
+  questionMark: {fileID: 0}
 --- !u!65 &938806873
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3720,6 +3721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 350
   isNpc: 1
+  questionMark: {fileID: 533155597}
 --- !u!114 &286496246623646269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5794,6 +5796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 310
   isNpc: 0
+  questionMark: {fileID: 0}
 --- !u!114 &814148135219711833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5808,6 +5811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 360
   isNpc: 1
+  questionMark: {fileID: 714837164}
 --- !u!137 &888295117825338073
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -7847,6 +7851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 325
   isNpc: 1
+  questionMark: {fileID: 1779008068}
 --- !u!1001 &3235635365294325669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11162,6 +11167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 340
   isNpc: 1
+  questionMark: {fileID: 4815312}
 --- !u!1001 &4325101488174813498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15173,10 +15179,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2645790934297552568}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58.32, y: 0, z: -0.87}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalRotation: {x: 0, y: 0.36788103, z: 0, w: 0.9298729}
+  m_LocalPosition: {x: -55.7, y: -1.26, z: -2.48}
+  m_LocalScale: {x: 1, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 611220930}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 43.17, z: 0}

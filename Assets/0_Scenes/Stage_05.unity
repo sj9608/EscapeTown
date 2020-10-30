@@ -7480,6 +7480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 525
   isNpc: 1
+  questionMark: {fileID: 291544422}
 --- !u!64 &734612884266394508
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11300,6 +11301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 520
   isNpc: 1
+  questionMark: {fileID: 1357333804}
 --- !u!1 &1747828395802709787
 GameObject:
   m_ObjectHideFlags: 0
@@ -13038,6 +13040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 515
   isNpc: 1
+  questionMark: {fileID: 513663341}
 --- !u!1001 &2285233705960685510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13131,6 +13134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 530
   isNpc: 1
+  questionMark: {fileID: 644125507}
 --- !u!95 &2756063102267239099
 Animator:
   serializedVersion: 3
@@ -17029,6 +17033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 545
   isNpc: 1
+  questionMark: {fileID: 1857187590}
 --- !u!4 &5316321667738905491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8634223037216290321, guid: 5bfb1e1845291194e916196c43f0abdd,
@@ -17427,6 +17432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 540
   isNpc: 1
+  questionMark: {fileID: 477356836}
 --- !u!4 &8495547922421214024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8859366073979783863, guid: acc06430082e0554387946b890f2090d,
