@@ -39,7 +39,8 @@ public class UIGamePlay : MonoBehaviour
         GI.UpdateRemainAmmoAction += GetMagazine;
         GI.UpdateGetPotionAction += GetPotion;
         GI.UpdateUsePotionAction += UsePotion;
-        GI.UpdateHpAction += HandleHP;
+        // GI.UpdateHpAction += HandleHP;       // UnityAction에 Lerp적용 되야함
+        GameManager.Instance.IsAimAction += Show_CrossHair;
     }
     private void OnDisable()
     {
@@ -47,7 +48,8 @@ public class UIGamePlay : MonoBehaviour
         GI.UpdateRemainAmmoAction -= GetMagazine;
         GI.UpdateGetPotionAction -= GetPotion;
         GI.UpdateUsePotionAction -= UsePotion;
-        GI.UpdateHpAction -= HandleHP;
+        // GI.UpdateHpAction -= HandleHP;       // UnityAction에 Lerp적용 되야함
+        GameManager.Instance.IsAimAction -= Show_CrossHair;
     }
     private void Start() 
     {
@@ -82,11 +84,11 @@ public class UIGamePlay : MonoBehaviour
         // UI 반영
 
         // curHP 값 불러오기
-        //HandleHP(); // GameInformation의 UnityAction 델리게이트로 이동
+        HandleHP(); // GameInformation의 UnityAction 델리게이트로 이동  // UnityAction에 Lerp적용시키기
 
         // 총 탄 수 / 잔 탄 수 불러오기
         // Show_Bullet_Count(); // GameInformation의 UnityAction 델리게이트로 이동
-        Show_CrossHair();
+        // Show_CrossHair(); // GameManager의 UnityAction 델리게이트로 이동
     }
 
 
@@ -104,12 +106,9 @@ public class UIGamePlay : MonoBehaviour
         hpbar.value = Mathf.Lerp(hpbar.value, GI.HP / GI.MAX_HP, Time.deltaTime);
     }
 
-    public void Show_CrossHair()
+    public void Show_CrossHair(bool fire2)
     {
-        if(Input.GetButton("Fire2"))
-            crossHair.SetActive(true);
-        else
-            crossHair.SetActive(false);
+        crossHair.SetActive(fire2);
     }
     public void UsePotion()
     {
