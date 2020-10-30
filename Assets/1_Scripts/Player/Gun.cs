@@ -116,8 +116,6 @@ public class Gun : MonoBehaviour
             // 레이가 충돌한 위치 저장
             hitPosition = hit.point;
             Zombie zombie = hit.transform.GetComponent<Zombie>();
-            // 레이가 충돌한 위치 저장
-            hitPosition = hit.point;
             if (zombie)
             {
                 zombie.OnDamage(gunDamage, hitPosition);
