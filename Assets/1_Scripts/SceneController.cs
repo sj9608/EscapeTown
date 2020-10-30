@@ -79,7 +79,6 @@ public class SceneController : SingletonBase<SceneController>
         stageHUDObject.SetActive(!isLoading);
         chatUIObject.SetActive(!isLoading);
         loadingObject.SetActive(isLoading);
-        GameManager.Instance.IsAimAction(false);
     }
 
 }
