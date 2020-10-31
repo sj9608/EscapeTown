@@ -35,14 +35,17 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("플레이어 공격 받음. 남은체력" + GI.HP);
         if (GI.HP <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
-    public void Die()
+    private IEnumerator Die()
     {
-        GameManager.Instance.PlayerDead();
         isDead = true;
+        GameManager.Instance.isGameOver = true;
         playerAnimator.SetTrigger("Die");
+
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.PlayerDead();
     }
 }

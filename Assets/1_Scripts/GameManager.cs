@@ -44,6 +44,7 @@ public class GameManager : SingletonBase<GameManager>
     // 마지막 번호는 EndingScene
     bool[] isDays = {true, true, true, false, true, false, true, false, true, false, false, true, false, true, false, true};
     //                0     1     2       3     4     5     6     7       8     9     10    11    12      13    14     15
+    //               MS    MAIN  ROOM   S02   S03   S031   S04   S041   S05   S051   S06    S07   S071   S08    S81   GES 
     // 씬로딩에만 쓸 임시 씬번호
     private int tempCurrentSceneNum;
 
@@ -57,6 +58,7 @@ public class GameManager : SingletonBase<GameManager>
         // 저장위치에 따라 쓸모 유무가 생김
         // 저장위치는 스테이지 클리어 직후 / 로딩 중 / 새 스테이지 씬 로딩 후 
         tempCurrentSceneNum = SCI.CurSceneNum;
+        Debug.Log("tempCurrentSceneNum : " + tempCurrentSceneNum);
         playerAttack = FindObjectOfType<PlayerAttack>();
         characterLocomotion = FindObjectOfType<CharacterLocomotion>();
         if (characterLocomotion != null)
@@ -129,7 +131,6 @@ public class GameManager : SingletonBase<GameManager>
     public void PlayerDead()
     {
         Debug.Log("플레이어가 죽음을 게임매니저가 인식");
-        isGameOver = true;
         GameOver();
     }
 
