@@ -104,5 +104,6 @@ public class ChatManager : SingletonBase<ChatManager>
         yield return new WaitForSeconds(3);
         chatCharacter.text = "";
         chatText.text = "";
+        GameManager.Instance.isInteractioning = false;
     }
 }

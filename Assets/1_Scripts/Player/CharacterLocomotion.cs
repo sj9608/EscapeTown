@@ -5,6 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 public class CharacterLocomotion : MonoBehaviour
 {
+    GameManager GMI = GameManager.Instance;
     public float jumpHeight;
     public float gravity;
     public float stepDown;
@@ -43,8 +44,26 @@ public class CharacterLocomotion : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        
+    }
+
+    public void UpdateIsSprinting()
+    {
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
+        animator.SetBool(isSprintingParam, isSprinting);
+    }
+
+    //private void OnAnimatorMove()
+    //{
+    //    rootMotion += animator.deltaPosition;
+    //}
+
+    private void FixedUpdate()
+    {
+        if (GMI.isGameOver || GMI.isLoading || GMI.isInteractioning)
         {
+            animator.SetFloat("InputX", 0);
+            animator.SetFloat("InputY", 0);
             return;
         }
         input.x = Input.GetAxis("Horizontal");
@@ -71,34 +90,17 @@ public class CharacterLocomotion : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             isCrouch = true;
-            animator.SetBool("isCrouch", isCrouch);
         }
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        else
         {
             isCrouch = false;
-            animator.SetBool("isCrouch", isCrouch);
         }
-
+        animator.SetBool("isCrouch", isCrouch);
         // 점프감지
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //Jump();               // 벨런스 문제로 점프기능 잠금
         }
-    }
-
-    public void UpdateIsSprinting()
-    {
-        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
-        animator.SetBool(isSprintingParam, isSprinting);
-    }
-
-    //private void OnAnimatorMove()
-    //{
-    //    rootMotion += animator.deltaPosition;
-    //}
-
-    private void FixedUpdate()
-    {
         if (isJumping)
         {
             UpdateInAir();

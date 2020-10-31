@@ -29,6 +29,8 @@ public class GameManager : SingletonBase<GameManager>
     public bool isLoading;
     // 팝업 띄우는 중
     public bool isPopupOn;
+    // 대화 중
+    public bool isInteractioning;
 
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
@@ -89,6 +91,7 @@ public class GameManager : SingletonBase<GameManager>
     }
     void Start()
     {
+        isInteractioning = false;
         isGameOver = false;
         isUsePotion = false;
         isLoading = false;
