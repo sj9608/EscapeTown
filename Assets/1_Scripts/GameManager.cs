@@ -156,6 +156,7 @@ public class GameManager : SingletonBase<GameManager>
     public void GetMagazine()
     {
         GI.RemainAmmo += addAmmo;
+        GetMagazineAction();
     }
     
     // Main Scene 버튼 새로하기 이어하기
