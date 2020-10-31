@@ -57,7 +57,10 @@ public class GameManager : SingletonBase<GameManager>
         tempCurrentSceneNum = SCI.CurSceneNum;
         playerAttack = FindObjectOfType<PlayerAttack>();
         characterLocomotion = FindObjectOfType<CharacterLocomotion>();
-        characterLocomotion.ChangePose(isDays[tempCurrentSceneNum]);
+        if (characterLocomotion != null)
+        {
+            characterLocomotion.ChangePose(isDays[tempCurrentSceneNum]);
+        }
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 낮 Scene
         enemies = GameObject.Find("Enemies");
@@ -71,6 +74,11 @@ public class GameManager : SingletonBase<GameManager>
         // ChatObject의 자식 수 세기
         chatObject = GameObject.Find("ChatObject");
         if(chatObject != null) numOfChatObject = chatObject.transform.childCount;
+
+        if (tempCurrentSceneNum == isDays.Length -1)
+        {
+            SCI.EndingScene();
+        }
     }
 
     private void Awake()
