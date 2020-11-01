@@ -9,6 +9,7 @@ public class UIOption : MonoBehaviour
     public AudioSource bgmsource;
     public AudioSource gameSound_Source;
     public Button btn_Back;
+    UIPause uipause;
     bool isShow = false;
 
     void Update()
@@ -22,16 +23,12 @@ public class UIOption : MonoBehaviour
         {
             return;
         }
-       if(Input.GetKeyDown(KeyCode.Escape) && isShow == false)
+       if(Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isPopupOn == true)
        {
            option.SetActive(false);
+           uipause.menuTable.SetActive(true);
            isShow = false;
        }
-    //    else
-    //    {
-    //        isShow  = true;
-    //        option.SetActive(true);
-    //    }
     }
     public void SetBGMVolume(float volume)
     {
@@ -45,6 +42,7 @@ public class UIOption : MonoBehaviour
     public void BTN_Back()
     {
         option.SetActive(false);
+        uipause.menuTable.SetActive(true);
     }
 }
 

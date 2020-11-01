@@ -8,12 +8,14 @@ public class UIPause : MonoBehaviour
     // ***************** 인게임 내 일시정지 팝업 메뉴창 ***************** //
 
     public GameObject menuSet;  // 인 게임 메뉴창
+    public GameObject menuTable;
     public GameObject optionSet;   // 셋팅 창 
     public Button btn_Continue; // 계속하기 버튼
     public Button btn_GotoMain; // 메인화면으로
     public Button btn_Setting;  // 설정
     public Button btn_Quit;     // 게임종료
-    bool isPopUp;
+    bool ispopup;
+
 
     void Update()
     {
@@ -38,15 +40,16 @@ public class UIPause : MonoBehaviour
                 // 마우스 커서를 안보이게 함
                 Cursor.visible = false;
                 menuSet.SetActive(false);
-                isPopUp = false;
-                Debug.Log("isPopUp :"+ isPopUp);
+                GameManager.Instance.isPopupOn = false;
+                ispopup = false;
                 Set_Outpause(); // 일시정지 해제
                 
             }
             else
             {
                 menuSet.SetActive(true);
-                isPopUp = true; 
+                GameManager.Instance.isPopupOn = true;
+                ispopup = true;
                 // 마우스 커서 고정을 해제
                 Cursor.lockState = CursorLockMode.None;
                 // 마우스 커서를 보이게 함
@@ -67,12 +70,13 @@ public class UIPause : MonoBehaviour
     {
         // SceneManager.LoadScene("Main",0); -> 씬이 멈춤
         //SceneController.Instance.NextSecne(0); -> ?????
+        SceneManager.LoadScene("Main",0);
     }
 
     public void BTN_Setting()
-    {
-        Debug.Log("open setting window");
-        optionSet.SetActive(true);
+    {   
+            optionSet.SetActive(true);
+            menuTable.SetActive(false);
     }
 
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
