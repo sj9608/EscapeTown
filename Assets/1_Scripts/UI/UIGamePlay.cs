@@ -23,12 +23,13 @@ public class UIGamePlay : MonoBehaviour
     public Image IMG_magazine;
     public Text numOfPotion_text;
     public Text numOfMagazine_text;
+    public GameObject tutorial;
 
     //public ChatController chatController;      // 대화 텍스트
     public delegate void battle_Event();
 
     [SerializeField] private Slider hpbar; // HP바
-
+ 
     private void Awake()
     {
         GI = GameInformation.Instance;
@@ -70,7 +71,8 @@ public class UIGamePlay : MonoBehaviour
         numOfPotion_text.text = GI.NumOfPotion.ToString();
         numOfMagazine_text.text = GI.RemainAmmo.ToString();
 
-        crossHair.SetActive(false);                        
+        crossHair.SetActive(false); 
+        tutorial.SetActive(true);                       
     }
 
     private void Update() 
@@ -138,6 +140,11 @@ public class UIGamePlay : MonoBehaviour
             }
             GameManager.Instance.isUsePotion = false;
         }
+    }
+
+    public void BTN_Exit_Tutorial()
+    {
+        Destroy(tutorial);
     }
 }
  
