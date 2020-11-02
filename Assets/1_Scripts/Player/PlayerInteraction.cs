@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    GameManager GMI = GameManager.Instance;
+    GameManager GMI;
     // 공격 범위
     protected float attackDistance;
     // 적군 레이어 마스크
@@ -17,6 +17,9 @@ public class PlayerInteraction : MonoBehaviour
     private float currentSearchAngle;
     Collider target = null;
 
+    private void Awake() {
+        GMI = GameManager.Instance;
+    }
     // Start is called before the first frame update
     void Start()
     {

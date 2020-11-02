@@ -6,7 +6,7 @@ using Cinemachine;
 
 public class CharacterAiming : MonoBehaviour
 {
-    GameManager GMI = GameManager.Instance;
+    GameManager GMI;
     public float turnSpeed = 15f;
     public float aimDuration = 0.18f; // 조준하는데 걸리는 시간.
 
@@ -18,6 +18,9 @@ public class CharacterAiming : MonoBehaviour
     public AxisState xAxis; // 시네머신 FreeLook 카메라에 있는 요소 가져오기 --> 에디터 상에서 수치 조절해줄 것.
     public AxisState yAxis;
 
+    private void Awake() {
+        GMI = GameManager.Instance;
+    }
 
     void Start()
     {
