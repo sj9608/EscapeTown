@@ -847,7 +847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &118961481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3180,6 +3180,7 @@ MonoBehaviour:
   IMG_magazine: {fileID: 1274198882}
   numOfPotion_text: {fileID: 1634525749}
   numOfMagazine_text: {fileID: 1418011865}
+  tutorial: {fileID: 118961480}
   hpbar: {fileID: 759357376}
 --- !u!114 &987351811
 MonoBehaviour:
@@ -7557,9 +7558,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 987351807}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 987351810}
+        m_MethodName: BTN_Exit_Tutorial
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
