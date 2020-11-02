@@ -14,7 +14,8 @@ public class UIPause : MonoBehaviour
     public Button btn_GotoMain; // 메인화면으로
     public Button btn_Setting;  // 설정
     public Button btn_Quit;     // 게임종료
-    bool ispopup;
+    UIOption uioption;
+    public bool ispopup;
 
 
     void Update()
@@ -76,7 +77,8 @@ public class UIPause : MonoBehaviour
     public void BTN_Setting()
     {   
             optionSet.SetActive(true);
-            menuTable.SetActive(false);
+            menuSet.SetActive(false);
+            GameManager.Instance.isPopupOn = false;
     }
 
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
