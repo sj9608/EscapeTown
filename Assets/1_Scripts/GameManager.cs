@@ -97,6 +97,7 @@ public class GameManager : SingletonBase<GameManager>
         isGameOver = false;
         isUsePotion = false;
         isLoading = false;
+        isPopupOn = false;
         InitScene();
     }
     void Update()

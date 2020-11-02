@@ -9,8 +9,13 @@ public class UIOption : MonoBehaviour
     public AudioSource bgmsource;
     public AudioSource gameSound_Source;
     public Button btn_Back;
-    bool isShow = false;
+    UIPause uipause;
+    public bool isShow = false;
 
+    void Start()
+    {
+        uipause =  GetComponent<UIPause>();
+    }
     void Update()
     {
         Popup_Option();
@@ -22,16 +27,13 @@ public class UIOption : MonoBehaviour
         {
             return;
         }
-       if(Input.GetKeyDown(KeyCode.Escape) && isShow == false)
-       {
-           option.SetActive(false);
-           isShow = false;
-       }
-    //    else
-    //    {
-    //        isShow  = true;
-    //        option.SetActive(true);
-    //    }
+        if (Input.GetKeyDown(KeyCode.Escape) && uipause.ispopup == true)
+        {
+            option.SetActive(false);
+            GameManager.Instance.isPopupOn = true;
+            uipause.menuSet.SetActive(true);
+            isShow = false;
+        }
     }
     public void SetBGMVolume(float volume)
     {
@@ -44,7 +46,12 @@ public class UIOption : MonoBehaviour
     }
     public void BTN_Back()
     {
-        option.SetActive(false);
+            option.SetActive(false);
+            Debug.Log("working back button!");
+            GameManager.Instance.isPopupOn = true;
+            uipause.menuSet.SetActive(true);
+            Debug.Log("working pannel");
+            isShow = false;
     }
 }
 
