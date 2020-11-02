@@ -29,6 +29,8 @@ public class GameManager : SingletonBase<GameManager>
     public bool isLoading;
     // 팝업 띄우는 중
     public bool isPopupOn;
+    // 설정 띄우는 중
+    public bool isOptionOn;
     // 대화 중
     public bool isInteractioning;
 
@@ -52,6 +54,8 @@ public class GameManager : SingletonBase<GameManager>
     public event UnityAction GameOverAction;
     public event UnityAction GetMagazineAction;
     public UnityAction<bool> IsAimAction;
+    public event UnityAction<bool> UIPauseAction;
+    public event UnityAction<bool> UIOptionToggleAction;
     public void InitScene()
     {
         // 현재 페이지에서만 쓸 인자용 씬번호
@@ -102,9 +106,13 @@ public class GameManager : SingletonBase<GameManager>
     }
     void Update()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        if (isGameOver || isLoading)
         {
             return;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Popup();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -123,7 +131,30 @@ public class GameManager : SingletonBase<GameManager>
             GetMagazine();
         }
     }
-
+    private void Popup(){
+        if (isOptionOn)
+        {
+            // 옵션 창 끄기
+            UIOptionToggleAction(isOptionOn);
+        }
+        isPopupOn = !isPopupOn;
+        if (isPopupOn)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            // 마우스 커서를 화면 중앙에 고정
+            Cursor.lockState = CursorLockMode.Locked;
+            Debug.Log("커서 비활성화");
+        }
+        UIPauseAction(isPopupOn);
+        Set_Pause();
+    }
+    private void Set_Pause(){
+        Time.timeScale = isPopupOn ? 0f : 1f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
+    }
     public void ZombieDead(string zName)
     {
         enemiesDic.Remove(zName);

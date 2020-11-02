@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIPause : MonoBehaviour
 {
     // ***************** 인게임 내 일시정지 팝업 메뉴창 ***************** //
-
+    GameManager GMI;
     public GameObject menuSet;  // 인 게임 메뉴창
     public GameObject menuTable;
     public GameObject optionSet;   // 셋팅 창 
@@ -17,14 +17,24 @@ public class UIPause : MonoBehaviour
     UIOption uioption;
     public bool ispopup;
 
-
+    private void Awake() {
+        GMI = GameManager.Instance;
+    }
+    private void OnEnable() {
+        GMI.UIPauseAction += MenuPopup;
+        GMI.UIOptionToggleAction += MenuPopup;
+    }
+    private void OnDisable() {
+        GMI.UIPauseAction -= MenuPopup;
+        GMI.UIOptionToggleAction -= MenuPopup;
+    }
     void Update()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
-        {
-            return;
-        }
-        popUp_Menu();
+        // if (GMI.isGameOver || GMI.isLoading)
+        // {
+        //     return;
+        // }
+        // popUp_Menu();
     }
 
 
@@ -35,15 +45,7 @@ public class UIPause : MonoBehaviour
            
             if (menuSet.activeSelf)
             {
-                // 마우스 커서를 화면 중앙에 고정
-                Cursor.lockState = CursorLockMode.Locked;
-                Debug.Log("커서 비활성화");
-                // 마우스 커서를 안보이게 함
-                Cursor.visible = false;
-                menuSet.SetActive(false);
-                GameManager.Instance.isPopupOn = false;
-                ispopup = false;
-                Set_Outpause(); // 일시정지 해제
+                
                 
             }
             else
@@ -55,30 +57,35 @@ public class UIPause : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 // 마우스 커서를 보이게 함
                 Cursor.visible = true;
-                Set_pause(); // 게임 일시정지
+                // Set_pause(); // 게임 일시정지
             }
         }
+    }
+
+    public void MenuPopup(bool isPopup){
+        menuSet.SetActive(!isPopup);
     }
 
     public void BTN_Continue()  // 팝업 메뉴 <계속하기>버튼
     {
         menuSet.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
-        Set_Outpause();
+        // GMI.Set_Pause();
     }
 
     public void BTN_Main()
     {
         // SceneManager.LoadScene("Main",0); -> 씬이 멈춤
         //SceneController.Instance.NextSecne(0); -> ?????
-        SceneManager.LoadScene("Main",0);
+        // SceneManager.LoadScene("Main",0);
+        GMI.GoMain();
     }
 
     public void BTN_Setting()
     {   
-            optionSet.SetActive(true);
-            menuSet.SetActive(false);
-            GameManager.Instance.isPopupOn = false;
+        optionSet.SetActive(true);
+        menuSet.SetActive(false);
+        GameManager.Instance.isPopupOn = false;
     }
 
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
@@ -91,18 +98,18 @@ public class UIPause : MonoBehaviour
     }
 
 
-    public void Set_pause() // 일시정지
-    {
-        Time.timeScale = 0f;
-        //Cursor.lockState = CursorLockMode.Confined;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
+    // public void Set_pause() // 일시정지
+    // {
+    //     Time.timeScale = 0f;
+    //     //Cursor.lockState = CursorLockMode.Confined;
+    //     Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
 
-    }
-    public void Set_Outpause() // 일시정지 해제
-    {
-        Time.timeScale = 1f;
-        //Cursor.lockState = CursorLockMode.Locked;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
-    }
+    // }
+    // public void Set_Outpause() // 일시정지 해제
+    // {
+    //     Time.timeScale = 1f;
+    //     //Cursor.lockState = CursorLockMode.Locked;
+    //     Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
+    // }
 
 }
