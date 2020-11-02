@@ -5,7 +5,7 @@ using UnityEngine;
 // 칼, 총 등 무기 오브젝트로 공격하는 script component
 public class PlayerAttack : MonoBehaviour
 {
-    GameManager GMI = GameManager.Instance;
+    GameManager GMI;
     // 사용할 총
     public Gun gun;
 
@@ -14,6 +14,9 @@ public class PlayerAttack : MonoBehaviour
     // 에임 조준 상태
     bool isAim;
     private Animator playerAnimator; // 애니메이터 컴포넌트
+    private void Awake() {
+        GMI = GameManager.Instance;
+    }
     // Start is called before the first frame update
     void Start()
     {

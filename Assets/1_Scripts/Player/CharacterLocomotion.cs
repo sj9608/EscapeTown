@@ -5,7 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 public class CharacterLocomotion : MonoBehaviour
 {
-    GameManager GMI = GameManager.Instance;
+    GameManager GMI;
     public float jumpHeight;
     public float gravity;
     public float stepDown;
@@ -32,6 +32,9 @@ public class CharacterLocomotion : MonoBehaviour
 
     int isSprintingParam = Animator.StringToHash("isSprinting");
 
+    private void Awake() {
+        GMI = GameManager.Instance;
+    }
     void Start()
     {
         animator = GetComponent<Animator>();
