@@ -23,8 +23,14 @@ public class GameManager : SingletonBase<GameManager>
 
     // 게임오버 판단
     public bool isGameOver;
+    // 포션 사용 중
     public bool isUsePotion;
+    // 로딩 중
     public bool isLoading;
+    // 팝업 띄우는 중
+    public bool isPopupOn;
+    // 대화 중
+    public bool isInteractioning;
 
     // 무기 데미지 나중 무기클래스에서 얻어옴
     int weaponDamage;
@@ -34,15 +40,17 @@ public class GameManager : SingletonBase<GameManager>
     public PlayerAttack playerAttack;
     public CharacterLocomotion characterLocomotion;
     // 씬 별 낮 밤 체크 bool 배열
-    // 0번은 false 고정 MainScene
+    // 0번 / 1번은 true 고정 ManagerScene / MainScene
     // 마지막 번호는 EndingScene
-    bool[] isDays = {false, true, false, true, false, true, false, true, false, true, true, false, true, false, true};
-    //                0       1     2       3     4     5     6     7       8     9     10    11    12      13    14     15
+    bool[] isDays = {true, true, true, false, true, false, true, false, true, false, false, true, false, true, false, true};
+    //                0     1     2       3     4     5     6     7       8     9     10    11    12      13    14     15
+    //               MS    MAIN  ROOM   S02   S03   S031   S04   S041   S05   S051   S06    S07   S071   S08    S81   GES 
     // 씬로딩에만 쓸 임시 씬번호
     private int tempCurrentSceneNum;
 
     // 게임 오버시 UI호출 Action
     public event UnityAction GameOverAction;
+    public event UnityAction GetMagazineAction;
     public UnityAction<bool> IsAimAction;
     public void InitScene()
     {
@@ -50,9 +58,13 @@ public class GameManager : SingletonBase<GameManager>
         // 저장위치에 따라 쓸모 유무가 생김
         // 저장위치는 스테이지 클리어 직후 / 로딩 중 / 새 스테이지 씬 로딩 후 
         tempCurrentSceneNum = SCI.CurSceneNum;
+        Debug.Log("tempCurrentSceneNum : " + tempCurrentSceneNum);
         playerAttack = FindObjectOfType<PlayerAttack>();
         characterLocomotion = FindObjectOfType<CharacterLocomotion>();
-        characterLocomotion.ChangePose(isDays[tempCurrentSceneNum]);
+        if (characterLocomotion != null)
+        {
+            characterLocomotion.ChangePose(isDays[tempCurrentSceneNum]);
+        }
         // 인스펙터에서 Enemies에 아무것도 넣지 않으면
         // 해당 스테이지는 낮 Scene
         enemies = GameObject.Find("Enemies");
@@ -60,12 +72,17 @@ public class GameManager : SingletonBase<GameManager>
         if (enemies != null)
         {
             enemiesDic = enemies.GetComponentsInChildren<Zombie>().ToDictionary(key => key.name);
+            Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
         }
-        Debug.Log("enemiesDic.Count : " + enemiesDic.Count);
 
         // ChatObject의 자식 수 세기
         chatObject = GameObject.Find("ChatObject");
         if(chatObject != null) numOfChatObject = chatObject.transform.childCount;
+
+        if (tempCurrentSceneNum == isDays.Length -1)
+        {
+            SCI.EndingScene();
+        }
     }
 
     private void Awake()
@@ -76,6 +93,7 @@ public class GameManager : SingletonBase<GameManager>
     }
     void Start()
     {
+        isInteractioning = false;
         isGameOver = false;
         isUsePotion = false;
         isLoading = false;
@@ -113,7 +131,6 @@ public class GameManager : SingletonBase<GameManager>
     public void PlayerDead()
     {
         Debug.Log("플레이어가 죽음을 게임매니저가 인식");
-        isGameOver = true;
         GameOver();
     }
 
@@ -151,6 +168,7 @@ public class GameManager : SingletonBase<GameManager>
     public void GetMagazine()
     {
         GI.RemainAmmo += addAmmo;
+        GetMagazineAction();
     }
     
     // Main Scene 버튼 새로하기 이어하기

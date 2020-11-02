@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    GameManager GMI = GameManager.Instance;
     // 공격 범위
     protected float attackDistance;
     // 적군 레이어 마스크
@@ -29,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        if (GMI.isGameOver || GMI.isLoading || GMI.isInteractioning)
         {
             return;
         }
@@ -57,6 +58,7 @@ public class PlayerInteraction : MonoBehaviour
                     ObjectData obj = hits[0].transform.GetComponent<ObjectData>();
                     if (obj != null && obj.enabled == true)
                     {
+                        GameManager.Instance.isInteractioning = true;
                         hits[0].transform.LookAt(transform);
                         StartCoroutine(ChatManager.Instance.PrintNormalChat(obj.id, obj.isNpc));
                         obj.questionMark.SetActive(false);

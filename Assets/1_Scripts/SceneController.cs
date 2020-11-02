@@ -81,5 +81,10 @@ public class SceneController : SingletonBase<SceneController>
         loadingObject.SetActive(isLoading);
         GameManager.Instance.IsAimAction(false);
     }
+    public void EndingScene(){
+        stageHUDObject.SetActive(false);
+        chatUIObject.SetActive(false);
+        loadingObject.SetActive(false);
+    }
 
 }

@@ -32,7 +32,7 @@ public class UIChatNote : MonoBehaviour
             return;
         }
         // E키를 누를 때 마다 열림/닫힘 상태 토글
-        if(Input.GetKeyDown(KeyCode.E)) isOpen = !isOpen;
+        if(Input.GetKeyDown(KeyCode.T)) isOpen = !isOpen;
 
         if(isOpen == false)
         {   // 닫힘 상태일 때 노트를 닫음

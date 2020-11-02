@@ -37,6 +37,7 @@ public class UIGamePlay : MonoBehaviour
     {
         GI.UpdateCurAmmoAction += Show_Bullet_Count;
         GI.UpdateRemainAmmoAction += GetMagazine;
+        GameManager.Instance.GetMagazineAction += GetMagazine;
         GI.UpdateGetPotionAction += GetPotion;
         GI.UpdateUsePotionAction += UsePotion;
         // GI.UpdateHpAction += HandleHP;       // UnityAction에 Lerp적용 되야함
@@ -46,6 +47,7 @@ public class UIGamePlay : MonoBehaviour
     {
         GI.UpdateCurAmmoAction -= Show_Bullet_Count;
         GI.UpdateRemainAmmoAction -= GetMagazine;
+        GameManager.Instance.GetMagazineAction -= GetMagazine;
         GI.UpdateGetPotionAction -= GetPotion;
         GI.UpdateUsePotionAction -= UsePotion;
         // GI.UpdateHpAction -= HandleHP;       // UnityAction에 Lerp적용 되야함
@@ -73,10 +75,6 @@ public class UIGamePlay : MonoBehaviour
 
     private void Update() 
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
-        {
-            return;
-        }
         // numOfPotion 값 불러오기
         // 
 

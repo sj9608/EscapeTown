@@ -5,6 +5,7 @@ using UnityEngine;
 // 칼, 총 등 무기 오브젝트로 공격하는 script component
 public class PlayerAttack : MonoBehaviour
 {
+    GameManager GMI = GameManager.Instance;
     // 사용할 총
     public Gun gun;
 
@@ -17,19 +18,20 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
+        isGun = true;
         isAim = false;
     }
 
     void Update()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        if (GMI.isGameOver || GMI.isLoading || GMI.isInteractioning)
         {
             return;
         }
         isAim = Input.GetButton("Fire2");
         if (isGun == true)
         {
-            GameManager.Instance.IsAimAction(isAim);
+            GMI.IsAimAction(isAim);
         }
         // 입력을 감지하고 총 발사하거나 재장전
         if (isAim && Input.GetButton("Fire1"))

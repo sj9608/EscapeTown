@@ -6,6 +6,7 @@ using Cinemachine;
 
 public class CharacterAiming : MonoBehaviour
 {
+    GameManager GMI = GameManager.Instance;
     public float turnSpeed = 15f;
     public float aimDuration = 0.18f; // 조준하는데 걸리는 시간.
 
@@ -27,7 +28,7 @@ public class CharacterAiming : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        if (GMI.isGameOver || GMI.isLoading|| GMI.isInteractioning)
         {
             return;
         }
@@ -42,7 +43,7 @@ public class CharacterAiming : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLoading)
+        if (GMI.isGameOver || GMI.isLoading || GMI.isInteractioning)
         {
             return;
         }
