@@ -5080,6 +5080,7 @@ GameObject:
   - component: {fileID: 929606088}
   - component: {fileID: 929606087}
   - component: {fileID: 929606089}
+  - component: {fileID: 5616830761386203443}
   m_Layer: 9
   m_Name: Zombie_Father_Male_01
   m_TagString: Enemy
@@ -5229,7 +5230,7 @@ MonoBehaviour:
   isDead: 0
   HP: 0
   ap: 0
-  walkForce: 0
+  walkSpeed: 0
   runSpeed: 0
   attackRange: 0
   normalSearchDistance: 0
@@ -5241,8 +5242,20 @@ MonoBehaviour:
   idleDelayMin: 1
   idleDelayMax: 3
   thinkIntervalTime: 0
-  bloodEffect: {fileID: 6027082966758478503, guid: 12d0cdcc3e5664e9594d398e338d09df,
-    type: 3}
+  footStepClips:
+  - {fileID: 8300000, guid: 60f1f4e5efc3d47c8a443276f40832ad, type: 3}
+  - {fileID: 8300000, guid: a00f0b1b7f98245eb84e0fb3955a63ba, type: 3}
+  - {fileID: 8300000, guid: 6e3bffff50263477a8a6276beb94af35, type: 3}
+  attackClips:
+  - {fileID: 8300000, guid: 3e360246361974be7870abea06a2f8c2, type: 3}
+  - {fileID: 8300000, guid: 28f4aeb5c707a42e1a3450779d541d41, type: 3}
+  - {fileID: 8300000, guid: 3f6ae3241baaa4b91a58bc8768e462d0, type: 3}
+  GrowlVoiceClip: {fileID: 8300000, guid: aa8a9db8c53c94bd5903eabd3d072ccd, type: 3}
+  chasingVoiceClip: {fileID: 8300000, guid: 43626b484e1a349d0a49cbdefac638cf, type: 3}
+  attackVoiceClip: {fileID: 8300000, guid: a1254451a77664c2cbc2bdc4daa63028, type: 3}
+  beAttacktedClip: {fileID: 8300000, guid: 13a067c2cac8f4d259ff5b6c3cb54612, type: 3}
+  beAttackedVoiceClip: {fileID: 8300000, guid: 0090c498a30a449298b22ad93cfe3c76, type: 3}
+  dyingVoiceClip: {fileID: 8300000, guid: e8b0dca469c0e454e952c7ce5a1bdac5, type: 3}
 --- !u!195 &929606089
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5265,6 +5278,102 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!82 &5616830761386203443
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686375517816074}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1691776765635722
 GameObject:
   m_ObjectHideFlags: 0

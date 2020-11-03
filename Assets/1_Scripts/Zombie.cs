@@ -52,6 +52,17 @@ public class Zombie : MonoBehaviour
 
     PlayerHealth player;
 
+    private AudioSource audioF;
+    private AudioSource audioS;
+    private AudioSource audioT;
+    [Header("Audio Clips")]
+    public AudioClip[] footStepClips;
+    public AudioClip[] attackClips;
+    public AudioClip GrowlVoiceClip, chasingVoiceClip,
+        attackVoiceClip, beAttacktedClip,
+        beAttackedVoiceClip, dyingVoiceClip;
+
+
 
     void Start()
     {
@@ -90,6 +101,10 @@ public class Zombie : MonoBehaviour
 
         // 플레이어를 대체할 테스트용 코드
         player = FindObjectOfType<PlayerHealth>();
+
+        audioF = GetComponent<AudioSource>();
+        audioS = gameObject.AddComponent<AudioSource>();
+        audioT = gameObject.AddComponent<AudioSource>();
     }
 
 
@@ -207,6 +222,9 @@ public class Zombie : MonoBehaviour
         idleDelay = Random.Range(idleDelayMin, idleDelayMax);
         currentState = State.Idle;
 
+        //audioF.clip = GrowlVoiceClip;
+        //audioF.Play();
+
         if (Random.Range(0, 2) == 0)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + Random.Range(-90, 0) - 30, transform.eulerAngles.z);
@@ -250,6 +268,8 @@ public class Zombie : MonoBehaviour
         nmAgent.isStopped = true;
         currentState = State.Attack;
         anim.SetInteger("ZombieState", (int)currentState);
+        audioS.clip = attackVoiceClip;
+        audioS.Play();
     }
     public void AttackPointHandler()
     {
@@ -257,6 +277,8 @@ public class Zombie : MonoBehaviour
         if (isPlayerTargeting && !player.isDead)
         {
             Debug.Log("좀비 어택 포인트 성공");
+            audioS.clip = attackClips[Random.Range(0, 3)];
+            audioS.Play();
             player.OnDamage(ap / 2);
         }
     }
@@ -271,6 +293,11 @@ public class Zombie : MonoBehaviour
         timeFlag = Time.time;
         currentSearchDistance = awareSearchDistance;
         currentSearchAngle = awareSearchAngle;
+
+        audioF.clip = beAttackedVoiceClip;
+        audioF.Play();
+        audioT.clip = beAttacktedClip;
+        audioT.Play();
 
         HP -= attackPoint;
         if (HP <= 0)
@@ -287,6 +314,8 @@ public class Zombie : MonoBehaviour
         nmAgent.isStopped = true;
         currentState = State.Dead;
         anim.SetTrigger("isDead");
+        audioS.clip = dyingVoiceClip;
+        audioS.Play();
         isDead = true;
         GetComponent<CapsuleCollider>().height = 0.1f;
         GetComponent<CapsuleCollider>().center = new Vector3(0, 0.2f, 0);
@@ -344,8 +373,6 @@ public class Zombie : MonoBehaviour
         return false;
     }
 
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -362,5 +389,18 @@ public class Zombie : MonoBehaviour
             Debug.Log("좀비 어택 범위에서 플레이어 나감");
             isPlayerTargeting = false;
         }
+    }
+
+    public void FootStepSound()
+    {
+        audioS.clip = footStepClips[Random.Range(0,3)];
+        audioS.Play();
+    }
+
+
+    public void ChasingVoiceSound()
+    {
+        audioT.clip = chasingVoiceClip;
+        audioT.Play();
     }
 }

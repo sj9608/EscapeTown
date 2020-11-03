@@ -2340,6 +2340,7 @@ MonoBehaviour:
   characterLocomotion: {fileID: 0}
   audioDay: {fileID: 8300000, guid: 43dc9c1637aa544ea9dbe4d99b39eb53, type: 3}
   audioNight: {fileID: 8300000, guid: 69f7c65b5582b42f69b90b186008b0c6, type: 3}
+  al: {fileID: 633200251}
 --- !u!1 &759357375
 GameObject:
   m_ObjectHideFlags: 0
