@@ -37,8 +37,7 @@ public class CharacterLocomotion : MonoBehaviour
     [Header("- Audio")]
     public AudioClip[] audioWalking;             // 음원
     public AudioClip[] audioRunningBreathe;
-    public AudioClip[] audioAttacked;
-    public AudioClip audioDead;
+
 
     int isSprintingParam = Animator.StringToHash("isSprinting");
 

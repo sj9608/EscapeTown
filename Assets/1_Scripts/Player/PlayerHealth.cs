@@ -11,26 +11,33 @@ public class PlayerHealth : MonoBehaviour
 
     private Animator playerAnimator; // 애니메이터 컴포넌트
 
+    AudioSource audioSource;
+    [Header("-Sound")]
+    public AudioClip audioDead;
+    public AudioClip[] audioBeAttacked;
+
     GameInformation GI;
-    // Start is called before the first frame update
+
     void Start()
     {
         GI = GameInformation.Instance;
         playerAnimator = GetComponent<Animator>();
         isDead = false;
+
+        // 사운드
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void OnDamage(float attackPoint)
     {
         if (isDead) return;
 
         // HP -= attackPoint;
         GI.UpdateHp(-attackPoint);
+
+        // 사운드
+        int random = UnityEngine.Random.Range(0, 2);
+        audioSource.PlayOneShot(audioBeAttacked[random]);
 
         Debug.Log("플레이어 공격 받음. 남은체력" + GI.HP);
         if (GI.HP <= 0)
@@ -44,6 +51,9 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         GameManager.Instance.isGameOver = true;
         playerAnimator.SetTrigger("Die");
+
+        // 사운드
+        audioSource.PlayOneShot(audioDead);
 
         yield return new WaitForSeconds(3f);
         GameManager.Instance.PlayerDead();

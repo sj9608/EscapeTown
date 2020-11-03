@@ -6961,7 +6961,6 @@ MonoBehaviour:
   audioAttacked:
   - {fileID: 8300000, guid: 0d12b917d70904be2bc03be00c3bf75e, type: 3}
   - {fileID: 8300000, guid: 71b7032d132514659a111fb1b70ccffe, type: 3}
-  audioDead: {fileID: 8300000, guid: 2f7cdebc774284f5ca9debeba67b8c70, type: 3}
 --- !u!114 &3777043104215094727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7041,6 +7040,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
+  audioDead: {fileID: 8300000, guid: 2f7cdebc774284f5ca9debeba67b8c70, type: 3}
+  audioBeAttacked:
+  - {fileID: 8300000, guid: 0d12b917d70904be2bc03be00c3bf75e, type: 3}
+  - {fileID: 8300000, guid: 71b7032d132514659a111fb1b70ccffe, type: 3}
 --- !u!114 &3669077572580119268
 MonoBehaviour:
   m_ObjectHideFlags: 0
