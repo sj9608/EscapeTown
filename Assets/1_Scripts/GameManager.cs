@@ -48,6 +48,13 @@ public class GameManager : SingletonBase<GameManager>
     // 씬로딩에만 쓸 임시 씬번호
     private int tempCurrentSceneNum;
 
+    // 낮 밤 스테이지 따른 배경음악
+    public AudioClip audioDay;
+    public AudioClip audioNight;
+    AudioSource audioSource;
+    float audioTime = 0f;
+
+
     // 게임 오버시 UI호출 Action
     public event UnityAction GameOverAction;
     public event UnityAction GetMagazineAction;
@@ -83,6 +90,15 @@ public class GameManager : SingletonBase<GameManager>
         {
             SCI.EndingScene();
         }
+
+        // 오디오 전환
+        if(tempCurrentSceneNum > 1)
+        {
+            if(isDays[tempCurrentSceneNum] == true) { audioSource.clip = audioDay; }
+            else{ audioSource.clip = audioNight; }
+            audioSource.Play();
+        }
+        
     }
 
     private void Awake()
@@ -90,6 +106,9 @@ public class GameManager : SingletonBase<GameManager>
         GI = GameInformation.Instance;
         SCI = SceneController.Instance;
         ChatManager = ChatManager.Instance;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.loop = true;
     }
     void Start()
     {

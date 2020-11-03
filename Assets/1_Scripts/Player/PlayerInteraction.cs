@@ -17,6 +17,11 @@ public class PlayerInteraction : MonoBehaviour
     private float currentSearchAngle;
     Collider target = null;
 
+
+    // 플레이어 사운드
+    AudioSource playerAudio;
+    public AudioClip audioGetItem;
+
     private void Awake() {
         GMI = GameManager.Instance;
     }
@@ -28,6 +33,9 @@ public class PlayerInteraction : MonoBehaviour
         attackDistance = 10f;
         interactionDistance = 2f;
         currentSearchAngle = 120f;
+
+        // 사운드
+        playerAudio = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -70,6 +78,8 @@ public class PlayerInteraction : MonoBehaviour
                     }
                     break;
                 case "Item":
+                    playerAudio.PlayOneShot(audioGetItem);
+
                     GameManager.Instance.GetItem(target);
                     break;
                 default:

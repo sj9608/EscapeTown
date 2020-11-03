@@ -6950,6 +6950,18 @@ MonoBehaviour:
   pushPower: 2
   weaponPoseRig: {fileID: 3777043104606958454}
   handIK: {fileID: 3777043104585379081}
+  audioWalking:
+  - {fileID: 8300000, guid: 60f1f4e5efc3d47c8a443276f40832ad, type: 3}
+  - {fileID: 8300000, guid: a00f0b1b7f98245eb84e0fb3955a63ba, type: 3}
+  - {fileID: 8300000, guid: 6e3bffff50263477a8a6276beb94af35, type: 3}
+  audioRunningBreathe:
+  - {fileID: 8300000, guid: 41ba6d2079d8b4235806e02a8cb9b028, type: 3}
+  - {fileID: 8300000, guid: 75264fdf2342e4ea49a64563c390435a, type: 3}
+  - {fileID: 8300000, guid: 159a2a045c47f4f5eb4c023ec44e1c7c, type: 3}
+  audioAttacked:
+  - {fileID: 8300000, guid: 0d12b917d70904be2bc03be00c3bf75e, type: 3}
+  - {fileID: 8300000, guid: 71b7032d132514659a111fb1b70ccffe, type: 3}
+  audioDead: {fileID: 8300000, guid: 2f7cdebc774284f5ca9debeba67b8c70, type: 3}
 --- !u!114 &3777043104215094727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7041,6 +7053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ee99cae40bfc14d907a59ba39c520c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioGetItem: {fileID: 8300000, guid: d967a116d0ebd46a8bddeda837642cfb, type: 3}
 --- !u!1 &3777448497425070976
 GameObject:
   m_ObjectHideFlags: 0
