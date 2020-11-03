@@ -30,6 +30,16 @@ public class CharacterLocomotion : MonoBehaviour
 
     PlayerAttack playerAttack;
 
+    // 플레이어 사운드
+    AudioSource playerAudio;            // 스피커
+    AudioSource playerAudio_Double;     // 겹치는 오디오용 스피커 -> 숨소리
+
+    [Header("- Audio")]
+    public AudioClip[] audioWalking;             // 음원
+    public AudioClip[] audioRunningBreathe;
+    public AudioClip[] audioAttacked;
+    public AudioClip audioDead;
+
     int isSprintingParam = Animator.StringToHash("isSprinting");
 
     private void Awake() {
@@ -42,18 +52,22 @@ public class CharacterLocomotion : MonoBehaviour
         rifle = transform.Find("Rifle").gameObject; // 라이플 오브젝트
 
         cc = GetComponent<CharacterController>();
-
-    }
-
-    void Update()
-    {
-        
+        playerAudio = gameObject.AddComponent<AudioSource>();
+        playerAudio_Double = gameObject.AddComponent<AudioSource>();
     }
 
     public void UpdateIsSprinting()
-    {
+    {  
         bool isSprinting = Input.GetKey(KeyCode.LeftShift);
         animator.SetBool(isSprintingParam, isSprinting);
+        
+
+        // 달릴 때 숨소리 랜덤 재생
+        if(isSprinting && !playerAudio.isPlaying)
+        {
+            int random = Random.Range(0, 3);
+            StartCoroutine(PlayAudio(audioRunningBreathe[random], playerAudio_Double));
+        }
     }
 
     //private void OnAnimatorMove()
@@ -63,6 +77,7 @@ public class CharacterLocomotion : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (GMI.isGameOver || GMI.isLoading || GMI.isInteractioning)
         {
             animator.SetFloat("InputX", 0);
@@ -74,7 +89,15 @@ public class CharacterLocomotion : MonoBehaviour
 
         animator.SetFloat("InputX", input.x);
         animator.SetFloat("InputY", input.y);
+        
 
+        // 이동 키 입력이 있으면 모래 밟는 소리를 사운드 클립에 삽입
+        if(input.x != 0f || input.y != 0f)
+        {
+            int random = Random.Range(0,3);
+            playerAudio.clip = audioWalking[random];
+        }
+        else playerAudio.clip = null;
 
         UpdateIsSprinting();
         // 스프린트 감지
@@ -112,6 +135,15 @@ public class CharacterLocomotion : MonoBehaviour
         {
             UpdateOnGround();
         }
+        
+        if(!playerAudio.isPlaying && playerAudio.clip != null)
+            StartCoroutine(PlayAudio(playerAudio.clip, playerAudio));
+    }
+
+    IEnumerator PlayAudio(AudioClip clip, AudioSource source)
+    {
+        source.PlayOneShot(clip);
+        yield return new WaitForSeconds(1f);
     }
 
     void UpdateInAir()

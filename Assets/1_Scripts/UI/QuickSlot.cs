@@ -19,6 +19,10 @@ public class QuickSlot : MonoBehaviour
 
     GameInformation GI;
 
+    // 사운드
+    AudioSource audioSource;
+    public AudioClip audioUsePotion;
+
     void Start()
     {
         GI = GameInformation.Instance;
@@ -42,7 +46,8 @@ public class QuickSlot : MonoBehaviour
     public void UsePotion(int numOfPotion)
     {
         if (isUsed == false)
-        {
+        {   
+            audioSource.PlayOneShot(audioUsePotion);
             numOfPotion_text.text = numOfPotion.ToString();
             Potion_CoolTime();
         }

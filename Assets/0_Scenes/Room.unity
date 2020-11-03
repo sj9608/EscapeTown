@@ -3133,6 +3133,11 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 1607997905}
+    - target: {fileID: 3777043104215094726, guid: f7969fef016d4ca43895e1617acd4e92,
+        type: 3}
+      propertyPath: audioWalking.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3777043104215094727, guid: f7969fef016d4ca43895e1617acd4e92,
         type: 3}
       propertyPath: xAxis.Value

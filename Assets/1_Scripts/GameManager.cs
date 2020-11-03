@@ -52,6 +52,7 @@ public class GameManager : SingletonBase<GameManager>
     public AudioClip audioDay;
     public AudioClip audioNight;
     AudioSource audioSource;
+    float audioTime = 0f;
 
 
     // 게임 오버시 UI호출 Action
@@ -95,7 +96,6 @@ public class GameManager : SingletonBase<GameManager>
         {
             if(isDays[tempCurrentSceneNum] == true) { audioSource.clip = audioDay; }
             else{ audioSource.clip = audioNight; }
-            Debug.Log(audioSource);
             audioSource.Play();
         }
         
