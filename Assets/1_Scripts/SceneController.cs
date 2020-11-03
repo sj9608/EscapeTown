@@ -57,7 +57,7 @@ public class SceneController : SingletonBase<SceneController>
 
     IEnumerator IENextScene(int current)
     {
-        
+        GameManager.Instance.audioSource.Stop();
         PopupChange(true);
         AsyncOperation unloadAsync = SceneManager.UnloadSceneAsync(current);
 

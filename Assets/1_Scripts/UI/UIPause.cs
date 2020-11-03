@@ -87,11 +87,11 @@ public class UIPause : MonoBehaviour
         GMI.isOptionOn = true;
     }
 
-    // public void BTN_ReStart()   // 팝업 메뉴 <다시하기> 버튼
-    // {
-    //     menuSet.SetActive(false);
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    // }
+    public void BTN_ReStart()   // 팝업 메뉴 <다시하기> 버튼
+    {
+        menuSet.SetActive(false);
+        GameManager.Instance.GameRetry();
+    }
 
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
     {

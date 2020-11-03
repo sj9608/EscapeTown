@@ -54,7 +54,7 @@ public class GameManager : SingletonBase<GameManager>
     // 낮 밤 스테이지 따른 배경음악
     public AudioClip audioDay;
     public AudioClip audioNight;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     float audioTime = 0f;
 
 
@@ -68,7 +68,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         // 현재 페이지에서만 쓸 인자용 씬번호
         // 저장위치에 따라 쓸모 유무가 생김
-        // 저장위치는 스테이지 클리어 직후 / 로딩 중 / 새 스테이지 씬 로딩 후 
+        // 저장위치는 스테이지 클리어 직후 / 로딩 중 / 새 스테이지 씬 로딩 후
         tempCurrentSceneNum = SCI.CurSceneNum;
         Debug.Log("tempCurrentSceneNum : " + tempCurrentSceneNum);
         playerAttack = FindObjectOfType<PlayerAttack>();
