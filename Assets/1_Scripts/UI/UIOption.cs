@@ -59,12 +59,13 @@ public class UIOption : MonoBehaviour
     }
     public void BTN_Back()
     {
-            option.SetActive(false);
-            Debug.Log("working back button!");
-            GameManager.Instance.isPopupOn = true;
-            uipause.menuSet.SetActive(true);
-            Debug.Log("working pannel");
-            isShow = false;
+        // option.SetActive(false);
+        // Debug.Log("working back button!");
+        // GameManager.Instance.isPopupOn = true;
+        // uipause.menuSet.SetActive(true);
+        // Debug.Log("working pannel");
+        // isShow = false;
+        GMI.Popup();
     }
 }
 

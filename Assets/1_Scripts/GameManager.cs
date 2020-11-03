@@ -131,30 +131,6 @@ public class GameManager : SingletonBase<GameManager>
             GetMagazine();
         }
     }
-    private void Popup(){
-        if (isOptionOn)
-        {
-            // 옵션 창 끄기
-            UIOptionToggleAction(isOptionOn);
-        }
-        isPopupOn = !isPopupOn;
-        if (isPopupOn)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-        else
-        {
-            // 마우스 커서를 화면 중앙에 고정
-            Cursor.lockState = CursorLockMode.Locked;
-            Debug.Log("커서 비활성화");
-        }
-        UIPauseAction(isPopupOn);
-        Set_Pause();
-    }
-    private void Set_Pause(){
-        Time.timeScale = isPopupOn ? 0f : 1f;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
-    }
     public void ZombieDead(string zName)
     {
         enemiesDic.Remove(zName);
@@ -288,6 +264,35 @@ public class GameManager : SingletonBase<GameManager>
         string jsonData = File.ReadAllText(path);
         gameData = JsonUtility.FromJson<GameData>(jsonData);
         return gameData;
+    }
+    public void Popup(){
+        if (isOptionOn && isPopupOn)
+        {
+            // 옵션 창 끄기
+            UIOptionToggleAction(isOptionOn);
+            isOptionOn = !isOptionOn;
+        }
+        else
+        {
+            isPopupOn = !isPopupOn;
+        }
+        
+        if (isPopupOn)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            // 마우스 커서를 화면 중앙에 고정
+            Cursor.lockState = CursorLockMode.Locked;
+            Debug.Log("커서 비활성화");
+        }
+        UIPauseAction(isPopupOn);
+        Set_Pause();
+    }
+    private void Set_Pause(){
+        Time.timeScale = isPopupOn ? 0f : 1f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
     }
 }
 

@@ -63,14 +63,12 @@ public class UIPause : MonoBehaviour
     }
 
     public void MenuPopup(bool isPopup){
-        menuSet.SetActive(!isPopup);
+        menuSet.SetActive(isPopup);
     }
 
     public void BTN_Continue()  // 팝업 메뉴 <계속하기>버튼
     {
-        menuSet.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        // GMI.Set_Pause();
+        GMI.Popup();
     }
 
     public void BTN_Main()
@@ -79,13 +77,14 @@ public class UIPause : MonoBehaviour
         //SceneController.Instance.NextSecne(0); -> ?????
         // SceneManager.LoadScene("Main",0);
         GMI.GoMain();
+        GMI.Popup();
     }
 
     public void BTN_Setting()
     {   
         optionSet.SetActive(true);
         menuSet.SetActive(false);
-        GameManager.Instance.isPopupOn = false;
+        GMI.isOptionOn = true;
     }
 
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
