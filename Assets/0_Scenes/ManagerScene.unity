@@ -3243,7 +3243,7 @@ MonoBehaviour:
   gameover: {fileID: 1424742785}
   btn_Retry: {fileID: 2083526341}
   btn_Main: {fileID: 1511639917}
-  btn_Exit: {fileID: 0}
+  btn_Exit: {fileID: 1511639917}
 --- !u!1 &1028827954
 GameObject:
   m_ObjectHideFlags: 0

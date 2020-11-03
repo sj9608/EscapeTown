@@ -147,4 +147,3 @@ public class UIGamePlay : MonoBehaviour
         Destroy(tutorial);
     }
 }
- 
