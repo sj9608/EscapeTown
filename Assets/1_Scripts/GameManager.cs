@@ -12,6 +12,7 @@ public class GameManager : SingletonBase<GameManager>
     ChatManager ChatManager;
     // 게임 save load용 data class
     GameData gameData;
+    public SoundController Sc;
 
     // 적 수를 딕셔너리에 넣어 좀비 수로 골포인트 판별
     GameObject enemies;

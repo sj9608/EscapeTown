@@ -6,6 +6,7 @@ using UnityEngine.Animations.Rigging;
 public class CharacterLocomotion : MonoBehaviour
 {
     GameManager GMI;
+    
     public float jumpHeight;
     public float gravity;
     public float stepDown;
@@ -103,10 +104,10 @@ public class CharacterLocomotion : MonoBehaviour
             playerAudio.clip = audioWalking[random];
             playerAudio.PlayOneShot(playerAudio.clip);
         }
-        else if((Mathf.Abs(input.x) <= 0.1f && (Mathf.Abs(input.y)) <= 0.1f) && playerAudio.isPlaying)
+        else if((Mathf.Abs(input.x) <= 0.1f && (Mathf.Abs(input.y)) <= 0.1f) && GMI.Sc.playerAudio.isPlaying)
         {
-            playerAudio.Stop();
-        } 
+            GameManager.Instance.Sc.playerAudio.Stop();
+        }
 
         UpdateIsSprinting();
         // 스프린트 감지
