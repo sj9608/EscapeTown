@@ -1033,7 +1033,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &190347096
 GameObject:
@@ -2546,6 +2546,7 @@ MonoBehaviour:
     type: 3}
   scrollView: {fileID: 2058418334}
   parentObject: {fileID: 145921372}
+  audioTurnOfPage: {fileID: 8300000, guid: 18d739f1e47b34d1bb9c6c3fe3970021, type: 3}
 --- !u!114 &788824313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3539,7 +3540,7 @@ RectTransform:
   - {fileID: 1402556268}
   - {fileID: 987351808}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4207,7 +4208,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1226429296
 GameObject:
