@@ -61,13 +61,19 @@ public class CharacterLocomotion : MonoBehaviour
         bool isSprinting = Input.GetKey(KeyCode.LeftShift);
         animator.SetBool(isSprintingParam, isSprinting);
         
-
+        
         // 달릴 때 숨소리 랜덤 재생
-        if(isSprinting && !playerAudio.isPlaying)
+        if(!isSprinting)
         {
-            int random = Random.Range(0, 3);
-            StartCoroutine(PlayAudio(audioRunningBreathe[random], playerAudio_Double));
+            playerAudio_Double.Stop();
         }
+    
+        if(isSprinting && !playerAudio_Double.isPlaying && (input.x != 0f || input.y != 0f))
+        {   
+            int random = Random.Range(0, 3);
+            playerAudio_Double.PlayOneShot(audioRunningBreathe[random]);
+        }
+        
     }
 
     //private void OnAnimatorMove()
@@ -92,12 +98,16 @@ public class CharacterLocomotion : MonoBehaviour
         
 
         // 이동 키 입력이 있으면 모래 밟는 소리를 사운드 클립에 삽입
-        if(input.x != 0f || input.y != 0f)
+        if((input.x != 0f || input.y != 0f) && !playerAudio.isPlaying)
         {
             int random = Random.Range(0,3);
             playerAudio.clip = audioWalking[random];
+            playerAudio.PlayOneShot(playerAudio.clip);
         }
-        else playerAudio.clip = null;
+        else if((Mathf.Abs(input.x) <= 0.1f && (Mathf.Abs(input.y)) <= 0.1f) && playerAudio.isPlaying)
+        {
+            playerAudio.Stop();
+        } 
 
         UpdateIsSprinting();
         // 스프린트 감지
@@ -135,15 +145,6 @@ public class CharacterLocomotion : MonoBehaviour
         {
             UpdateOnGround();
         }
-        
-        if(!playerAudio.isPlaying && playerAudio.clip != null)
-            StartCoroutine(PlayAudio(playerAudio.clip, playerAudio));
-    }
-
-    IEnumerator PlayAudio(AudioClip clip, AudioSource source)
-    {
-        source.PlayOneShot(clip);
-        yield return new WaitForSeconds(1f);
     }
 
     void UpdateInAir()
