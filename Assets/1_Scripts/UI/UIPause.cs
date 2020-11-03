@@ -67,19 +67,25 @@ public class UIPause : MonoBehaviour
         Set_Outpause();
     }
 
-    public void BTN_Main()
+    public void BTN_Main()  // 팝업 메뉴 <메인으로> 버튼
     {
         // SceneManager.LoadScene("Main",0); -> 씬이 멈춤
         //SceneController.Instance.NextSecne(0); -> ?????
         SceneManager.LoadScene("Main",0);
     }
 
-    public void BTN_Setting()
+    public void BTN_Setting()   // 팝업 메뉴 <설정> 버튼
     {   
             optionSet.SetActive(true);
             menuSet.SetActive(false);
             GameManager.Instance.isPopupOn = false;
     }
+
+    // public void BTN_ReStart()   // 팝업 메뉴 <다시하기> 버튼
+    // {
+    //     menuSet.SetActive(false);
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    // }
 
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
     {
