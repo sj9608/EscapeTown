@@ -3192,6 +3192,7 @@ MonoBehaviour:
   numOfPotion_text: {fileID: 1634525749}
   numOfMagazine_text: {fileID: 1418011865}
   tutorial: {fileID: 118961480}
+  audioUsePotion: {fileID: 8300000, guid: 361a9e43090b142e3a2b53f04512611d, type: 3}
   hpbar: {fileID: 759357376}
 --- !u!114 &987351811
 MonoBehaviour:
