@@ -9,6 +9,9 @@ public class UIStartGame : MonoBehaviour
     // 게임 시작 화면
     // 새로하기, 이어하기, 설정, 게임 종료 버튼
 
+    private void Start() {
+        Cursor.lockState = CursorLockMode.Confined;
+    }
     public void OnClickStart()                          // 새로하기 버튼
     {
         // 씬 로딩 화면 호출
