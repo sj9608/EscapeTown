@@ -70,6 +70,10 @@ public class SceneController : SingletonBase<SceneController>
 
         yield return new WaitUntil(() => { return loadAsync.isDone; });
         PopupChange(false);
+
+        // 사운드
+        GameManager.Instance.Sc.SceneAudio.PlayOneShot(GameManager.Instance.Sc.audioLoadingComplete);
+
         GameManager.Instance.InitScene();
     }
 

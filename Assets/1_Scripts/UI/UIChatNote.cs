@@ -19,10 +19,15 @@ public class UIChatNote : MonoBehaviour
     bool isOpen;                                                      // 대화 수첩의 상태(열림/닫힘) 
     bool[] isUse = new bool[100];                                     // id에 해당하는 대화 내용을 생성 했는지 확인하는 진리 값
 
+
+    AudioSource audioSource;
+    public AudioClip audioTurnOfPage;
+
     void Start()
     {
         // 대화 수첩 닫힘 상태가 디폴트
         isOpen = false;
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -32,8 +37,12 @@ public class UIChatNote : MonoBehaviour
             return;
         }
         // E키를 누를 때 마다 열림/닫힘 상태 토글
-        if(Input.GetKeyDown(KeyCode.T)) isOpen = !isOpen;
-
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            isOpen = !isOpen;
+            audioSource.PlayOneShot(audioTurnOfPage);
+        }
+        
         if(isOpen == false)
         {   // 닫힘 상태일 때 노트를 닫음
             scrollView.gameObject.SetActive(false);

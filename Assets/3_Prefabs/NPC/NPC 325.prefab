@@ -616,6 +616,7 @@ GameObject:
   - component: {fileID: 6733568493592687445}
   - component: {fileID: 6641826272719799313}
   - component: {fileID: 6596429794762998331}
+  - component: {fileID: -2504410101238469165}
   m_Layer: 0
   m_Name: NPC 325
   m_TagString: NPC
@@ -680,6 +681,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 325
   isNpc: 1
+  questionMark: {fileID: 0}
+--- !u!136 &-2504410101238469165
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735529084320734561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.3892655
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!1 &6735548498368503883
 GameObject:
   m_ObjectHideFlags: 0

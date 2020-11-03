@@ -25,6 +25,13 @@ public class UIGamePlay : MonoBehaviour
     public Text numOfMagazine_text;
     public GameObject tutorial;
 
+
+    // 사운드
+    AudioSource audioSource;                    // 스피커
+    [Header("-Sound")]
+    public AudioClip audioUsePotion;            // 음원
+
+
     //public ChatController chatController;      // 대화 텍스트
     public delegate void battle_Event();
 
@@ -56,6 +63,9 @@ public class UIGamePlay : MonoBehaviour
     }
     private void Start() 
     {
+        // 사운드
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         // numOfPotion 값 불러오기
         
         // numOfBullet 값 불러오기
@@ -111,7 +121,10 @@ public class UIGamePlay : MonoBehaviour
         crossHair.SetActive(fire2);
     }
     public void UsePotion()
-    {
+    {   
+        // 포션 사용 사운드
+        audioSource.PlayOneShot(audioUsePotion);
+
         numOfPotion_text.text = GI.NumOfPotion.ToString();
         Potion_CoolTime();
     }
