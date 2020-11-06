@@ -102,6 +102,7 @@ public class GameManager : SingletonBase<GameManager>
             if(isDays[tempCurrentSceneNum] == true) { audioSource.clip = audioDay; }
             else{ audioSource.clip = audioNight; }
             audioSource.Play();
+            Cursor.visible = false;
         }
         
     }
@@ -300,11 +301,13 @@ public class GameManager : SingletonBase<GameManager>
         if (isPopupOn)
         {
             Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
         }
         else
         {
             // 마우스 커서를 화면 중앙에 고정
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             Debug.Log("커서 비활성화");
         }
         UIPauseAction(isPopupOn);
