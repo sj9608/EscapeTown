@@ -10,7 +10,8 @@ public class UIStartGame : MonoBehaviour
     // 새로하기, 이어하기, 설정, 게임 종료 버튼
 
     private void Start() {
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
+        GameManager.Instance.isLoading = true;
     }
     public void OnClickStart()                          // 새로하기 버튼
     {
