@@ -29,11 +29,14 @@ public class PlayerAttack : MonoBehaviour
     {
         if (GMI.isGameOver || GMI.isLoading || GMI.isInteractioning)
         {
+            // 게임오버거나 로딩중이거나 대화중이면 입력키 막음
             return;
         }
+        // 조준 bool값은 Input으로 판단
         isAim = Input.GetButton("Fire2");
         if (isGun == true)
         {
+            // 총을 들고 있으면 조준선 표시
             GMI.IsAimAction(isAim);
         }
         // 입력을 감지하고 총 발사하거나 재장전
@@ -52,10 +55,12 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+    // 공격 시도
     public void Attack()
     {
         if (isGun)
         {
+            // 총 들었을때 건에 공격 요청
             gun.Fire();
         }
     }    
