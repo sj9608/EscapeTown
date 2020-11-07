@@ -78,10 +78,12 @@ public class Gun : MonoBehaviour
     }
     private void Start()
     {
+        // 보유 총알 수를 게임인포메이션과 맞춤
         ammoRemain = GI.RemainAmmo;
-        // 현재 탄창을 가득채우기
+        // 현재 탄창의 총알 수를 게인포메이션과 맞춤
         magAmmo = GI.CurAmmo;
-        // 총의 현재 상태를 총을 쏠 준비가 된 상태로 변경
+        // 총의 현재 상태
+        // 씬 전환 시 총알이 0인 경우 판단
         gunState = (magAmmo > 0) ? GunState.Ready : GunState.Empty;
         // 마지막으로 총을 쏜 시점을 초기화
         lastFireTime = 0;
@@ -106,24 +108,26 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
         // 총알이 맞은 곳을 저장할 변수
         Vector3 hitPosition = Vector3.zero;
-
+        // Raycast 인자용 Ray 값 설정
+        // Ray 시작지점
         ray.origin = fireTransform.position;
+        // Ray 방향
         ray.direction = raycastDestination.position - fireTransform.position;
 
-        // 레이캐스트(시작지점, 방향, 충돌 정보 컨테이너, 사정거리, 레이어마스크)
+        // 레이캐스트((시작지점, 방향), 충돌 정보 컨테이너, 사정거리, 레이어마스크)
         if (Physics.Raycast(ray, out hit, fireDistance, LayerMask.GetMask("Enemy")))
         {
             // 레이가 충돌한 위치 저장
             hitPosition = hit.point;
+            // 좀비가 맞으면 객체 생성
             Zombie zombie = hit.transform.GetComponent<Zombie>();
             if (zombie)
             {
                 zombie.OnDamage(gunDamage, hitPosition);
             }
+            // 좀비가 맞으면 파티클 재생
             bloodEffect.transform.position = hitPosition;
             bloodEffect.Play();
-            // 레이가 어떤 물체와 충돌한 경우
-            //GameManager.Instance.Attack(hit.collider, damage);
         }
         else
         {
