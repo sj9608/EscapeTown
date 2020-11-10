@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+// ***************** 인게임 내 일시정지 팝업 메뉴창 ***************** //
 public class UIPause : MonoBehaviour
 {
-    // ***************** 인게임 내 일시정지 팝업 메뉴창 ***************** //
     GameManager GMI;
     public GameObject menuSet;  // 인 게임 메뉴창
     public GameObject menuTable;
@@ -20,6 +20,7 @@ public class UIPause : MonoBehaviour
     private void Awake() {
         GMI = GameManager.Instance;
     }
+    // UI Action에 등록 / 해제
     private void OnEnable() {
         GMI.UIPauseAction += MenuPopup;
         GMI.UIOptionToggleAction += MenuPopup;
@@ -37,7 +38,7 @@ public class UIPause : MonoBehaviour
         // popUp_Menu();
     }
 
-
+    // 삭제 대상
     void popUp_Menu()  //인 게임내 팝업 메뉴창
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -61,7 +62,7 @@ public class UIPause : MonoBehaviour
             }
         }
     }
-
+    // 일시정지 팝업 토글
     public void MenuPopup(bool isPopup){
         menuSet.SetActive(isPopup);
     }
@@ -92,7 +93,8 @@ public class UIPause : MonoBehaviour
         GMI.Popup();
         GMI.GameRetry();
     }
-
+    // GameManager로 보낼 것
+    // UIPause / Main 존재
     public void BTN_Exit()  // 팝업 메뉴 <게임종료>버튼
     {
         #if UNITY_EDITOR
