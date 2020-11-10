@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 
 // ************* 아이템 획득 시 뜨는 팝업창에 대한 코드 ****************
+// 포션 / 탄창 획득 시
+// 코루틴으로 슬라이드 UI구현
+// GameManager와 GameInformation에 만들어 둔 UnityAction에 메서드 등록
 public class UILogPopUpWindow : MonoBehaviour
 {
     GameInformation GI;
@@ -20,6 +23,7 @@ public class UILogPopUpWindow : MonoBehaviour
     private void Awake() {
         GI = GameInformation.Instance;
     }
+    // UI Action에 등록 / 해제
     private void OnEnable() {
         GameManager.Instance.GetMagazineAction += GetMagazineLog;
         GI.UpdateGetPotionAction += GetPotionLog;
@@ -35,12 +39,15 @@ public class UILogPopUpWindow : MonoBehaviour
         potion_LogWindow.SetActive(false);
         magazine_LogWindow.SetActive(false);
     }
+    // 코루틴 실행
     private void GetMagazineLog(){
         StartCoroutine(IELogMagazinePopUp());
     }
+    // 코루틴 실행
     private void GetPotionLog(){
         StartCoroutine(IELogPotionPopUp());
     }
+    // 탄창 습득 팝업
     IEnumerator IELogMagazinePopUp()
     {
         magazine_LogWindow.SetActive(true);
@@ -60,6 +67,7 @@ public class UILogPopUpWindow : MonoBehaviour
         isShow = false;
         rectTransform_2.localPosition = new Vector3(680, -237, 0);
     }
+    // 포션 습득 팝업
     IEnumerator IELogPotionPopUp()
     {
         potion_LogWindow.SetActive(true);
