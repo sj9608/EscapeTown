@@ -41,6 +41,7 @@ public class UIGamePlay : MonoBehaviour
     {
         GI = GameInformation.Instance;
     }
+    // UI Action에 등록 / 해제
     private void OnEnable()
     {
         GI.UpdateCurAmmoAction += Show_Bullet_Count;
@@ -94,51 +95,60 @@ public class UIGamePlay : MonoBehaviour
         // UI 반영
 
         // curHP 값 불러오기
-        HandleHP(); // GameInformation의 UnityAction 델리게이트로 이동  // UnityAction에 Lerp적용시키기
+
+        // GameInformation의 UnityAction 델리게이트로 이동  // UnityAction에 Lerp적용시키기
+        // 수정 필요
+        HandleHP();
 
         // 총 탄 수 / 잔 탄 수 불러오기
         // Show_Bullet_Count(); // GameInformation의 UnityAction 델리게이트로 이동
         // Show_CrossHair(); // GameManager의 UnityAction 델리게이트로 이동
     }
-
-
+    
+    // UI 잔탄 수
     public void Show_Bullet_Count()  // 장전 후 사용하고 남은 총알 갯수
     {
         // curBullet : 현재 총알수, magCapacity : 최대 총알 수(30발)
 
+        // UI에서 고정 문자열 추가
         curBullet.text = GI.CurAmmo.ToString() + " /  30"; 
                          //string.Format("{0} / {1}",cur_Bullet, magCapacity);
         //remainBullet.text = GameInformation.Instance.RemainAmmo.ToString();
     }
-
+    // UI HP 바
     private void HandleHP() // HP바 
     {
         hpbar.value = Mathf.Lerp(hpbar.value, GI.HP / GI.MAX_HP, Time.deltaTime);
     }
-
+    // UI 조준선
     public void Show_CrossHair(bool fire2)
     {
         crossHair.SetActive(fire2);
     }
+    // UI 포션 사용
     public void UsePotion()
     {   
         // 포션 사용 사운드
         audioSource.PlayOneShot(audioUsePotion);
 
         numOfPotion_text.text = GI.NumOfPotion.ToString();
+        // 쿨타임 표시 UI
         Potion_CoolTime();
     }
+    // UI 포션 습득
     public void GetPotion()
     {
         numOfPotion_text.text = GI.NumOfPotion.ToString();
     }
+    // UI 탄창 습득
     void GetMagazine()
     {
         numOfMagazine_text.text = GI.RemainAmmo.ToString();
     }
-
-    public void Potion_CoolTime() // 아이템 사용시 쿨타임 표시 UI(쿨 타임 동안 퀵슬롯 이미지 로드)
+    // 아이템 사용시 쿨타임 표시 UI(쿨 타임 동안 퀵슬롯 이미지 로드)
+    public void Potion_CoolTime()
     {
+        // GameManager에 포션 사용중이라고 알림
         GameManager.Instance.isUsePotion = true;
         StartCoroutine(CoolTime(3f)); // 쿨타임 3초
         IEnumerator CoolTime(float coolTime) // 코루틴
@@ -154,7 +164,7 @@ public class UIGamePlay : MonoBehaviour
             GameManager.Instance.isUsePotion = false;
         }
     }
-
+    // 튜토리얼 끄면 파괴
     public void BTN_Exit_Tutorial()
     {
         Destroy(tutorial);

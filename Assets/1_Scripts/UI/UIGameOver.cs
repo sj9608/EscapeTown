@@ -23,11 +23,11 @@ public class UIGameOver : MonoBehaviour
     }
 
     private void OnEnable() {
-        // GameOver시 보여줘야 할 메서드 Action에 메서드 추가
+        // GameOver시 보여줘야 할 UI메서드 Action에 메서드 추가
         GameManager.Instance.GameOverAction += Show_GameOver_Pannel;
     }
     private void OnDisable(){
-        // GameOver시 보여줘야 할 메서드 Action에 메서드 제거
+        // GameOver시 보여줘야 할 UI메서드 Action에 메서드 제거
         // null check 필요
         GameManager.Instance.GameOverAction -= Show_GameOver_Pannel;
     }
