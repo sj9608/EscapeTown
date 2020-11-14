@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 // ***************** 인게임 내 일시정지 팝업 메뉴창 ***************** //
+// 팝업 On / Off
+// 계속하기 / 메인으로 / 설정 / 다시하기 / 게임종료 버튼
 public class UIPause : MonoBehaviour
 {
     GameManager GMI;

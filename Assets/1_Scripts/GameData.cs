@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    // 데이터 저장용 클래스
     public int saveSceneNum;
     public float saveHP;
     public int saveRemainAmmo;
