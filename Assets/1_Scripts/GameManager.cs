@@ -7,6 +7,16 @@ using UnityEngine.Events;
 
 public class GameManager : SingletonBase<GameManager>
 {
+    // 게임매니저
+    // 게임 플레이에 관련된 기능
+    // 각 관리객체들을 연결 / 호출해주는 메인 관리객체
+    
+    // 좀비 죽음 // 플레이어 죽음
+    // 아이템 습득 // 포션 습득 // 포션 사용 // 탄창 습득
+    // 새로하기 // 이어하기 // 게임 오버 // 다시하기 // 메인으로
+    // 클리어 조건 체크
+    // 파일 저장하기 // 저장파일 불러오기
+    // 팝업창 관리 // 게임시간 멈추기 / 다시가기
     GameInformation GI;
     SceneController SCI;
     ChatManager ChatManager;
@@ -152,17 +162,18 @@ public class GameManager : SingletonBase<GameManager>
             GetMagazine();
         }
     }
+    // 좀비 죽음
     public void ZombieDead(string zName)
     {
         enemiesDic.Remove(zName);
     }
-
+    // 플레이어 죽음
     public void PlayerDead()
     {
         Debug.Log("플레이어가 죽음을 게임매니저가 인식");
         GameOver();
     }
-
+    // 아이템 습득
     public void GetItem(Collider getItem)
     {
         if (getItem != null)
@@ -180,10 +191,12 @@ public class GameManager : SingletonBase<GameManager>
             getItem.gameObject.SetActive(false);
         }
     }
+    // 아이템 포션 습득
     public void GetPotion()
     {
         GI.UpdatePotion(1);
     }
+    // 포션 사용
     public void UsePotion()
     {
         // 포션 사용 메서드
@@ -194,6 +207,7 @@ public class GameManager : SingletonBase<GameManager>
             GI.UpdateHp(30);
         }
     }
+    // 아이템 탄창 습득
     public void GetMagazine()
     {
         GI.RemainAmmo += addAmmo;
@@ -236,13 +250,13 @@ public class GameManager : SingletonBase<GameManager>
         }
         
     }
-    
+    // 다시하기
     public void GameRetry()
     {
         isGameOver = false;
         LoadGame();
     }
-    
+    // 메인으로
     public void GoMain()
     {
         // 메인 씬 불러오기
@@ -250,6 +264,8 @@ public class GameManager : SingletonBase<GameManager>
         SCI.CurSceneNum = 1;
         SCI.NextSecne(tempCurrentSceneNum);
     }
+    // 스테이지 클리어 조건 체크
+    // 골포인트 진입 시
     public void StageClear()
     {
         if (enemiesDic == null || enemiesDic.Count == 0)
@@ -267,7 +283,7 @@ public class GameManager : SingletonBase<GameManager>
             Debug.Log("클리어 조건을 만족하지 못하였습니다.");
         }
     }
-
+    // json형태 파일 저장하기
     [ContextMenu("To Json Data")]
     public void SaveGameDataToJson()
     {
@@ -277,7 +293,7 @@ public class GameManager : SingletonBase<GameManager>
         string path = Path.Combine(Application.dataPath, "SaveData.json");
         File.WriteAllText(path, jsonData);
     }
-
+    // json형태 저장파일 불러오기
     [ContextMenu("From Json Data")]
     public GameData LoadGameDataToJson()
     {
@@ -286,6 +302,10 @@ public class GameManager : SingletonBase<GameManager>
         gameData = JsonUtility.FromJson<GameData>(jsonData);
         return gameData;
     }
+    // 팝업창 관리
+    // Popup 여부
+    // option 창 여부
+    // popup 여부로 마우스 커서 제어
     public void Popup(){
         if (isOptionOn && isPopupOn)
         {
@@ -313,6 +333,7 @@ public class GameManager : SingletonBase<GameManager>
         UIPauseAction(isPopupOn);
         Set_Pause();
     }
+    // 게임시간 멈추기 / 다시가기
     private void Set_Pause(){
         Time.timeScale = isPopupOn ? 0f : 1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixedDeltaTime = 물리적인 효과, FixedUpdat 가 실행되는  초당 간격
